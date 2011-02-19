@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Jessica</id>
+    <version>0.3</version>
+    <authors>Tom Bell</authors>
+    <owners>Tom Bell</owners>
+    <projectUrl>http://github.com/tombell/jessica</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</description>
+  </metadata>
+  <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <file src="bin\Debug\Jessica.dll" target="lib\" />
+  </files>
+</package>
