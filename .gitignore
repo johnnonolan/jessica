@@ -1,0 +1,20 @@
+# Visual Studio
+*.user
+*.suo
+*.cache
+_ReSharper.*/
+*.Publish.xml
+[Bb]in
+[Oo]bj
+
+# Subversion
+.svn/
+_svn/
+
+# Build structure
+[Bb]uild/
+
+# Misc
+Thumbs.db
+*.bak
+*.log

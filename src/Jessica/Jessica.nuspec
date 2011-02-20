@@ -8,8 +8,14 @@
     <projectUrl>http://github.com/tombell/jessica</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</description>
+    <summary>
+      A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.
+      Basic documentation: https://github.com/tombell/jessica/wiki
+    </summary>
   </metadata>
   <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <!-- hopefully build configuration options can be put here... -->
     <file src="bin\Debug\Jessica.dll" target="lib\" />
+    <!--<file src="bin\Release\Jessica.dll" target="lib\" />-->
   </files>
 </package>
