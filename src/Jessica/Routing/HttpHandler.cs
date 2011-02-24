@@ -5,17 +5,20 @@ using System.Net;
 using System.Web;
 using System.Web.Routing;
 using Jessica.Extensions;
-using Jessica.Results;
 
 namespace Jessica.Routing
 {
     public class HttpHandler : IHttpHandler
     {
-        private readonly Dictionary<string, Func<dynamic, IActionResult>> _actions;
+        private readonly string _route;
+        private readonly RequestContext _request;
+        private readonly Type _moduleType;
 
-        public HttpHandler(Dictionary<string, Func<dynamic, IActionResult>> actions)
+        public HttpHandler(string route, RequestContext request, Type moduleType)
         {
-            _actions = actions;
+            _route = route;
+            _request = request;
+            _moduleType = moduleType;
         }
 
         private static void AddFormAndQueryStringParameters(IDictionary<string, object> parameters, HttpRequestBase request)
@@ -31,31 +34,31 @@ namespace Jessica.Routing
             }
         }
 
-        private static void AddRouteDataParameters(IDictionary<string, object> parameters, HttpContextBase context)
+        private void AddRouteDataParameters(IDictionary<string, object> parameters)
         {
-            if (context.Items.Contains("RouteData"))
+            if (_request.RouteData != null)
             {
-                var routeData = context.Items["RouteData"] as RouteData;
-
-                if (routeData != null)
-                {
-                    routeData.Values.ForEach(
-                        param => parameters.Add(param.Key, param.Value.ToString()));
-                }
+                _request.RouteData.Values.ForEach(
+                    p => parameters.Add(p.Key, p.Value));
             }
         }
 
         public void ProcessRequest(HttpContext context)
         {
-            if (_actions.ContainsKey(context.Request.HttpMethod))
+            var module = Jess.Factory.CreateInstance(_moduleType);
+            var routes = module.Routes;
+
+            if (routes[_route].ContainsKey(context.Request.HttpMethod))
             {
                 var wrapper = new HttpContextWrapper(context);
                 IDictionary<string, object> parameters = new ExpandoObject();
 
-                AddFormAndQueryStringParameters(parameters, wrapper.Request);
-                AddRouteDataParameters(parameters, wrapper);
+                parameters.Add("request", _request);
 
-                var result = _actions[context.Request.HttpMethod].Invoke(parameters);
+                AddFormAndQueryStringParameters(parameters, wrapper.Request);
+                AddRouteDataParameters(parameters);
+
+                var result = routes[_route][context.Request.HttpMethod].Invoke(parameters);
                 result.WriteToResponse(wrapper);
             }
             else

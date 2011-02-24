@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
-using Jessica.Results;
 
 namespace Jessica.Routing
 {
     public class RouteHandler : IRouteHandler
     {
-        private readonly Dictionary<string, Func<dynamic, IActionResult>> _actions;
+        private readonly string _route;
+        private readonly Type _moduleType;
 
-        public RouteHandler(Dictionary<string, Func<dynamic, IActionResult>> actions)
+        public RouteHandler(string route, Type moduleType)
         {
-            _actions = actions;
+            _route = route;
+            _moduleType = moduleType;
         }
 
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            requestContext.HttpContext.Items.Add("RouteData", requestContext.RouteData);
-            return new HttpHandler(_actions);
+            return new HttpHandler(_route, requestContext, _moduleType);
         }
     }
 }

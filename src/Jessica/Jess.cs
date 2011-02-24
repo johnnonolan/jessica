@@ -26,7 +26,7 @@ namespace Jessica
                 if (instance != null)
                 {
                     instance.Routes.ForEach(
-                        route => RouteTable.Routes.Add(new Route(route.Key, new RouteHandler(route.Value))));
+                        route => RouteTable.Routes.Add(new Route(route.Key, new RouteHandler(route.Key, module))));
                 }
             });
         }

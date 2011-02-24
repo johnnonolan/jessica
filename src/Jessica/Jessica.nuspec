@@ -2,7 +2,7 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Jessica</id>
-    <version>0.3</version>
+    <version>0.4</version>
     <authors>Tom Bell</authors>
     <owners>Tom Bell</owners>
     <projectUrl>http://github.com/tombell/jessica</projectUrl>
@@ -14,8 +14,6 @@
     </summary>
   </metadata>
   <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <!-- hopefully build configuration options can be put here... -->
-    <file src="bin\Debug\Jessica.dll" target="lib\" />
-    <!--<file src="bin\Release\Jessica.dll" target="lib\" />-->
+    <file src="bin\Release\Jessica.dll" target="lib\" />
   </files>
 </package>

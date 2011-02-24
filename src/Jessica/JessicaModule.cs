@@ -36,7 +36,10 @@ namespace Jessica
             }
             else
             {
-                _routes.Add(route, new Dictionary<string, Func<dynamic, IActionResult>> { { method, action } });
+                _routes.Add(route, new Dictionary<string, Func<dynamic, IActionResult>> 
+                {
+                    { method, action } 
+                });
             }
         }
 
