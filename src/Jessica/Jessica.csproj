@@ -56,6 +56,7 @@
     <Compile Include="Results\StringResult.cs" />
     <Compile Include="Routing\HttpHandler.cs" />
     <Compile Include="Routing\RouteHandler.cs" />
+    <Compile Include="Helpers\Url.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Jessica.nuspec" />

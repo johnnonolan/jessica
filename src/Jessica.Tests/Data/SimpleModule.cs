@@ -14,6 +14,9 @@ namespace Jessica.Tests.Data
 
             Get("/hello/:name",
                 parameters => new StringResult(string.Format("Hello, {0}", parameters.name)));
+
+            Get("greet", "/greet/:name",
+                parameters => new StringResult("Hello, named route!"));
         }
     }
 }

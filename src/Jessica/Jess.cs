@@ -12,6 +12,8 @@ namespace Jessica
     {
         public static IJessicaFactory Factory = new DefaultJessicaFactory();
 
+        public static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
+
         public static void Initialise()
         {
             var modules = new List<Type>();

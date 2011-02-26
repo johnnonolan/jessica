@@ -19,9 +19,21 @@ namespace Jessica
             _routes = new Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>>();
         }
 
-        private void AddRouteAndAction(string method, string route, Func<dynamic, IActionResult> action)
+        private void AddRouteAndAction(string name, string method, string route, Func<dynamic, IActionResult> action)
         {
             route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
+
+            if (name != null)
+            {
+                if (Jess.NamedRoutes.ContainsKey(name))
+                {
+                    Jess.NamedRoutes[name] = route;
+                }
+                else
+                {
+                    Jess.NamedRoutes.Add(name, route);
+                }
+            }
 
             if (_routes.ContainsKey(route))
             {
@@ -43,24 +55,44 @@ namespace Jessica
             }
         }
 
+        protected void Delete(string name, string route, Func<dynamic, IActionResult> action)
+        {
+            AddRouteAndAction(name, "DELETE", route, action);
+        }
+
         protected void Delete(string route, Func<dynamic, IActionResult> action)
         {
-            AddRouteAndAction("DELETE", route, action);
+            Delete(null, route, action);
+        }
+
+        protected void Get(string name, string route, Func<dynamic, IActionResult> action)
+        {
+            AddRouteAndAction(name, "GET", route, action);
         }
 
         protected void Get(string route, Func<dynamic, IActionResult> action)
         {
-            AddRouteAndAction("GET", route, action);
+            Get(null, route, action);
+        }
+
+        protected void Post(string name, string route, Func<dynamic, IActionResult> action)
+        {
+            AddRouteAndAction(name, "POST", route, action);
         }
 
         protected void Post(string route, Func<dynamic, IActionResult> action)
         {
-            AddRouteAndAction("POST", route, action);
+            Post(null, route, action);
+        }
+
+        protected void Put(string name, string route, Func<dynamic, IActionResult> action)
+        {
+            AddRouteAndAction(name, "PUT", route, action);
         }
 
         protected void Put(string route, Func<dynamic, IActionResult> action)
         {
-            AddRouteAndAction("PUT", route, action);
+            Post(null, route, action);
         }
     }
 }

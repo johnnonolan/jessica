@@ -15,11 +15,11 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void Initialise_With2JessicaModules_ShouldAdd3RoutesToRouteTable()
+        public void Initialise_With2JessicaModules_ShouldAdd4RoutesToRouteTable()
         {
             Jess.Initialise();
 
-            Assert.That(RouteTable.Routes.Count, Is.EqualTo(3));
+            Assert.That(RouteTable.Routes.Count, Is.EqualTo(4));
         }
 
         [Test]

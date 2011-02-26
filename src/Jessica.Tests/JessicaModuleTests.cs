@@ -7,11 +7,11 @@ namespace Jessica.Tests
     public class JessicaModuleTests
     {
         [Test]
-        public void Constructor_With2Routes_ShouldContain2Routes()
+        public void Constructor_With3Routes_ShouldContain3Routes()
         {
             var module = new SimpleModule();
 
-            Assert.That(module.Routes.Count, Is.EqualTo(2));
+            Assert.That(module.Routes.Count, Is.EqualTo(3));
         }
 
         [Test]
@@ -28,6 +28,14 @@ namespace Jessica.Tests
             var module = new OverwrittenModule();
 
             Assert.That(module.Routes["overwrite"].Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Constructor_WithSimpleModuleWith1NamedRoute_ShouldAdd1NamedRoute()
+        {
+            var module = new SimpleModule();
+
+            Assert.That(Jess.NamedRoutes.Count, Is.EqualTo(1));
         }
     }
 }

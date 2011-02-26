@@ -50,6 +50,7 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
+    <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="JessicaModuleTests.cs" />
     <Compile Include="JessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
