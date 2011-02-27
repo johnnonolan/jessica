@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using Jessica.Extensions;
 
 namespace Jessica.Results
 {
@@ -9,6 +10,11 @@ namespace Jessica.Results
         public StringResult(string data)
         {
             _data = data;
+        }
+
+        public StringResult(string format, params object[] args)
+        {
+            _data = format.With(args);
         }
 
         public void WriteToResponse(HttpContextBase context)

@@ -51,6 +51,7 @@
     <Compile Include="JessicaModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\FileResult.cs" />
+    <Compile Include="Results\HtmlResult.cs" />
     <Compile Include="Results\IActionResult.cs" />
     <Compile Include="Results\JsonResult.cs" />
     <Compile Include="Results\RedirectResult.cs" />
