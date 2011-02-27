@@ -8,10 +8,7 @@
     <projectUrl>http://jessicafx.org</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</description>
-    <summary>
-      A micro web framework written out of curiosity in .NET, inspired
-      by Ruby's Sinatra. Basic documentation: https://github.com/tombell/jessica/wiki
-    </summary>
+    <summary>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</summary>
   </metadata>
   <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <file src="bin\Release\Jessica.dll" target="lib\" />

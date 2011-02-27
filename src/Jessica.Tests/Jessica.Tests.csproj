@@ -47,9 +47,11 @@
     <Compile Include="Data\CustomJessicaFactory.cs" />
     <Compile Include="Data\OverwrittenModule.cs" />
     <Compile Include="Data\SimpleModule.cs" />
+    <Compile Include="Data\SimpleObject.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
+    <Compile Include="Helpers\MapperTests.cs" />
     <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="JessicaModuleTests.cs" />
     <Compile Include="JessTests.cs" />
