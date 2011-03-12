@@ -8,12 +8,6 @@ namespace Jessica.Tests.Helpers
     [TestFixture]
     public class UrlTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-            Jess.NamedRoutes.Clear();
-        }
-
         [Test]
         public void For_WithIncorrectName_ShouldThrowException()
         {

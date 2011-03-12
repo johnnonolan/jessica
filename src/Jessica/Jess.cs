@@ -12,11 +12,13 @@ namespace Jessica
     {
         public static IJessicaFactory Factory = new DefaultJessicaFactory();
 
-        public static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
+        public readonly static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
 
         public static void Initialise()
         {
             var modules = new List<Type>();
+
+            NamedRoutes.Clear();
 
             AppDomain.CurrentDomain.GetAssemblies().ForEach(
                 asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof(JessicaModule))));
