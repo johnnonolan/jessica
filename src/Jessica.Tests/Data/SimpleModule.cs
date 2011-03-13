@@ -2,7 +2,7 @@
 
 namespace Jessica.Tests.Data
 {
-    public class SimpleModule : JessicaModule
+    public class SimpleModule : JessModule
     {
         public SimpleModule()
         {

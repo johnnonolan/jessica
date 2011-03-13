@@ -48,7 +48,7 @@
     <Compile Include="Factory\IJessicaFactory.cs" />
     <Compile Include="Helpers\Mapper.cs" />
     <Compile Include="Jess.cs" />
-    <Compile Include="JessicaModule.cs" />
+    <Compile Include="JessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\FileResult.cs" />
     <Compile Include="Results\HtmlResult.cs" />
@@ -56,15 +56,11 @@
     <Compile Include="Results\JsonResult.cs" />
     <Compile Include="Results\RedirectResult.cs" />
     <Compile Include="Results\StringResult.cs" />
-    <Compile Include="Routing\HttpHandler.cs" />
-    <Compile Include="Routing\RouteHandler.cs" />
+    <Compile Include="Routing\JessicaHttpHandler.cs" />
+    <Compile Include="Routing\JessicaRouteHandler.cs" />
     <Compile Include="Helpers\Url.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Jessica.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

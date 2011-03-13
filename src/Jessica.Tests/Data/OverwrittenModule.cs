@@ -2,7 +2,7 @@
 
 namespace Jessica.Tests.Data
 {
-    public class OverwrittenModule : JessicaModule
+    public class OverwrittenModule : JessModule
     {
         public OverwrittenModule()
         {
