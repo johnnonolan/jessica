@@ -48,7 +48,11 @@ namespace Jessica.Routing
             var module = Jess.Factory.CreateInstance(_moduleType);
             var routes = module.Routes;
 
-            if (routes[_route].ContainsKey(context.Request.HttpMethod))
+            if (routes[_route] == null)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
+            else if (routes[_route].ContainsKey(context.Request.HttpMethod))
             {
                 var wrapper = new HttpContextWrapper(context);
                 IDictionary<string, object> parameters = new ExpandoObject();
@@ -58,7 +62,10 @@ namespace Jessica.Routing
                 AddFormAndQueryStringParameters(parameters, wrapper.Request);
                 AddRouteDataParameters(parameters);
 
+                module.Before.Invoke(_request);
                 var result = routes[_route][context.Request.HttpMethod].Invoke(parameters);
+                module.After.Invoke(_request);
+
                 result.WriteToResponse(wrapper);
             }
             else

@@ -8,15 +8,29 @@ namespace Jessica
     public class JessModule
     {
         private readonly Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>> _routes;
+        private readonly BeforePipeline _beforePipeline;
+        private readonly AfterPipeline _afterPipeline;
 
         public Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>> Routes
         {
             get { return _routes; }
         }
 
+        public BeforePipeline Before
+        {
+            get { return _beforePipeline; }
+        }
+
+        public AfterPipeline After
+        {
+            get { return _afterPipeline; }
+        }
+
         public JessModule()
         {
             _routes = new Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>>();
+            _beforePipeline = new BeforePipeline();
+            _afterPipeline = new AfterPipeline();
         }
 
         private void AddRouteAndAction(string name, string method, string route, Func<dynamic, IActionResult> action)

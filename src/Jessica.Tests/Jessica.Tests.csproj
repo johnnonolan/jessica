@@ -53,7 +53,7 @@
     <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
     <Compile Include="Helpers\MapperTests.cs" />
     <Compile Include="Helpers\UrlTests.cs" />
-    <Compile Include="JessicaModuleTests.cs" />
+    <Compile Include="JessModuleTests.cs" />
     <Compile Include="JessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

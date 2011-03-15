@@ -20,10 +20,8 @@ namespace Jessica
 
             NamedRoutes.Clear();
 
-            AppDomain.CurrentDomain
-                .GetAssemblies()
-                .ForEach(
-                    asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof (JessModule))));
+            AppDomain.CurrentDomain.GetAssemblies().ForEach(
+                asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof (JessModule))));
 
             modules.ForEach(module =>
             {
@@ -31,9 +29,8 @@ namespace Jessica
 
                 if (instance != null)
                 {
-                    instance.Routes
-                        .ForEach(
-                            route => RouteTable.Routes.Add(new Route(route.Key, new JessicaRouteHandler(route.Key, module))));
+                    instance.Routes.ForEach(
+                        route => RouteTable.Routes.Add(new Route(route.Key, new JessicaRouteHandler(route.Key, module))));
                 }
             });
         }
