@@ -7,7 +7,7 @@ namespace Jessica.Results
 {
     public class HtmlResult : IActionResult
     {
-        private readonly string _path;
+        private string _path;
 
         public HtmlResult(string path)
         {

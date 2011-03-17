@@ -12,16 +12,16 @@ namespace Jessica
     {
         public static IJessicaFactory Factory = new DefaultJessicaFactory();
 
-        public readonly static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
+        public static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
 
         public static void Initialise()
         {
-            var modules = new List<Type>();
-
             NamedRoutes.Clear();
 
+            var modules = new List<Type>();
+
             AppDomain.CurrentDomain.GetAssemblies().ForEach(
-                asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof (JessModule))));
+                asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof(JessModule))));
 
             modules.ForEach(module =>
             {
@@ -29,8 +29,7 @@ namespace Jessica
 
                 if (instance != null)
                 {
-                    instance.Routes.ForEach(
-                        route => RouteTable.Routes.Add(new Route(route.Key, new JessicaRouteHandler(route.Key, module))));
+                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Key, new JessicaRouteHandler(route.Key, module))));
                 }
             });
         }

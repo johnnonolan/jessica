@@ -5,7 +5,7 @@ namespace Jessica.Results
 {
     public class JsonResult : IActionResult
     {
-        private readonly object _data;
+        private object _data;
 
         public JsonResult(object data)
         {

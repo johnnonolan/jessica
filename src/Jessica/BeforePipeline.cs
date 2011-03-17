@@ -6,7 +6,7 @@ namespace Jessica
 {
     public class BeforePipeline
     {
-        private readonly List<Action<RequestContext>> _pipeline;
+        private List<Action<RequestContext>> _pipeline;
 
         public BeforePipeline()
         {

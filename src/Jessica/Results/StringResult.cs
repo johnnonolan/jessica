@@ -5,7 +5,7 @@ namespace Jessica.Results
 {
     public class StringResult : IActionResult
     {
-        private readonly string _data;
+        private string _data;
 
         public StringResult(string data)
         {

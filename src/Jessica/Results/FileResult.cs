@@ -8,7 +8,7 @@ namespace Jessica.Results
 {
     public class FileResult : IActionResult
     {
-        private readonly string _path;
+        private string _path;
 
         public FileResult(string path)
         {

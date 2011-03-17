@@ -7,9 +7,9 @@ namespace Jessica
 {
     public class JessModule
     {
-        private readonly Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>> _routes;
-        private readonly BeforePipeline _beforePipeline;
-        private readonly AfterPipeline _afterPipeline;
+        private Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>> _routes;
+        private BeforePipeline _beforePipeline;
+        private AfterPipeline _afterPipeline;
 
         public Dictionary<string, Dictionary<string, Func<dynamic, IActionResult>>> Routes
         {
@@ -33,9 +33,14 @@ namespace Jessica
             _afterPipeline = new AfterPipeline();
         }
 
+        private string ConvertUrlFromSinatra(string route)
+        {
+            return Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
+        }
+
         private void AddRouteAndAction(string name, string method, string route, Func<dynamic, IActionResult> action)
         {
-            route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
+            route = ConvertUrlFromSinatra(route);
 
             if (name != null)
             {

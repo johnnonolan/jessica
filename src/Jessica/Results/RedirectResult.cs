@@ -4,7 +4,7 @@ namespace Jessica.Results
 {
     public class RedirectResult : IActionResult
     {
-        private readonly string _url;
+        private string _url;
 
         public RedirectResult(string url)
         {

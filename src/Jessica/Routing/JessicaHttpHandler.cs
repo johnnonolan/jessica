@@ -10,9 +10,9 @@ namespace Jessica.Routing
 {
     public class JessicaHttpHandler : IHttpHandler
     {
-        private readonly string _route;
-        private readonly RequestContext _request;
-        private readonly Type _moduleType;
+        private string _route;
+        private RequestContext _request;
+        private Type _moduleType;
 
         public JessicaHttpHandler(string route, RequestContext request, Type moduleType)
         {
@@ -43,27 +43,45 @@ namespace Jessica.Routing
             }
         }
 
+        private void InvokeRequestLifecycle(HttpContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InvokePreRequestHook(HttpContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ResolveAndInvokeRouteAction(HttpContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InvokePostRequestHook(HttpContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             var module = Jess.Factory.CreateInstance(_moduleType);
             var routes = module.Routes;
 
-            if (routes[_route] == null)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            }
-            else if (routes[_route].ContainsKey(context.Request.HttpMethod))
+            if (routes[_route].ContainsKey(context.Request.HttpMethod))
             {
                 var wrapper = new HttpContextWrapper(context);
                 IDictionary<string, object> parameters = new ExpandoObject();
 
-                parameters.Add("request", _request);
+                parameters.Add("HttpContext", context);
 
                 AddFormAndQueryStringParameters(parameters, wrapper.Request);
                 AddRouteDataParameters(parameters);
 
                 module.Before.Invoke(_request);
+
                 var result = routes[_route][context.Request.HttpMethod].Invoke(parameters);
+
                 module.After.Invoke(_request);
 
                 result.WriteToResponse(wrapper);
