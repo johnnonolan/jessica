@@ -37,31 +37,41 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\CustomJessicaFactory.cs" />
-    <Compile Include="Data\OverwrittenModule.cs" />
-    <Compile Include="Data\SimpleModule.cs" />
-    <Compile Include="Data\SimpleObject.cs" />
+    <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
+    <Compile Include="Fakes\Modules\FakeModule.cs" />
+    <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
+    <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="ResponseFactoryExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
+    <Compile Include="Factories\DefaultJessicaFactoryTests.cs" />
     <Compile Include="Helpers\MapperTests.cs" />
     <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="JessModuleTests.cs" />
     <Compile Include="JessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\FileResponseTests.cs" />
+    <Compile Include="Responses\JsonResponseTests.cs" />
+    <Compile Include="Responses\RedirectResponseTests.cs" />
+    <Compile Include="Responses\StaticFileResponseTests.cs" />
+    <Compile Include="Responses\TextResponseTests.cs" />
+    <Compile Include="ResponseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jessica\Jessica.csproj">
       <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
       <Name>Jessica</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Fakes\Files\Base.css" />
+    <Content Include="Fakes\Files\FakeHtml.html" />
+    <Content Include="Fakes\Files\HelloWorld.txt" />
+    <Content Include="Fakes\Files\SimpleJs.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

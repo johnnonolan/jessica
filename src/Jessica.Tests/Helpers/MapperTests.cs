@@ -1,6 +1,6 @@
 ﻿using System.Dynamic;
 using Jessica.Helpers;
-using Jessica.Tests.Data;
+using Jessica.Tests.Fakes.Models;
 using NUnit.Framework;
 
 namespace Jessica.Tests.Helpers
@@ -8,64 +8,62 @@ namespace Jessica.Tests.Helpers
     [TestFixture]
     public class MapperTests
     {
+        private dynamic _source;
+        private SimpleModel _model;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _source = new ExpandoObject();
+            _model = new SimpleModel();
+        }
+
         [Test]
         public void Map_WithExpandoAndSimpleObject_ShouldMapCorrectly()
         {
-            dynamic source = new ExpandoObject();
-            var destination = new SimpleObject();
+            _source.Message = "Hello, world!";
+            _source.Count = 100;
 
-            source.Message = "Hello, world!";
-            source.Count = 100;
+            Mapper<SimpleModel>.Map(_source, _model);
 
-            Mapper<SimpleObject>.Map(source, destination);
-
-            Assert.That(destination.Message, Is.EqualTo("Hello, world!"));
-            Assert.That(destination.Count, Is.EqualTo(100));
+            Assert.That(_model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(_model.Count, Is.EqualTo(100));
         }
 
         [Test]
         public void Map_WithExpandoAndSimpleObjectWithLowerCasing_ShouldMapCorrectly()
         {
-            dynamic source = new ExpandoObject();
-            var destination = new SimpleObject();
+            _source.message = "Hello, world!";
+            _source.count = 100;
 
-            source.message = "Hello, world!";
-            source.count = 100;
+            Mapper<SimpleModel>.Map(_source, _model);
 
-            Mapper<SimpleObject>.Map(source, destination);
-
-            Assert.That(destination.Message, Is.EqualTo("Hello, world!"));
-            Assert.That(destination.Count, Is.EqualTo(100));
+            Assert.That(_model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(_model.Count, Is.EqualTo(100));
         }
 
         [Test]
         public void Map_WithExpandoAndSimpleObjectWithDifferentCasing_ShouldMapCorrectly()
         {
-            dynamic source = new ExpandoObject();
-            var destination = new SimpleObject();
+            _source.mEsSagE = "Hello, world!";
+            _source.cOuNt = 100;
 
-            source.mEsSagE = "Hello, world!";
-            source.cOuNt = 100;
+            Mapper<SimpleModel>.Map(_source, _model);
 
-            Mapper<SimpleObject>.Map(source, destination);
-
-            Assert.That(destination.Message, Is.EqualTo("Hello, world!"));
-            Assert.That(destination.Count, Is.EqualTo(100));
+            Assert.That(_model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(_model.Count, Is.EqualTo(100));
         }
 
         [Test]
         public void Map_WithExpandoAndSimpleObjectWithDifferentTypes_ShouldNotMapValues()
         {
-            dynamic source = new ExpandoObject();
-            var destination = new SimpleObject();
+            _source.message = 100;
+            _source.count = "Hello, world!";
 
-            source.message = 100;
-            source.count = "Hello, world!";
+            Mapper<SimpleModel>.Map(_source, _model);
 
-            Mapper<SimpleObject>.Map(source, destination);
-
-            Assert.That(destination.Message, Is.Null);
-            Assert.That(destination.Count, Is.EqualTo(0));
+            Assert.That(_model.Message, Is.Null);
+            Assert.That(_model.Count, Is.EqualTo(0));
         }
     }
 }

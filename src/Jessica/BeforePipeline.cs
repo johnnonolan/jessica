@@ -38,17 +38,17 @@ namespace Jessica
             return pipelineToAddTo;
         }
 
-        public virtual void AddItemToStartOfPipeline(Action<RequestContext> action)
+        public void AddItemToStartOfPipeline(Action<RequestContext> action)
         {
             InsertItemAtPipelineIndex(0, action);
         }
 
-        public virtual void AddItemToEndOfPipeline(Action<RequestContext> action)
+        public void AddItemToEndOfPipeline(Action<RequestContext> action)
         {
             _pipeline.Add(action);
         }
 
-        public virtual void InsertItemAtPipelineIndex(int index, Action<RequestContext> action)
+        public void InsertItemAtPipelineIndex(int index, Action<RequestContext> action)
         {
             _pipeline.Insert(index, action);
         }

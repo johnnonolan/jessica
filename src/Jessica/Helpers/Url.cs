@@ -16,6 +16,7 @@ namespace Jessica.Helpers
             }
 
             var route = Jess.NamedRoutes[name];
+
             return "/" + (parameters == null ? route : ReplaceUrlParameters(route, parameters));
         }
 
@@ -29,15 +30,12 @@ namespace Jessica.Helpers
                 var name = prop.Name;
                 var value = prop.GetValue(defaults, null).ToString();
                 var propertyReplaced = false;
-
                 route = RecursiveParameterReplace(route, name, value, ref propertyReplaced);
-
                 if (!propertyReplaced)
                 {
                     unreplaced.Add(name, value);
                 }
             }
-
             return route + (unreplaced.Count > 0 ? BuildQueryString(unreplaced) : string.Empty);
         }
 

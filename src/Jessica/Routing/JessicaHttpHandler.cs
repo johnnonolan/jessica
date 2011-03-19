@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Routing;
@@ -21,74 +22,58 @@ namespace Jessica.Routing
             _moduleType = moduleType;
         }
 
-        private static void AddFormAndQueryStringParameters(IDictionary<string, object> parameters, HttpRequestBase request)
+        private static void AddFormParameters(IDictionary<string, object> parameters, HttpRequest request)
         {
             foreach (string key in request.Form)
             {
                 parameters.Add(key, request.Form[key]);
             }
+        }
 
+        private static void AddQueryStringParameters(IDictionary<string, object> parameters, HttpRequest request)
+        {
             foreach (string key in request.QueryString)
             {
                 parameters.Add(key, request.QueryString[key]);
             }
         }
 
-        private void AddRouteDataParameters(IDictionary<string, object> parameters)
+        private static void AddRouteParameters(IDictionary<string, object> parameters, RouteData routeData)
         {
-            if (_request.RouteData != null)
+            if (routeData != null)
             {
-                _request.RouteData.Values.ForEach(
-                    p => parameters.Add(p.Key, p.Value));
+                routeData.Values.ForEach(p => parameters.Add(p.Key, p.Value));
             }
         }
 
-        private void InvokeRequestLifecycle(HttpContext context)
+        private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
         {
-            throw new NotImplementedException();
-        }
-
-        private void InvokePreRequestHook(HttpContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ResolveAndInvokeRouteAction(HttpContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void InvokePostRequestHook(HttpContext context)
-        {
-            throw new NotImplementedException();
+            response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
+            httpResponse.StatusCode = response.StatusCode;
+            httpResponse.ContentType = response.ContentType;
         }
 
         public void ProcessRequest(HttpContext context)
         {
             var module = Jess.Factory.CreateInstance(_moduleType);
-            var routes = module.Routes;
-
-            if (routes[_route].ContainsKey(context.Request.HttpMethod))
+            var route = module.Routes.Single(r => r.Url == _route);
+            var method = context.Request.HttpMethod.ToUpper();
+            if (route.Actions[method] != null)
             {
-                var wrapper = new HttpContextWrapper(context);
                 IDictionary<string, object> parameters = new ExpandoObject();
-
+                AddQueryStringParameters(parameters, context.Request);
+                AddFormParameters(parameters, context.Request);
+                AddRouteParameters(parameters, _request.RouteData);
                 parameters.Add("HttpContext", context);
-
-                AddFormAndQueryStringParameters(parameters, wrapper.Request);
-                AddRouteDataParameters(parameters);
-
                 module.Before.Invoke(_request);
-
-                var result = routes[_route][context.Request.HttpMethod].Invoke(parameters);
-
+                var response = route.Actions[method].Invoke(parameters);
                 module.After.Invoke(_request);
-
-                result.WriteToResponse(wrapper);
+                MapResponseToHttpResponse(response, context.Response);
+                response.Contents.Invoke(context.Response.OutputStream);
             }
             else
             {
-                context.Response.StatusCode = (int)HttpStatusCode.NotImplemented;
+                context.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
             }
         }
 
