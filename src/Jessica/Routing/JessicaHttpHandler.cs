@@ -58,17 +58,23 @@ namespace Jessica.Routing
             var module = Jess.Factory.CreateInstance(_moduleType);
             var route = module.Routes.Single(r => r.Url == _route);
             var method = context.Request.HttpMethod.ToUpper();
+
             if (route.Actions[method] != null)
             {
                 IDictionary<string, object> parameters = new ExpandoObject();
+
                 AddQueryStringParameters(parameters, context.Request);
                 AddFormParameters(parameters, context.Request);
                 AddRouteParameters(parameters, _request.RouteData);
+
                 parameters.Add("HttpContext", context);
+                
                 module.Before.Invoke(_request);
                 var response = route.Actions[method].Invoke(parameters);
                 module.After.Invoke(_request);
+
                 MapResponseToHttpResponse(response, context.Response);
+
                 response.Contents.Invoke(context.Response.OutputStream);
             }
             else

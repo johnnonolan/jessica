@@ -2,6 +2,7 @@
 *.user
 *.suo
 *.cache
+*.Resharper
 _ReSharper.*/
 *.Publish.xml
 [Bb]in

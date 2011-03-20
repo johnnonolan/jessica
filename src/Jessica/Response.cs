@@ -16,7 +16,7 @@ namespace Jessica
 
         public int StatusCode { get; set; }
 
-        protected Response()
+        public Response()
         {
             Contents = GetStringContents(string.Empty);
             ContentType = "text/html";

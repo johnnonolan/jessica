@@ -59,6 +59,9 @@
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
     <Compile Include="ResponseTests.cs" />
+    <Compile Include="Routing\JessicaHttpHandlerTests.cs" />
+    <Compile Include="Routing\JessicaRouteHandler.cs" />
+    <Compile Include="Routing\RouteTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jessica\Jessica.csproj">
