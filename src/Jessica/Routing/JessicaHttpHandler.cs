@@ -68,7 +68,7 @@ namespace Jessica.Routing
                 AddRouteParameters(parameters, _request.RouteData);
 
                 parameters.Add("HttpContext", context);
-                
+
                 module.Before.Invoke(_request);
                 var response = route.Actions[method].Invoke(parameters);
                 module.After.Invoke(_request);

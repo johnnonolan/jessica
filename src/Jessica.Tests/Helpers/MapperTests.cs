@@ -31,7 +31,7 @@ namespace Jessica.Tests.Helpers
         }
 
         [Test]
-        public void Map_WithExpandoAndSimpleObjectWithLowerCasing_ShouldMapCorrectly()
+        public void Map_WithExpandoAndSimpleObjectWithLowerCasing_ShouldMap()
         {
             _source.message = "Hello, world!";
             _source.count = 100;
@@ -42,8 +42,9 @@ namespace Jessica.Tests.Helpers
             Assert.That(_model.Count, Is.EqualTo(100));
         }
 
+
         [Test]
-        public void Map_WithExpandoAndSimpleObjectWithDifferentCasing_ShouldMapCorrectly()
+        public void Map_WithExpandoAndSimpleObjectWithDifferentCasing_ShouldMap()
         {
             _source.mEsSagE = "Hello, world!";
             _source.cOuNt = 100;
@@ -55,7 +56,7 @@ namespace Jessica.Tests.Helpers
         }
 
         [Test]
-        public void Map_WithExpandoAndSimpleObjectWithDifferentTypes_ShouldNotMapValues()
+        public void Map_WithExpandoAndSimpleObjectWithDifferentTypes_ShouldNotMap()
         {
             _source.message = 100;
             _source.count = "Hello, world!";
@@ -64,6 +65,54 @@ namespace Jessica.Tests.Helpers
 
             Assert.That(_model.Message, Is.Null);
             Assert.That(_model.Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Map_WithExpandoNoDestination_SHouldMapAndReturnNewObject()
+        {
+            _source.message = "Hello, world!";
+            _source.count = 100;
+
+            var model = Mapper<SimpleModel>.Map(_source);
+
+            Assert.That(model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(model.Count, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void Map_WithExpandoAndNoDestinationWithLowerCasing_ShouldMapAndReturnNewObject()
+        {
+            _source.message = "Hello, world!";
+            _source.count = 100;
+
+            var model = Mapper<SimpleModel>.Map(_source);
+
+            Assert.That(model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(model.Count, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void Map_WithExpandoAndNoDestinationWithDifferentCasing_ShouldMap()
+        {
+            _source.mEsSagE = "Hello, world!";
+            _source.cOuNt = 100;
+
+            var model = Mapper<SimpleModel>.Map(_source);
+
+            Assert.That(model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That(model.Count, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void Map_WithExpandoAndNoDestinationWithDifferentTypes_ShouldNotMap()
+        {
+            _source.message = 100;
+            _source.count = "Hello, world!";
+
+            var model = Mapper<SimpleModel>.Map(_source);
+
+            Assert.That((string)model.Message, Is.Null);
+            Assert.That((int)model.Count, Is.EqualTo(0));
         }
     }
 }

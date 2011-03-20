@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Jessica.Helpers
 {
     public static class Mapper<T>
-        where T : class
+        where T : new()
     {
         private static Dictionary<string, PropertyInfo> PropertyMap;
 
@@ -35,6 +35,15 @@ namespace Jessica.Helpers
 
                 prop.SetValue(destination, kv.Value, null);
             }
+        }
+
+        public static T Map(ExpandoObject source)
+        {
+            var model = new T();
+
+            Map(source, model);
+
+            return model;
         }
     }
 }
