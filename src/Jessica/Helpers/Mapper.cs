@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
@@ -6,13 +7,13 @@ using System.Reflection;
 namespace Jessica.Helpers
 {
     public static class Mapper<T>
-        where T : new()
+        where T : class
     {
-        private static Dictionary<string, PropertyInfo> PropertyMap;
+        private static Dictionary<string, PropertyInfo> _propertyMap;
 
         static Mapper()
         {
-            PropertyMap = typeof(T)
+            _propertyMap = typeof(T)
                 .GetProperties()
                 .ToDictionary(p => p.Name.ToLower(), p => p);
         }
@@ -23,7 +24,7 @@ namespace Jessica.Helpers
             {
                 PropertyInfo prop;
 
-                if (!PropertyMap.TryGetValue(kv.Key.ToLower(), out prop))
+                if (!_propertyMap.TryGetValue(kv.Key.ToLower(), out prop))
                 {
                     continue;
                 }
@@ -39,7 +40,7 @@ namespace Jessica.Helpers
 
         public static T Map(ExpandoObject source)
         {
-            var model = new T();
+            var model = Activator.CreateInstance<T>();
 
             Map(source, model);
 
