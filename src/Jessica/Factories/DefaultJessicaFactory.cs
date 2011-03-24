@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jessica.Factory
+namespace Jessica.Factories
 {
     public class DefaultJessicaFactory : IJessicaFactory
     {

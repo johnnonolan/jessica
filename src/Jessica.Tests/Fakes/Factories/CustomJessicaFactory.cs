@@ -1,5 +1,5 @@
 ﻿using System;
-using Jessica.Factory;
+using Jessica.Factories;
 
 namespace Jessica.Tests.Fakes.Factories
 {

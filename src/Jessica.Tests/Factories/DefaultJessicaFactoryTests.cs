@@ -1,4 +1,4 @@
-﻿using Jessica.Factory;
+﻿using Jessica.Factories;
 using Jessica.Tests.Fakes.Modules;
 using NUnit.Framework;
 

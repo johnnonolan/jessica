@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Routing;
 using Jessica.Extensions;
-using Jessica.Factory;
+using Jessica.Factories;
 using Jessica.Routing;
 
 namespace Jessica
