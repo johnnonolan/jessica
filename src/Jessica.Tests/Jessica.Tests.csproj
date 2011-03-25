@@ -59,9 +59,6 @@
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
     <Compile Include="ResponseTests.cs" />
-    <Compile Include="Routing\JessicaHttpHandlerTests.cs" />
-    <Compile Include="Routing\JessicaRouteHandler.cs" />
-    <Compile Include="Routing\RouteTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jessica\Jessica.csproj">
@@ -69,7 +66,9 @@
       <Name>Jessica</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Routing\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Fakes\Files\Base.css" />
     <Content Include="Fakes\Files\FakeHtml.html" />
