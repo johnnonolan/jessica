@@ -2,16 +2,11 @@
 {
     public class DefaultResponseFactory : IResponseFactory
     {
-        private string _rootPath;
-
-        public string RootPath
-        {
-            get { return _rootPath; }
-        }
+        public string RootPath { get; private set; }
 
         public DefaultResponseFactory(string rootPath)
         {
-            _rootPath = rootPath;
+            RootPath = rootPath;
         }
     }
 }
