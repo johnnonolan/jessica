@@ -62,7 +62,6 @@
     <Compile Include="Routing\JessicaRouteHandler.cs" />
     <Compile Include="Helpers\Url.cs" />
     <Compile Include="Routing\Route.cs" />
-    <Compile Include="ViewEngines\FileSystemViewSourceProvider.cs" />
     <Compile Include="ViewEngines\IViewEngine.cs" />
     <Compile Include="ViewEngines\ViewFactory.cs" />
     <Compile Include="ViewEngines\ViewLocation.cs" />

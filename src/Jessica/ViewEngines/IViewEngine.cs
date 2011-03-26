@@ -6,7 +6,7 @@ namespace Jessica.ViewEngines
 {
     public interface IViewEngine
     {
-        IEnumerable<string> Extensions { get; set; }
+        IEnumerable<string> Extensions { get; }
 
         Action<Stream> RenderView(ViewLocation viewLocation, dynamic model);
     }
