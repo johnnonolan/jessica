@@ -104,9 +104,14 @@ namespace Jessica
             Post(null, route, action);
         }
 
-        protected Action<Stream> View(string viewName = null, dynamic model = null)
+        protected Action<Stream> View(string viewName, dynamic model = null)
         {
             return ViewFactory.RenderView(viewName, model);
+        }
+
+        protected Action<Stream> View(dynamic model)
+        {
+            return ViewFactory.RenderView(null, model);
         }
     }
 }
