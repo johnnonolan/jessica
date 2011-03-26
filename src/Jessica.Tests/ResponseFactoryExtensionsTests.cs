@@ -9,12 +9,12 @@ namespace Jessica.Tests
     [TestFixture]
     public class ResponseFactoryExtensionsTests
     {
-        private IResponseFactory _factory;
+        private ResponseFactory _factory;
 
         [SetUp]
         public void SetUp()
         {
-            _factory = new DefaultResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
+            _factory = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
         }
 
         [Test]

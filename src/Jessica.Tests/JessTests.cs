@@ -12,6 +12,7 @@ namespace Jessica.Tests
         public void TearDown()
         {
             Jess.Factory = new DefaultJessicaFactory();
+            Jess.ViewEngines.Clear();
         }
 
         [Test]

@@ -6,36 +6,22 @@ namespace Jessica
 {
     public class BeforePipeline
     {
-        private List<Action<RequestContext>> _pipeline;
+        public List<Action<RequestContext>> Pipeline { get; set; }
 
         public BeforePipeline()
         {
-            _pipeline = new List<Action<RequestContext>>();
+            Pipeline = new List<Action<RequestContext>>();
         }
 
         public void Invoke(RequestContext context)
         {
-            _pipeline.ForEach(
-                action => action.Invoke(context));
-        }
-
-        public static implicit operator BeforePipeline(Action<RequestContext> action)
-        {
-            var pipeline = new BeforePipeline();
-            pipeline.AddItemToEndOfPipeline(action);
-            return pipeline;
+            Pipeline.ForEach(action => action.Invoke(context));
         }
 
         public static BeforePipeline operator +(BeforePipeline pipeline, Action<RequestContext> action)
         {
             pipeline.AddItemToEndOfPipeline(action);
             return pipeline;
-        }
-
-        public static BeforePipeline operator +(BeforePipeline pipelineToAddTo, BeforePipeline pipelineToAdd)
-        {
-            pipelineToAddTo._pipeline.AddRange(pipelineToAdd._pipeline);
-            return pipelineToAddTo;
         }
 
         public void AddItemToStartOfPipeline(Action<RequestContext> action)
@@ -45,12 +31,12 @@ namespace Jessica
 
         public void AddItemToEndOfPipeline(Action<RequestContext> action)
         {
-            _pipeline.Add(action);
+            Pipeline.Add(action);
         }
 
         public void InsertItemAtPipelineIndex(int index, Action<RequestContext> action)
         {
-            _pipeline.Insert(index, action);
+            Pipeline.Insert(index, action);
         }
     }
 }

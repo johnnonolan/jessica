@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 using Jessica.Factories;
 using Jessica.Routing;
+using Jessica.ViewEngines;
 
 namespace Jessica
 {
@@ -15,14 +17,17 @@ namespace Jessica
 
         public AfterPipeline After { get; private set; }
 
-        public IResponseFactory Response { get; private set; }
+        public ResponseFactory Response { get; private set; }
+
+        private ViewFactory ViewFactory { get; set; }
 
         protected JessModule()
         {
             Routes = new List<Route>();
             Before = new BeforePipeline();
             After = new AfterPipeline();
-            Response = new DefaultResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
+            Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
+            ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private void AddRouteAndAction(string name, string method, string route, Func<dynamic, Response> action)
@@ -97,6 +102,16 @@ namespace Jessica
         protected void Put(string route, Func<dynamic, Response> action)
         {
             Post(null, route, action);
+        }
+
+        protected Action<Stream> View(string viewName, dynamic model = null)
+        {
+            return ViewFactory.RenderView(viewName, model);
+        }
+
+        protected Action<Stream> View(dynamic model)
+        {
+            return ViewFactory.RenderView(null, model);
         }
     }
 }

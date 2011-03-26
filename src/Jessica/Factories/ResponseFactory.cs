@@ -1,10 +1,10 @@
 ﻿namespace Jessica.Factories
 {
-    public class DefaultResponseFactory : IResponseFactory
+    public class ResponseFactory
     {
         public string RootPath { get; private set; }
 
-        public DefaultResponseFactory(string rootPath)
+        public ResponseFactory(string rootPath)
         {
             RootPath = rootPath;
         }

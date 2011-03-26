@@ -40,11 +40,14 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterPipelineTests.cs" />
+    <Compile Include="BeforePipelineTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Fakes\ViewEngines\FakeViewEngine.cs" />
     <Compile Include="ResponseFactoryExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Factories\DefaultJessicaFactoryTests.cs" />
@@ -59,6 +62,8 @@
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
     <Compile Include="ResponseTests.cs" />
+    <Compile Include="ViewEngines\ViewFactoryTests.cs" />
+    <Compile Include="ViewEngines\ViewLocatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jessica\Jessica.csproj">
@@ -66,14 +71,14 @@
       <Name>Jessica</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Routing\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Fakes\Files\Base.css" />
     <Content Include="Fakes\Files\FakeHtml.html" />
     <Content Include="Fakes\Files\HelloWorld.txt" />
     <Content Include="Fakes\Files\SimpleJs.js" />
+    <Content Include="Fakes\Views\Simple.html" />
+    <Content Include="Fakes\Views\View.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
