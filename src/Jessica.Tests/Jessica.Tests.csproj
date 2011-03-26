@@ -40,6 +40,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterPipelineTests.cs" />
+    <Compile Include="BeforePipelineTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
@@ -69,9 +71,7 @@
       <Name>Jessica</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Routing\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Fakes\Files\Base.css" />
     <Content Include="Fakes\Files\FakeHtml.html" />
