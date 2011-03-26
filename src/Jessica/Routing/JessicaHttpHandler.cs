@@ -12,13 +12,13 @@ namespace Jessica.Routing
     public class JessicaHttpHandler : IHttpHandler
     {
         private string _route;
-        private RequestContext _request;
+        private RequestContext _requestContext;
         private Type _moduleType;
 
-        public JessicaHttpHandler(string route, RequestContext request, Type moduleType)
+        public JessicaHttpHandler(string route, RequestContext requestContext, Type moduleType)
         {
             _route = route;
-            _request = request;
+            _requestContext = requestContext;
             _moduleType = moduleType;
         }
 
@@ -65,13 +65,13 @@ namespace Jessica.Routing
 
                 AddQueryStringParameters(parameters, context.Request);
                 AddFormParameters(parameters, context.Request);
-                AddRouteParameters(parameters, _request.RouteData);
+                AddRouteParameters(parameters, _requestContext.RouteData);
 
                 parameters.Add("HttpContext", context);
 
-                module.Before.Invoke(_request);
+                module.Before.Invoke(_requestContext);
                 var response = route.Actions[method].Invoke(parameters);
-                module.After.Invoke(_request);
+                module.After.Invoke(_requestContext);
 
                 MapResponseToHttpResponse(response, context.Response);
 
