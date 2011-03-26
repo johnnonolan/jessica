@@ -44,9 +44,8 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DefaultJessicaFactory.cs" />
-    <Compile Include="Factories\DefaultResponseFactory.cs" />
+    <Compile Include="Factories\ResponseFactory.cs" />
     <Compile Include="Factories\IJessicaFactory.cs" />
-    <Compile Include="Factories\IResponseFactory.cs" />
     <Compile Include="ResponseFactoryExtensions.cs" />
     <Compile Include="Helpers\Mapper.cs" />
     <Compile Include="Jess.cs" />

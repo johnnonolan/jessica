@@ -17,7 +17,7 @@ namespace Jessica
 
         public AfterPipeline After { get; private set; }
 
-        public IResponseFactory Response { get; private set; }
+        public ResponseFactory Response { get; private set; }
 
         private ViewFactory ViewFactory { get; set; }
 
@@ -26,7 +26,7 @@ namespace Jessica
             Routes = new List<Route>();
             Before = new BeforePipeline();
             After = new AfterPipeline();
-            Response = new DefaultResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
+            Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
             ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
