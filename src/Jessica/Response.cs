@@ -24,6 +24,11 @@ namespace Jessica
             StatusCode = HttpStatusCode.OK.AsInt();
         }
 
+        public static implicit  operator Response(Action<Stream> action)
+        {
+            return new Response { Contents = action };
+        }
+
         protected static Action<Stream> GetStringContents(string contents)
         {
             return stream =>

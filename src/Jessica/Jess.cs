@@ -5,14 +5,22 @@ using System.Web.Routing;
 using Jessica.Extensions;
 using Jessica.Factories;
 using Jessica.Routing;
+using Jessica.ViewEngines;
 
 namespace Jessica
 {
     public static class Jess
     {
-        public static IJessicaFactory Factory = new DefaultJessicaFactory();
+        public static IJessicaFactory Factory { get; set; }
+        public static IDictionary<string, string> NamedRoutes { get; private set; }
+        public static IList<IViewEngine> ViewEngines { get; private set; }
 
-        public static IDictionary<string, string> NamedRoutes = new Dictionary<string, string>();
+        static Jess()
+        {
+            Factory = new DefaultJessicaFactory();
+            NamedRoutes = new Dictionary<string, string>();
+            ViewEngines = new List<IViewEngine>();
+        }
 
         public static void Initialise()
         {
