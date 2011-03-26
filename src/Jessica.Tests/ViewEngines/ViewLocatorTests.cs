@@ -50,7 +50,7 @@ namespace Jessica.Tests.ViewEngines
         }
 
         [Test]
-        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectFileLocation()
+        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectLocation()
         {
             var location = _locator.FindView("View", new[] { "html" });
 
@@ -58,7 +58,7 @@ namespace Jessica.Tests.ViewEngines
         }
 
         [Test]
-        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectFileExtension()
+        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectExtension()
         {
             var location = _locator.FindView("View", new[] { "html" });
 
@@ -66,13 +66,55 @@ namespace Jessica.Tests.ViewEngines
         }
 
         [Test]
-        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectFileContents()
+        public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectContents()
         {
             var location = _locator.FindView("View", new[] { "html" });
             var contents = location.Contents.ReadToEnd();
 
             Assert.That(contents, Contains.Substring("<title>My View!</title>"));
             Assert.That(contents, Contains.Substring("<h1>My View!</h1>"));
+        }
+
+        [Test]
+        public void FindView_WithNonExistingSubFolderViewNameAndExtensions_ShouldReturnNull()
+        {
+            var location = _locator.FindView("Shared/DoesNotExist", new[] { "html" });
+
+            Assert.That(location, Is.Null);
+        }
+
+        [Test]
+        public void FindView_WithExistingSubFolderViewNameAndExtensions_ShouldReturnInstanceOfViewLocation()
+        {
+            var location = _locator.FindView("Shared/List", new[] { "html" });
+
+            Assert.That(location, Is.InstanceOf<ViewLocation>());
+        }
+
+        [Test]
+        public void FindView_WithExistingSubFolderViewNameAndExtensions_ShouldReturnCorrectLocation()
+        {
+            var location = _locator.FindView("Shared/List", new[] { "html" });
+
+            Assert.That(location.Location, Is.EqualTo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\Views\\", "Shared/List.html")));
+        }
+
+        [Test]
+        public void FindView_WithExistingSubFolderViewNameAndExtensions_ShouldReturnCorrectExtension()
+        {
+            var location = _locator.FindView("Shared/List", new[] { "html" });
+
+            Assert.That(location.Extension, Is.EqualTo("html"));
+        }
+
+        [Test]
+        public void FindView_WithExistingSubFolderViewNameAndExtensions_ShouldReturnCorrectContents()
+        {
+            var location = _locator.FindView("Shared/List", new[] { "html" });
+            var contents = location.Contents.ReadToEnd();
+
+            Assert.That(contents, Contains.Substring("<title>My Sub Folder View!</title>"));
+            Assert.That(contents, Contains.Substring("<h1>My Sub Folder View!</h1>"));
         }
     }
 }

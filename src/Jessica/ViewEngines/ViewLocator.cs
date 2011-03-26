@@ -35,21 +35,30 @@ namespace Jessica.ViewEngines
                     return null;
                 }
 
-                var filesInViewFolder = Directory.GetFiles(viewFolder);
-                var viewFiles = filesInViewFolder
-                    .SelectMany(file => supportedExtensions, (file, extension) => new { file, extension })
-                    .Where(o => Path.GetFileName(o.file.ToUpperInvariant()) == string.Concat(viewName, ".", o.extension).ToUpperInvariant())
-                    .Select(o => new { o.file, o.extension });
+                var selectedView = FindViewFromName(viewFolder, viewName, supportedExtensions);
+                var fileStream = new FileStream(selectedView.Item1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 
-                var selectedView = viewFiles.FirstOrDefault();
-                var fileStream = new FileStream(selectedView.file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-                return new ViewLocation(selectedView.file, selectedView.extension, new StreamReader(fileStream));
+                return new ViewLocation(selectedView.Item1, selectedView.Item2, new StreamReader(fileStream));
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        private Tuple<string, string> FindViewFromName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        {
+            foreach (var extension in supportedExtensions)
+            {
+                var file = Path.Combine(viewFolder, viewName + "." + extension);
+
+                if (File.Exists(file))
+                {
+                    return Tuple.Create(file, extension);
+                }
+            }
+
+            return null;
         }
     }
 }
