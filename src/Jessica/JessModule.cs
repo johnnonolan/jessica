@@ -30,7 +30,7 @@ namespace Jessica
             ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
-        private void AddRouteAndAction(string name, string method, string route, Func<dynamic, Response> action)
+        private void AddRoute(string name, string method, string route, Func<dynamic, Response> action)
         {
             route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
 
@@ -45,6 +45,7 @@ namespace Jessica
                     Jess.NamedRoutes.Add(name, route);
                 }
             }
+
             var existing = Routes.SingleOrDefault(r => r.Url == route);
 
             if (existing != null)
@@ -66,7 +67,7 @@ namespace Jessica
 
         protected void Delete(string name, string route, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "DELETE", route, action);
+            AddRoute(name, "DELETE", route, action);
         }
 
         protected void Delete(string route, Func<dynamic, Response> action)
@@ -76,7 +77,7 @@ namespace Jessica
 
         protected void Get(string name, string route, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "GET", route, action);
+            AddRoute(name, "GET", route, action);
         }
 
         protected void Get(string route, Func<dynamic, Response> action)
@@ -86,7 +87,7 @@ namespace Jessica
 
         protected void Post(string name, string route, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "POST", route, action);
+            AddRoute(name, "POST", route, action);
         }
 
         protected void Post(string route, Func<dynamic, Response> action)
@@ -96,7 +97,7 @@ namespace Jessica
 
         protected void Put(string name, string route, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "PUT", route, action);
+            AddRoute(name, "PUT", route, action);
         }
 
         protected void Put(string route, Func<dynamic, Response> action)
