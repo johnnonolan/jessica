@@ -30,7 +30,7 @@ namespace Jessica
             ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
-        private void AddRoute(string name, string method, string route, Func<dynamic, Response> action)
+        private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
         {
             route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
 
@@ -62,47 +62,47 @@ namespace Jessica
             else
             {
                 Routes.Add(new Route(route, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
-            }
+            }           
         }
 
         protected void Delete(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute(name, "DELETE", route, action);
+            AddRoute("DELETE", route, name, action);
         }
 
         protected void Delete(string route, Func<dynamic, Response> action)
         {
-            AddRoute(null, "DELETE", route, action);
+            AddRoute("DELETE", route, null, action);
         }
 
         protected void Get(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute(name, "GET", route, action);
+            AddRoute("GET", route, name, action);
         }
 
         protected void Get(string route, Func<dynamic, Response> action)
         {
-            AddRoute(null, "GET", route, action);
+            AddRoute("GET", route, null, action);
         }
 
         protected void Post(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute(name, "POST", route, action);
+            AddRoute("POST", route, name, action);
         }
 
         protected void Post(string route, Func<dynamic, Response> action)
         {
-            AddRoute(null, "POST", route, action);
+            AddRoute("POST", route, null, action);
         }
 
         protected void Put(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute(name, "PUT", route, action);
+            AddRoute("PUT", route, name, action);
         }
 
         protected void Put(string route, Func<dynamic, Response> action)
         {
-            AddRoute(null, "PUT", route, action);
+            AddRoute("PUT", route, null, action);
         }
 
         protected Action<Stream> View(string viewName, dynamic model = null)
