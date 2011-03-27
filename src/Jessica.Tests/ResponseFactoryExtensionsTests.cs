@@ -75,7 +75,7 @@ namespace Jessica.Tests
         public void AsHtml_WithPathToExistingHtmlFile_ShouldReturnAResponseWithContentsOfHtmlFile()
         {
             var response = _factory.AsHtml("../../Fakes/Files/FakeHtml.html");
-            
+
             var stream = new MemoryStream();
             response.Contents.Invoke(stream);
             stream.Position = 0;

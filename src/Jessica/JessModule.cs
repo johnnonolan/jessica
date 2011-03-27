@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Jessica.Factories;
 using Jessica.Routing;
 using Jessica.ViewEngines;
@@ -62,7 +62,7 @@ namespace Jessica
             else
             {
                 Routes.Add(new Route(route, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
-            }           
+            }
         }
 
         protected void Delete(string route, string name, Func<dynamic, Response> action)

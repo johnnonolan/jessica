@@ -41,9 +41,7 @@ namespace Jessica.Helpers
         public static T Map(ExpandoObject source)
         {
             var model = Activator.CreateInstance<T>();
-
             Map(source, model);
-
             return model;
         }
     }
