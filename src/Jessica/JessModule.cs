@@ -65,44 +65,44 @@ namespace Jessica
             }
         }
 
-        protected void Delete(string name, string route, Func<dynamic, Response> action)
+        protected void Delete(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute(name, "DELETE", route, action);
         }
 
         protected void Delete(string route, Func<dynamic, Response> action)
         {
-            Delete(null, route, action);
+            AddRoute(null, "DELETE", route, action);
         }
 
-        protected void Get(string name, string route, Func<dynamic, Response> action)
+        protected void Get(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute(name, "GET", route, action);
         }
 
         protected void Get(string route, Func<dynamic, Response> action)
         {
-            Get(null, route, action);
+            AddRoute(null, "GET", route, action);
         }
 
-        protected void Post(string name, string route, Func<dynamic, Response> action)
+        protected void Post(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute(name, "POST", route, action);
         }
 
         protected void Post(string route, Func<dynamic, Response> action)
         {
-            Post(null, route, action);
+            AddRoute(null, "POST", route, action);
         }
 
-        protected void Put(string name, string route, Func<dynamic, Response> action)
+        protected void Put(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute(name, "PUT", route, action);
         }
 
         protected void Put(string route, Func<dynamic, Response> action)
         {
-            Post(null, route, action);
+            AddRoute(null, "PUT", route, action);
         }
 
         protected Action<Stream> View(string viewName, dynamic model = null)
