@@ -16,6 +16,13 @@ namespace Jessica.ViewEngines
 
         public ViewLocation FindView(string viewName, IEnumerable<string> supportedExtensions)
         {
+            if (supportedExtensions == null)
+            {
+                return null;
+            }
+
+            supportedExtensions = supportedExtensions.ToList();
+
             if (string.IsNullOrEmpty(viewName) || !supportedExtensions.Any())
             {
                 return null;
@@ -48,17 +55,12 @@ namespace Jessica.ViewEngines
 
         private Tuple<string, string> FindViewFromName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
         {
-            foreach (var extension in supportedExtensions)
-            {
-                var file = Path.Combine(viewFolder, viewName + "." + extension);
+            var selectedView = from extension in supportedExtensions
+                               let file = Path.Combine(viewFolder, viewName + "." + extension)
+                               where File.Exists(file)
+                               select Tuple.Create(file, extension);
 
-                if (File.Exists(file))
-                {
-                    return Tuple.Create(file, extension);
-                }
-            }
-
-            return null;
+            return selectedView.FirstOrDefault();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
@@ -18,7 +17,7 @@ namespace Jessica.Helpers
                 .ToDictionary(p => p.Name.ToLower(), p => p);
         }
 
-        public static void Map(ExpandoObject source, T destination)
+        public static void Map(IEnumerable<KeyValuePair<string, object>> source, T destination)
         {
             foreach (var kv in source)
             {
@@ -38,7 +37,7 @@ namespace Jessica.Helpers
             }
         }
 
-        public static T Map(ExpandoObject source)
+        public static T Map(IEnumerable<KeyValuePair<string, object>> source)
         {
             var model = Activator.CreateInstance<T>();
             Map(source, model);
