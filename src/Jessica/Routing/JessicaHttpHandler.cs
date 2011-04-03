@@ -24,7 +24,7 @@ namespace Jessica.Routing
 
         public bool IsReusable 
         {
-            get { return true; }
+            get { return false; }
         }
 
         public void ProcessRequest(HttpContext context)
@@ -51,8 +51,6 @@ namespace Jessica.Routing
                     module.After.Invoke(_requestContext);
 
                     MapResponseToHttpResponse(response, context.Response);
-
-                    response.Contents.Invoke(context.Response.OutputStream);
                 }
                 else
                 {
@@ -94,6 +92,7 @@ namespace Jessica.Routing
             response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
             httpResponse.StatusCode = response.StatusCode;
             httpResponse.ContentType = response.ContentType;
+            response.Contents.Invoke(httpResponse.OutputStream);
         }
     }
 }
