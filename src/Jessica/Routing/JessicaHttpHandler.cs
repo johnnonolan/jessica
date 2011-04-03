@@ -22,35 +22,9 @@ namespace Jessica.Routing
             _moduleType = moduleType;
         }
 
-        private static void AddFormParameters(IDictionary<string, object> parameters, HttpRequest request)
+        public bool IsReusable 
         {
-            foreach (string key in request.Form)
-            {
-                parameters.Add(key, request.Form[key]);
-            }
-        }
-
-        private static void AddQueryStringParameters(IDictionary<string, object> parameters, HttpRequest request)
-        {
-            foreach (string key in request.QueryString)
-            {
-                parameters.Add(key, request.QueryString[key]);
-            }
-        }
-
-        private static void AddRouteParameters(IDictionary<string, object> parameters, RouteData routeData)
-        {
-            if (routeData != null)
-            {
-                routeData.Values.ForEach(p => parameters.Add(p.Key, p.Value));
-            }
-        }
-
-        private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
-        {
-            response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
-            httpResponse.StatusCode = response.StatusCode;
-            httpResponse.ContentType = response.ContentType;
+            get { return true; }
         }
 
         public void ProcessRequest(HttpContext context)
@@ -91,9 +65,35 @@ namespace Jessica.Routing
             }
         }
 
-        public bool IsReusable
+        private static void AddFormParameters(IDictionary<string, object> parameters, HttpRequest request)
         {
-            get { return true; }
+            foreach (string key in request.Form)
+            {
+                parameters.Add(key, request.Form[key]);
+            }
+        }
+
+        private static void AddQueryStringParameters(IDictionary<string, object> parameters, HttpRequest request)
+        {
+            foreach (string key in request.QueryString)
+            {
+                parameters.Add(key, request.QueryString[key]);
+            }
+        }
+
+        private static void AddRouteParameters(IDictionary<string, object> parameters, RouteData routeData)
+        {
+            if (routeData != null)
+            {
+                routeData.Values.ForEach(p => parameters.Add(p.Key, p.Value));
+            }
+        }
+
+        private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
+        {
+            response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
+            httpResponse.StatusCode = response.StatusCode;
+            httpResponse.ContentType = response.ContentType;
         }
     }
 }
