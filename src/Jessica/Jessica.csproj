@@ -41,7 +41,6 @@
     <Compile Include="AfterPipeline.cs" />
     <Compile Include="BeforePipeline.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DefaultJessicaFactory.cs" />
     <Compile Include="Factories\ResponseFactory.cs" />

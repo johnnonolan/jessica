@@ -46,7 +46,6 @@
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
-    <Compile Include="Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Fakes\ViewEngines\AnotherViewEngine.cs" />
     <Compile Include="Fakes\ViewEngines\FakeViewEngine.cs" />
     <Compile Include="ResponseFactoryExtensionsTests.cs" />

@@ -54,12 +54,12 @@ namespace Jessica.Routing
                 }
                 else
                 {
-                    context.Response.StatusCode = HttpStatusCode.MethodNotAllowed.AsInt();
+                    context.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
                 }
             }
             else
             {
-                context.Response.StatusCode = HttpStatusCode.InternalServerError.AsInt();
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
 
