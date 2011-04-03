@@ -42,10 +42,16 @@ namespace Jessica.ViewEngines
                     return null;
                 }
 
-                var selectedView = FindViewFromName(viewFolder, viewName, supportedExtensions);
-                var fileStream = new FileStream(selectedView.Item1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                var selectedview = (string.IsNullOrEmpty(Path.GetExtension(viewName))) ?
+                    FindViewFromShortName(viewFolder, viewName, supportedExtensions) : FindViewFromFullName(viewFolder, viewName, supportedExtensions);
 
-                return new ViewLocation(selectedView.Item1, selectedView.Item2, new StreamReader(fileStream));
+                if (selectedview == null)
+                {
+                    return null;
+                }
+
+                var fileStream = new FileStream(selectedview.Item1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                return new ViewLocation(selectedview.Item1, selectedview.Item2, new StreamReader(fileStream));
             }
             catch (Exception)
             {
@@ -53,7 +59,20 @@ namespace Jessica.ViewEngines
             }
         }
 
-        private Tuple<string, string> FindViewFromName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        private Tuple<string, string> FindViewFromFullName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        {
+            var extension = Path.GetExtension(viewName);
+            var file = Path.Combine(viewFolder, viewName);
+
+            if (!File.Exists(file) || !supportedExtensions.Contains(extension.TrimStart('.')))
+            {
+                return null;
+            }
+
+            return new Tuple<string, string>(file, extension);
+        }
+
+        private Tuple<string, string> FindViewFromShortName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
         {
             var selectedView = from extension in supportedExtensions
                                let file = Path.Combine(viewFolder, viewName + "." + extension)

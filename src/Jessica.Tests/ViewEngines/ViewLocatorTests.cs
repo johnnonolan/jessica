@@ -50,6 +50,14 @@ namespace Jessica.Tests.ViewEngines
         }
 
         [Test]
+        public void FindView_WithFullViewNameAndExtensions_ShouldReturnInstanceOfViewLocation()
+        {
+            var location = _locator.FindView("View.html", new[] { "html" });
+
+            Assert.That(location, Is.InstanceOf<ViewLocation>());
+        }
+
+        [Test]
         public void FindView_WithExistingViewNameAndExtensions_ShouldReturnCorrectLocation()
         {
             var location = _locator.FindView("View", new[] { "html" });
