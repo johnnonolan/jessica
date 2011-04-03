@@ -55,7 +55,7 @@ namespace Jessica.Routing
 
         public void ProcessRequest(HttpContext context)
         {
-            var module = Jess.Factory.CreateInstance(_moduleType);
+            var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
             var route = module.Routes.Single(r => r.Url == _route);
             var method = context.Request.HttpMethod.ToUpper();
 

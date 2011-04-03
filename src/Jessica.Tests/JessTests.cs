@@ -24,6 +24,14 @@ namespace Jessica.Tests
         }
 
         [Test]
+        public void Initialise_WithTwoViewEngineImplementations_ShouldAddTwoViewEngines()
+        {
+            Jess.Initialise();
+
+            Assert.That(Jess.ViewEngines.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void Factory_WhenRequested_ShouldBeInstanceOfDefaultJessicaFactory()
         {
             Assert.That(Jess.Factory, Is.InstanceOf(typeof(DefaultJessicaFactory)));

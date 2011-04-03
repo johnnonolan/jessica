@@ -4,9 +4,9 @@ namespace Jessica.Factories
 {
     public class DefaultJessicaFactory : IJessicaFactory
     {
-        public JessModule CreateInstance(Type moduleType)
+        public object CreateInstance(Type type)
         {
-            return Activator.CreateInstance(moduleType) as JessModule;
+            return Activator.CreateInstance(type);
         }
     }
 }
