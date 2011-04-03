@@ -56,30 +56,38 @@ namespace Jessica.Routing
         public void ProcessRequest(HttpContext context)
         {
             var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
-            var route = module.Routes.Single(r => r.Url == _route);
-            var method = context.Request.HttpMethod.ToUpper();
 
-            if (route.Actions[method] != null)
+            if (module != null)
             {
-                IDictionary<string, object> parameters = new ExpandoObject();
+                var route = module.Routes.Single(r => r.Url == _route);
+                var method = context.Request.HttpMethod.ToUpper();
 
-                AddQueryStringParameters(parameters, context.Request);
-                AddFormParameters(parameters, context.Request);
-                AddRouteParameters(parameters, _requestContext.RouteData);
+                if (route.Actions[method] != null)
+                {
+                    IDictionary<string, object> parameters = new ExpandoObject();
 
-                parameters.Add("HttpContext", context);
+                    AddQueryStringParameters(parameters, context.Request);
+                    AddFormParameters(parameters, context.Request);
+                    AddRouteParameters(parameters, _requestContext.RouteData);
 
-                module.Before.Invoke(_requestContext);
-                var response = route.Actions[method].Invoke(parameters);
-                module.After.Invoke(_requestContext);
+                    parameters.Add("HttpContext", context);
 
-                MapResponseToHttpResponse(response, context.Response);
+                    module.Before.Invoke(_requestContext);
+                    var response = route.Actions[method].Invoke(parameters);
+                    module.After.Invoke(_requestContext);
 
-                response.Contents.Invoke(context.Response.OutputStream);
+                    MapResponseToHttpResponse(response, context.Response);
+
+                    response.Contents.Invoke(context.Response.OutputStream);
+                }
+                else
+                {
+                    context.Response.StatusCode = HttpStatusCode.MethodNotAllowed.AsInt();
+                }
             }
             else
             {
-                context.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
+                context.Response.StatusCode = HttpStatusCode.InternalServerError.AsInt();
             }
         }
 
