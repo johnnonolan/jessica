@@ -29,67 +29,61 @@ namespace Jessica.Routing
 
         public void ProcessRequest(HttpContext context)
         {
+            var response = InvokeRequestLifeCycle(context);
+            MapResponseToHttpResponse(response, context.Response);
+        }
+
+        private Response InvokeRequestLifeCycle(HttpContext context)
+        {
             var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
 
-            if (module != null)
+            if (module == null)
             {
-                var route = module.Routes.Single(r => r.Url == _route);
-                var method = context.Request.HttpMethod.ToUpper();
-
-                if (route.Actions[method] != null)
-                {
-                    IDictionary<string, object> parameters = new ExpandoObject();
-
-                    AddQueryStringParameters(parameters, context.Request);
-                    AddFormParameters(parameters, context.Request);
-                    AddRouteParameters(parameters, _requestContext.RouteData);
-
-                    parameters.Add("HttpContext", context);
-
-                    module.Before.Invoke(_requestContext);
-                    var response = route.Actions[method].Invoke(parameters);
-                    module.After.Invoke(_requestContext);
-
-                    MapResponseToHttpResponse(response, context.Response);
-                }
-                else
-                {
-                    context.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
-                }
+                return (int)HttpStatusCode.InternalServerError;
             }
-            else
+
+            var route = module.Routes.Single(r => r.Url == _route);
+            var method = context.Request.HttpMethod.ToUpper();
+
+            if (route.Actions[method] == null)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return (int)HttpStatusCode.MethodNotAllowed;
             }
+
+            module.Before.Invoke(_requestContext);
+            var parameters = BuildParameterObject(context);
+            var response = route.Actions[method].Invoke(parameters);
+            module.After.Invoke(_requestContext);
+
+            return response;
         }
 
-        private static void AddFormParameters(IDictionary<string, object> parameters, HttpRequest request)
+        private ExpandoObject BuildParameterObject(HttpContext context)
         {
-            foreach (string key in request.Form)
-            {
-                parameters.Add(key, request.Form[key]);
-            }
-        }
+            IDictionary<string, object> parameters = new ExpandoObject();
 
-        private static void AddQueryStringParameters(IDictionary<string, object> parameters, HttpRequest request)
-        {
-            foreach (string key in request.QueryString)
+            foreach (string key in context.Request.Form)
             {
-                parameters.Add(key, request.QueryString[key]);
+                parameters.Add(key, context.Request.Form[key]);
             }
-        }
 
-        private static void AddRouteParameters(IDictionary<string, object> parameters, RouteData routeData)
-        {
-            if (routeData != null)
+            foreach (string key in context.Request.QueryString)
             {
-                routeData.Values.ForEach(p => parameters.Add(p.Key, p.Value));
+                parameters.Add(key, context.Request.QueryString[key]);
             }
+
+            foreach (var item in _requestContext.RouteData.Values)
+            {
+                parameters.Add(item.Key, item.Value);
+            }
+
+            parameters.Add("HttpContext", context);
+            return parameters as ExpandoObject;
         }
 
         private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
         {
-            response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
+            response.Headers.ForEach(header => httpResponse.Headers.Add(header.Key, header.Value));
             httpResponse.StatusCode = response.StatusCode;
             httpResponse.ContentType = response.ContentType;
             response.Contents.Invoke(httpResponse.OutputStream);

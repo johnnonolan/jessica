@@ -17,12 +17,17 @@ namespace Jessica
             Headers = new Dictionary<string, string>();
             StatusCode = (int)HttpStatusCode.OK;
             ContentType = "text/html";
-            Contents = GetStringContents(string.Empty);            
+            Contents = GetStringContents(string.Empty);
         }
 
-        public static implicit  operator Response(Action<Stream> action)
+        public static implicit operator Response(Action<Stream> action)
         {
             return new Response { Contents = action };
+        }
+
+        public static implicit operator Response(int statusCode)
+        {
+            return new Response { StatusCode = statusCode };
         }
 
         protected static Action<Stream> GetStringContents(string contents)
