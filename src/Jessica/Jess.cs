@@ -33,18 +33,18 @@ namespace Jessica
             var engines = new List<Type>();
 
             AppDomain.CurrentDomain.GetAssemblies().ForEach(asm =>
-                {
-                    modules.AddRange(asm.GetTypes()
-                        .Where(type => type.BaseType == typeof(JessModule)));
+            {
+                modules.AddRange(asm.GetTypes()
+                    .Where(type => type.BaseType == typeof(JessModule)));
 
-                    engines.AddRange(asm.GetTypes()
-                        .Where(type => typeof(IViewEngine).IsAssignableFrom(type))
-                        .Where(type => type != typeof(IViewEngine)));
-                });
+                engines.AddRange(asm.GetTypes()
+                    .Where(type => typeof(IViewEngine).IsAssignableFrom(type))
+                    .Where(type => type != typeof(IViewEngine)));
+            });
 
             modules.ForEach(module =>
             {
-                var instance = Jess.Factory.CreateInstance(module) as JessModule;
+                var instance = Factory.CreateInstance(module) as JessModule;
 
                 if (instance != null)
                 {
@@ -54,7 +54,7 @@ namespace Jessica
 
             engines.ForEach(engine =>
             {
-                var instance = Jess.Factory.CreateInstance(engine) as IViewEngine;
+                var instance = Factory.CreateInstance(engine) as IViewEngine;
 
                 if (instance != null)
                 {
