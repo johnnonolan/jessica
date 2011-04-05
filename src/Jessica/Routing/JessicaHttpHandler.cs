@@ -58,7 +58,7 @@ namespace Jessica.Routing
             return response;
         }
 
-        private ExpandoObject BuildParameterObject(HttpContext context)
+        private dynamic BuildParameterObject(HttpContext context)
         {
             IDictionary<string, object> parameters = new ExpandoObject();
 
@@ -78,7 +78,7 @@ namespace Jessica.Routing
             }
 
             parameters.Add("HttpContext", context);
-            return parameters as ExpandoObject;
+            return parameters;
         }
 
         private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)

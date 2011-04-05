@@ -9,6 +9,12 @@ using Jessica.ViewEngines;
 
 namespace Jessica
 {
+    public enum Environment
+    {
+        Production,
+        Development
+    }
+
     public static class Jess
     {
         public static IJessicaFactory Factory { get; set; }
@@ -22,7 +28,7 @@ namespace Jessica
             ViewEngines = new List<IViewEngine>();
         }
         
-        public static void Initialise()
+        public static void Initialise(Environment environment = Environment.Development)
         {
             RouteTable.Routes.Clear();
 
@@ -39,7 +45,7 @@ namespace Jessica
 
                 engines.AddRange(asm.GetTypes()
                     .Where(type => typeof(IViewEngine).IsAssignableFrom(type))
-                    .Where(type => type != typeof(IViewEngine)));
+                    .Where(type => !type.IsInterface));
             });
 
             modules.ForEach(module =>
@@ -48,7 +54,15 @@ namespace Jessica
 
                 if (instance != null)
                 {
-                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new System.Web.Routing.Route(route.Url, new JessicaRouteHandler(route.Url, module))));
+                    instance.Routes.ForEach(route =>
+                    {
+                        RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
+
+                        if (route.Name != null)
+                        {
+                            NamedRoutes.Add(route.Name, route.Url);
+                        }
+                    });
                 }
             });
 
@@ -61,6 +75,17 @@ namespace Jessica
                     ViewEngines.Add(instance);
                 }
             });
+
+            if (environment == Environment.Development)
+            {
+                // idea 1...
+                // RouteTable.Routes.Add(new Route("__jessica", new DiagnosticRouteHandler()));
+                // RouteTable.Routes.Add(new Route("{*url}", new NotFoundRouteHandler()));
+
+                // idea 2...
+                // RouteTable.Routes.Add(new Route("__jessica", new InternalRouteHandler("diagnostic")));
+                // RouteTable.Routes.Add(new Route("{*url}", new InternalRouteHandler("notfound")));
+            }
         }
     }
 }

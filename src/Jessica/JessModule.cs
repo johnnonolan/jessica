@@ -11,7 +11,7 @@ namespace Jessica
 {
     public class JessModule
     {
-        public IList<Route> Routes { get; private set; }
+        public IList<JessicaRoute> Routes { get; private set; }
 
         public BeforePipeline Before { get; private set; }
 
@@ -23,7 +23,7 @@ namespace Jessica
 
         protected JessModule()
         {
-            Routes = new List<Route>();
+            Routes = new List<JessicaRoute>();
             Before = new BeforePipeline();
             After = new AfterPipeline();
             Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
@@ -33,18 +33,6 @@ namespace Jessica
         private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
         {
             route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
-
-            if (name != null)
-            {
-                if (Jess.NamedRoutes.ContainsKey(name))
-                {
-                    Jess.NamedRoutes[name] = route;
-                }
-                else
-                {
-                    Jess.NamedRoutes.Add(name, route);
-                }
-            }
 
             var existing = Routes.SingleOrDefault(r => r.Url == route);
 
@@ -61,7 +49,7 @@ namespace Jessica
             }
             else
             {
-                Routes.Add(new Route(route, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
+                Routes.Add(new JessicaRoute(route, name, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
             }
         }
 
