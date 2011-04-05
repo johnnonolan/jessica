@@ -78,13 +78,8 @@ namespace Jessica
 
             if (environment == Environment.Development)
             {
-                // idea 1...
                 // RouteTable.Routes.Add(new Route("__jessica", new DiagnosticRouteHandler()));
                 // RouteTable.Routes.Add(new Route("{*url}", new NotFoundRouteHandler()));
-
-                // idea 2...
-                // RouteTable.Routes.Add(new Route("__jessica", new InternalRouteHandler("diagnostic")));
-                // RouteTable.Routes.Add(new Route("{*url}", new InternalRouteHandler("notfound")));
             }
         }
     }

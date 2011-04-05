@@ -30,6 +30,11 @@ namespace Jessica
             return new Response { StatusCode = statusCode };
         }
 
+        public static implicit operator Response(string contents)
+        {
+            return new Response { Contents = GetStringContents(contents) };
+        }
+
         protected static Action<Stream> GetStringContents(string contents)
         {
             return stream =>
