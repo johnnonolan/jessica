@@ -10,7 +10,7 @@ namespace Jessica.Responses
             Headers.Add("Location", location);
             Contents = GetStringContents(string.Empty);
             ContentType = "text/html";
-            StatusCode = HttpStatusCode.SeeOther.AsInt();
+            StatusCode = (int)HttpStatusCode.SeeOther;
         }
     }
 }

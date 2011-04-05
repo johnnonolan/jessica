@@ -22,70 +22,71 @@ namespace Jessica.Routing
             _moduleType = moduleType;
         }
 
-        private static void AddFormParameters(IDictionary<string, object> parameters, HttpRequest request)
+        public bool IsReusable 
         {
-            foreach (string key in request.Form)
-            {
-                parameters.Add(key, request.Form[key]);
-            }
-        }
-
-        private static void AddQueryStringParameters(IDictionary<string, object> parameters, HttpRequest request)
-        {
-            foreach (string key in request.QueryString)
-            {
-                parameters.Add(key, request.QueryString[key]);
-            }
-        }
-
-        private static void AddRouteParameters(IDictionary<string, object> parameters, RouteData routeData)
-        {
-            if (routeData != null)
-            {
-                routeData.Values.ForEach(p => parameters.Add(p.Key, p.Value));
-            }
-        }
-
-        private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
-        {
-            response.Headers.ForEach(header => httpResponse.AddHeader(header.Key, header.Value));
-            httpResponse.StatusCode = response.StatusCode;
-            httpResponse.ContentType = response.ContentType;
+            get { return false; }
         }
 
         public void ProcessRequest(HttpContext context)
         {
-            var module = Jess.Factory.CreateInstance(_moduleType);
+            var response = InvokeRequestLifeCycle(context);
+            MapResponseToHttpResponse(response, context.Response);
+        }
+
+        private Response InvokeRequestLifeCycle(HttpContext context)
+        {
+            var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
+
+            if (module == null)
+            {
+                return (int)HttpStatusCode.InternalServerError;
+            }
+
             var route = module.Routes.Single(r => r.Url == _route);
             var method = context.Request.HttpMethod.ToUpper();
 
-            if (route.Actions[method] != null)
+            if (route.Actions[method] == null)
             {
-                IDictionary<string, object> parameters = new ExpandoObject();
-
-                AddQueryStringParameters(parameters, context.Request);
-                AddFormParameters(parameters, context.Request);
-                AddRouteParameters(parameters, _requestContext.RouteData);
-
-                parameters.Add("HttpContext", context);
-
-                module.Before.Invoke(_requestContext);
-                var response = route.Actions[method].Invoke(parameters);
-                module.After.Invoke(_requestContext);
-
-                MapResponseToHttpResponse(response, context.Response);
-
-                response.Contents.Invoke(context.Response.OutputStream);
+                return (int)HttpStatusCode.MethodNotAllowed;
             }
-            else
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.MethodNotAllowed;
-            }
+
+            module.Before.Invoke(_requestContext);
+            var parameters = BuildParameterObject(context);
+            var response = route.Actions[method].Invoke(parameters);
+            module.After.Invoke(_requestContext);
+
+            return response;
         }
 
-        public bool IsReusable
+        private dynamic BuildParameterObject(HttpContext context)
         {
-            get { return true; }
+            IDictionary<string, object> parameters = new ExpandoObject();
+
+            foreach (string key in context.Request.Form)
+            {
+                parameters.Add(key, context.Request.Form[key]);
+            }
+
+            foreach (string key in context.Request.QueryString)
+            {
+                parameters.Add(key, context.Request.QueryString[key]);
+            }
+
+            foreach (var item in _requestContext.RouteData.Values)
+            {
+                parameters.Add(item.Key, item.Value);
+            }
+
+            parameters.Add("HttpContext", context);
+            return parameters;
+        }
+
+        private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
+        {
+            response.Headers.ForEach(header => httpResponse.Headers.Add(header.Key, header.Value));
+            httpResponse.StatusCode = response.StatusCode;
+            httpResponse.ContentType = response.ContentType;
+            response.Contents.Invoke(httpResponse.OutputStream);
         }
     }
 }

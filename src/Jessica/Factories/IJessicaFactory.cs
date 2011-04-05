@@ -4,6 +4,6 @@ namespace Jessica.Factories
 {
     public interface IJessicaFactory
     {
-        JessModule CreateInstance(Type moduleType);
+        object CreateInstance(Type type);
     }
 }

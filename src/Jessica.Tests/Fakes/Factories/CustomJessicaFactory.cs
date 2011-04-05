@@ -5,7 +5,7 @@ namespace Jessica.Tests.Fakes.Factories
 {
     public class CustomJessicaFactory : IJessicaFactory
     {
-        public JessModule CreateInstance(Type moduleType)
+        public object CreateInstance(Type type)
         {
             throw new NotImplementedException();
         }

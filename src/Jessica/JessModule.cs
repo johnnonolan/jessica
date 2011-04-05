@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Jessica.Factories;
 using Jessica.Routing;
 using Jessica.ViewEngines;
@@ -11,7 +11,7 @@ namespace Jessica
 {
     public class JessModule
     {
-        public IList<Route> Routes { get; private set; }
+        public IList<JessicaRoute> Routes { get; private set; }
 
         public BeforePipeline Before { get; private set; }
 
@@ -23,28 +23,17 @@ namespace Jessica
 
         protected JessModule()
         {
-            Routes = new List<Route>();
+            Routes = new List<JessicaRoute>();
             Before = new BeforePipeline();
             After = new AfterPipeline();
             Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
             ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
-        private void AddRouteAndAction(string name, string method, string route, Func<dynamic, Response> action)
+        private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
         {
             route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
 
-            if (name != null)
-            {
-                if (Jess.NamedRoutes.ContainsKey(name))
-                {
-                    Jess.NamedRoutes[name] = route;
-                }
-                else
-                {
-                    Jess.NamedRoutes.Add(name, route);
-                }
-            }
             var existing = Routes.SingleOrDefault(r => r.Url == route);
 
             if (existing != null)
@@ -60,48 +49,48 @@ namespace Jessica
             }
             else
             {
-                Routes.Add(new Route(route, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
+                Routes.Add(new JessicaRoute(route, name, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
             }
         }
 
-        protected void Delete(string name, string route, Func<dynamic, Response> action)
+        protected void Delete(string route, string name, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "DELETE", route, action);
+            AddRoute("DELETE", route, name, action);
         }
 
         protected void Delete(string route, Func<dynamic, Response> action)
         {
-            Delete(null, route, action);
+            AddRoute("DELETE", route, null, action);
         }
 
-        protected void Get(string name, string route, Func<dynamic, Response> action)
+        protected void Get(string route, string name, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "GET", route, action);
+            AddRoute("GET", route, name, action);
         }
 
         protected void Get(string route, Func<dynamic, Response> action)
         {
-            Get(null, route, action);
+            AddRoute("GET", route, null, action);
         }
 
-        protected void Post(string name, string route, Func<dynamic, Response> action)
+        protected void Post(string route, string name, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "POST", route, action);
+            AddRoute("POST", route, name, action);
         }
 
         protected void Post(string route, Func<dynamic, Response> action)
         {
-            Post(null, route, action);
+            AddRoute("POST", route, null, action);
         }
 
-        protected void Put(string name, string route, Func<dynamic, Response> action)
+        protected void Put(string route, string name, Func<dynamic, Response> action)
         {
-            AddRouteAndAction(name, "PUT", route, action);
+            AddRoute("PUT", route, name, action);
         }
 
         protected void Put(string route, Func<dynamic, Response> action)
         {
-            Post(null, route, action);
+            AddRoute("PUT", route, null, action);
         }
 
         protected Action<Stream> View(string viewName, dynamic model = null)

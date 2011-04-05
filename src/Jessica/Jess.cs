@@ -25,19 +25,48 @@ namespace Jessica
         public static void Initialise()
         {
             RouteTable.Routes.Clear();
+
             NamedRoutes.Clear();
+            ViewEngines.Clear();
 
             var modules = new List<Type>();
+            var engines = new List<Type>();
 
-            AppDomain.CurrentDomain.GetAssemblies().ForEach(asm => modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof(JessModule))));
+            AppDomain.CurrentDomain.GetAssemblies().ForEach(asm =>
+            {
+                modules.AddRange(asm.GetTypes()
+                    .Where(type => type.BaseType == typeof(JessModule)));
+
+                engines.AddRange(asm.GetTypes()
+                    .Where(type => typeof(IViewEngine).IsAssignableFrom(type))
+                    .Where(type => !type.IsInterface));
+            });
 
             modules.ForEach(module =>
             {
-                var instance = Factory.CreateInstance(module);
+                var instance = Factory.CreateInstance(module) as JessModule;
 
                 if (instance != null)
                 {
-                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new System.Web.Routing.Route(route.Url, new JessicaRouteHandler(route.Url, module))));
+                    instance.Routes.ForEach(route =>
+                    {
+                        RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
+
+                        if (route.Name != null)
+                        {
+                            NamedRoutes.Add(route.Name, route.Url);
+                        }
+                    });
+                }
+            });
+
+            engines.ForEach(engine =>
+            {
+                var instance = Factory.CreateInstance(engine) as IViewEngine;
+
+                if (instance != null)
+                {
+                    ViewEngines.Add(instance);
                 }
             });
         }

@@ -2,31 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Jessica.Extensions;
 
 namespace Jessica
 {
     public class Response
     {
-        public string ContentType { get; set; }
-
-        public Action<Stream> Contents { get; set; }
-
         public IDictionary<string, string> Headers { get; set; }
-
         public int StatusCode { get; set; }
+        public string ContentType { get; set; }
+        public Action<Stream> Contents { get; set; }
 
         public Response()
         {
-            Contents = GetStringContents(string.Empty);
-            ContentType = "text/html";
             Headers = new Dictionary<string, string>();
-            StatusCode = HttpStatusCode.OK.AsInt();
+            StatusCode = (int)HttpStatusCode.OK;
+            ContentType = "text/html";
+            Contents = GetStringContents(string.Empty);
         }
 
-        public static implicit  operator Response(Action<Stream> action)
+        public static implicit operator Response(Action<Stream> action)
         {
             return new Response { Contents = action };
+        }
+
+        public static implicit operator Response(int statusCode)
+        {
+            return new Response { StatusCode = statusCode };
+        }
+
+        public static implicit operator Response(string contents)
+        {
+            return new Response { Contents = GetStringContents(contents) };
         }
 
         protected static Action<Stream> GetStringContents(string contents)

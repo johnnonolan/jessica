@@ -6,7 +6,7 @@ using Jessica.Extensions;
 
 namespace Jessica.Helpers
 {
-    public class Url
+    public static class Url
     {
         public static string For(string name, object parameters = null)
         {
@@ -50,7 +50,7 @@ namespace Jessica.Helpers
             return route;
         }
 
-        public static string BuildQueryString(NameValueCollection parameters)
+        private static string BuildQueryString(NameValueCollection parameters)
         {
             var pairs = parameters.AllKeys.Select(key => "{0}={1}".With(key.UrlEncode(), parameters[key].UrlEncode()));
             return "?" + "&".Join(pairs);

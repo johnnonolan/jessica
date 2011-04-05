@@ -16,6 +16,13 @@ namespace Jessica.ViewEngines
 
         public ViewLocation FindView(string viewName, IEnumerable<string> supportedExtensions)
         {
+            if (supportedExtensions == null)
+            {
+                return null;
+            }
+
+            supportedExtensions = supportedExtensions.ToList();
+
             if (string.IsNullOrEmpty(viewName) || !supportedExtensions.Any())
             {
                 return null;
@@ -35,21 +42,44 @@ namespace Jessica.ViewEngines
                     return null;
                 }
 
-                var filesInViewFolder = Directory.GetFiles(viewFolder);
-                var viewFiles = filesInViewFolder
-                    .SelectMany(file => supportedExtensions, (file, extension) => new { file, extension })
-                    .Where(o => Path.GetFileName(o.file.ToUpperInvariant()) == string.Concat(viewName, ".", o.extension).ToUpperInvariant())
-                    .Select(o => new { o.file, o.extension });
+                var selectedview = (string.IsNullOrEmpty(Path.GetExtension(viewName))) ?
+                    FindViewFromShortName(viewFolder, viewName, supportedExtensions) : FindViewFromFullName(viewFolder, viewName, supportedExtensions);
 
-                var selectedView = viewFiles.FirstOrDefault();
-                var fileStream = new FileStream(selectedView.file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                if (selectedview == null)
+                {
+                    return null;
+                }
 
-                return new ViewLocation(selectedView.file, selectedView.extension, new StreamReader(fileStream));
+                var fileStream = new FileStream(selectedview.Item1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                return new ViewLocation(selectedview.Item1, selectedview.Item2, new StreamReader(fileStream));
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        private static Tuple<string, string> FindViewFromFullName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        {
+            var extension = Path.GetExtension(viewName);
+            var file = Path.Combine(viewFolder, viewName);
+
+            if (!File.Exists(file) || extension == null || !supportedExtensions.Contains(extension.TrimStart('.')))
+            {
+                return null;
+            }
+
+            return new Tuple<string, string>(file, extension.TrimStart('.'));
+        }
+
+        private static Tuple<string, string> FindViewFromShortName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        {
+            var selectedView = from extension in supportedExtensions
+                               let file = Path.Combine(viewFolder, viewName + "." + extension)
+                               where File.Exists(file)
+                               select Tuple.Create(file, extension);
+
+            return selectedView.FirstOrDefault();
         }
     }
 }
