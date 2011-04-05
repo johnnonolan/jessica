@@ -9,12 +9,6 @@ using Jessica.ViewEngines;
 
 namespace Jessica
 {
-    public enum Environment
-    {
-        Production,
-        Development
-    }
-
     public static class Jess
     {
         public static IJessicaFactory Factory { get; set; }
@@ -27,8 +21,8 @@ namespace Jessica
             NamedRoutes = new Dictionary<string, string>();
             ViewEngines = new List<IViewEngine>();
         }
-        
-        public static void Initialise(Environment environment = Environment.Development)
+
+        public static void Initialise()
         {
             RouteTable.Routes.Clear();
 
@@ -75,12 +69,6 @@ namespace Jessica
                     ViewEngines.Add(instance);
                 }
             });
-
-            if (environment == Environment.Development)
-            {
-                // RouteTable.Routes.Add(new Route("__jessica", new DiagnosticRouteHandler()));
-                // RouteTable.Routes.Add(new Route("{*url}", new NotFoundRouteHandler()));
-            }
         }
     }
 }
