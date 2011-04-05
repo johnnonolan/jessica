@@ -43,5 +43,27 @@ namespace Jessica.Tests
 
             Assert.That(response.Headers, Is.Not.Null);
         }
+
+        [Test]
+        public void Implicit_WithStatusCode_ShouldReturnAResponseWithCorrectStatusCode()
+        {
+            Response response = 200;
+
+            Assert.That(response.StatusCode, Is.EqualTo(200));
+        }
+
+        [Test]
+        public void Implicit_WithStringValue_ShouldReturnAResponseWithCOrrectContents()
+        {
+            Response response = "Hello, world!";
+
+            var stream = new MemoryStream();
+            response.Contents.Invoke(stream);
+            stream.Position = 0;
+            var reader = new StreamReader(stream);
+            var contents = reader.ReadToEnd();
+
+            Assert.That(contents, Is.EqualTo("Hello, world!"));
+        }
     }
 }
