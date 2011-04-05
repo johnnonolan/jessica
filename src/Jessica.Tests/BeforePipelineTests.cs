@@ -16,7 +16,7 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void AddItemToEndOfPipeline_With2Items_ShouldAddToEndOfList()
+        public void AddItemToEndOfPipeline_WithTwoItems_ShouldAddToEndOfList()
         {
             Action<RequestContext> action1 = context => { };
             Action<RequestContext> action2 = context => { };
@@ -29,7 +29,7 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void AddItemToEndOfPipeline_With2Items_ShouldAddToStartOfList()
+        public void AddItemToEndOfPipeline_WithTwoItems_ShouldAddToStartOfList()
         {
             Action<RequestContext> action1 = context => { };
             Action<RequestContext> action2 = context => { };
@@ -42,7 +42,7 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void InsertItemAtPipelineIndex_With3Items_ShouldInsertAtCorrectIndexes()
+        public void InsertItemAtPipelineIndex_WithThreeItems_ShouldInsertAtCorrectIndexes()
         {
             Action<RequestContext> action1 = context => { };
             Action<RequestContext> action2 = context => { };
@@ -70,7 +70,7 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void Invoke_With2Items_ShouldCallAllItems()
+        public void Invoke_WithTwoItems_ShouldCallAllItems()
         {
             var action1Called = false;
             var action2Called = false;

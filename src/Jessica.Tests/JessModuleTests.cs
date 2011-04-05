@@ -16,13 +16,13 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void Constructor_With4Routes_ShouldContain4Routes()
+        public void Constructor_WithFourRoutes_ShouldContainFourRoutes()
         {
             Assert.That(_module.Routes.Count, Is.EqualTo(4));
         }
 
         [Test]
-        public void Constructor_WithRouteWithGetAndPostActions_ShouldContain2Actions()
+        public void Constructor_WithRouteWithGetAndPostActions_ShouldContainTwoActions()
         {
             Assert.That(_module.Routes.Any(r => r.Url == ""), Is.True);
             Assert.That(_module.Routes.Single(r => r.Url == "").Actions.Count, Is.EqualTo(2));

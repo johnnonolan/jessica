@@ -43,6 +43,7 @@
     <Compile Include="AfterPipelineTests.cs" />
     <Compile Include="BeforePipelineTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
+    <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />

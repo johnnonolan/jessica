@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web.Routing;
 using Jessica.Factories;
 using Jessica.Routing;
 using Jessica.ViewEngines;
@@ -18,8 +17,14 @@ namespace Jessica
         public ResponseFactory Response { get; private set; }
 
         ViewFactory _viewFactory;
+        string _basePath;
 
         protected JessModule()
+            : this (string.Empty)
+        {            
+        }
+
+        protected JessModule(string basePath)
         {
             Routes = new List<JessicaRoute>();
             Before = new BeforePipeline();
@@ -27,11 +32,12 @@ namespace Jessica
             Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
 
             _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
+            _basePath = basePath;
         }
 
         private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
         {
-            route = Regex.Replace(route, "/:([^/]*)", "/{$1}").TrimStart('/');
+            route = string.Concat(_basePath, Regex.Replace(route, "/:([^/]*)", "/{$1}")).TrimStart('/');
 
             var existing = Routes.SingleOrDefault(r => r.Url == route);
 

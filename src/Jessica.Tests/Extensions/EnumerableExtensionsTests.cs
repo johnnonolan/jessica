@@ -9,7 +9,7 @@ namespace Jessica.Tests.Extensions
     public class EnumerableExtensionsTests
     {
         [Test]
-        public void ForEach_WithCollectionOf0_ShouldIterate0Times()
+        public void ForEach_WithEmptyCollection_ShouldIterateZeroTimes()
         {
             var collection = new List<int>();
             var iterations = 0;
@@ -20,7 +20,7 @@ namespace Jessica.Tests.Extensions
         }
 
         [Test]
-        public void ForEach_WithCollectionOf1_ShouldIterate1Time()
+        public void ForEach_WithCollectionOfOneItem_ShouldIterateOneTime()
         {
             var collection = new List<int> { 1 };
             var iterations = 0;
@@ -31,7 +31,7 @@ namespace Jessica.Tests.Extensions
         }
 
         [Test]
-        public void ForEach_WithCollectionOf10_ShouldIterate10Times()
+        public void ForEach_WithCollectionOfTenItems_ShouldIterateTenTimes()
         {
             var collection = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             var iterations = 0;
