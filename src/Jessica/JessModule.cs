@@ -19,7 +19,7 @@ namespace Jessica
 
         public ResponseFactory Response { get; private set; }
 
-        private ViewFactory ViewFactory { get; set; }
+        ViewFactory ViewFactory { get; set; }
 
         protected JessModule()
         {

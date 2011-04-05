@@ -7,7 +7,7 @@ namespace Jessica.Tests
     [TestFixture]
     public class JessModuleTests
     {
-        private JessModule _module;
+        JessModule _module;
 
         [SetUp]
         public void SetUp()

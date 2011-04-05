@@ -9,7 +9,7 @@ namespace Jessica.Tests
     [TestFixture]
     public class ResponseFactoryExtensionsTests
     {
-        private ResponseFactory _factory;
+        ResponseFactory _factory;
 
         [SetUp]
         public void SetUp()

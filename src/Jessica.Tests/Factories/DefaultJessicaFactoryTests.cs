@@ -7,7 +7,7 @@ namespace Jessica.Tests.Factories
     [TestFixture]
     public class DefaultJessicaFactoryTests
     {
-        private IJessicaFactory _factory;
+        IJessicaFactory _factory;
 
         [SetUp]
         public void SetUp()

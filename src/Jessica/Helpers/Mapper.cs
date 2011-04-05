@@ -8,7 +8,7 @@ namespace Jessica.Helpers
     public static class Mapper<T>
         where T : class
     {
-        private static Dictionary<string, PropertyInfo> _propertyMap;
+        static Dictionary<string, PropertyInfo> _propertyMap;
 
         static Mapper()
         {

@@ -8,7 +8,7 @@ namespace Jessica.Tests
     [TestFixture]
     public class AfterPipelineTests
     {
-        private AfterPipeline _pipeline;
+        AfterPipeline _pipeline;
 
         [SetUp]
         public void SetUp()

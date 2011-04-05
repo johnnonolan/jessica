@@ -7,7 +7,7 @@ namespace Jessica.ViewEngines
 {
     public class ViewLocator
     {
-        private string _rootPath;
+        string _rootPath;
 
         public ViewLocator(string rootPath)
         {

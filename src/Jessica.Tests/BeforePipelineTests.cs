@@ -7,7 +7,7 @@ namespace Jessica.Tests
 {
     public class BeforePipelineTests
     {
-        private BeforePipeline _pipeline;
+        BeforePipeline _pipeline;
 
         [SetUp]
         public void SetUp()

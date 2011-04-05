@@ -6,8 +6,8 @@ namespace Jessica.Routing
 {
     public class JessicaRouteHandler : IRouteHandler
     {
-        private string _route;
-        private Type _moduleType;
+        string _route;
+        Type _moduleType;
 
         public JessicaRouteHandler(string route, Type moduleType)
         {

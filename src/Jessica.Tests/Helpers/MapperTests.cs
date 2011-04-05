@@ -8,8 +8,8 @@ namespace Jessica.Tests.Helpers
     [TestFixture]
     public class MapperTests
     {
-        private dynamic _source;
-        private SimpleModel _model;
+        dynamic _source;
+        SimpleModel _model;
 
         [SetUp]
         public void SetUp()
