@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web.Routing;
 using Jessica.Factories;
 using Jessica.Routing;
 using Jessica.ViewEngines;
@@ -12,14 +13,11 @@ namespace Jessica
     public class JessModule
     {
         public IList<JessicaRoute> Routes { get; private set; }
-
         public BeforePipeline Before { get; private set; }
-
         public AfterPipeline After { get; private set; }
-
         public ResponseFactory Response { get; private set; }
 
-        ViewFactory ViewFactory { get; set; }
+        ViewFactory _viewFactory;
 
         protected JessModule()
         {
@@ -27,7 +25,8 @@ namespace Jessica
             Before = new BeforePipeline();
             After = new AfterPipeline();
             Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
-            ViewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
+
+            _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
@@ -95,12 +94,12 @@ namespace Jessica
 
         protected Action<Stream> View(string viewName, dynamic model = null)
         {
-            return ViewFactory.RenderView(viewName, model);
+            return _viewFactory.RenderView(viewName, model);
         }
 
         protected Action<Stream> View(dynamic model)
         {
-            return ViewFactory.RenderView(null, model);
+            return _viewFactory.RenderView(null, model);
         }
     }
 }
