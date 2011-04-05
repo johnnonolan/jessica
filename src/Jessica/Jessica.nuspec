@@ -2,13 +2,18 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Jessica</id>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
     <authors>Tom Bell</authors>
     <owners>Tom Bell</owners>
     <projectUrl>http://jessicafx.org</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</description>
-    <summary>A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.</summary>
+    <description>
+      A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.
+    </description>
+    <summary>
+      A micro web framework written out of curiosity in .NET, inspired by Ruby's Sinatra.
+    </summary>
+    <tags>Jessica JessicaFx ASP.NET MicroFramework WebFramework</tags>
   </metadata>
   <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <file src="bin\Release\Jessica.dll" target="lib\" />
