@@ -56,14 +56,14 @@ namespace Jessica.Tests.Helpers
         }
 
         [Test]
-        public void Map_WithExpandoAndSimpleObjectWithDifferentTypes_ShouldNotMap()
+        public void Map_WithExpandoAndSimpleObjectWithDifferentTypes_ShouldMap()
         {
             _source.message = 100;
             _source.count = "Hello, world!";
 
             Mapper<SimpleModel>.Map(_source, _model);
 
-            Assert.That(_model.Message, Is.Null);
+            Assert.That(_model.Message, Is.EqualTo("100"));
             Assert.That(_model.Count, Is.EqualTo(0));
         }
 
@@ -104,15 +104,29 @@ namespace Jessica.Tests.Helpers
         }
 
         [Test]
-        public void Map_WithExpandoAndNoDestinationWithDifferentTypes_ShouldNotMap()
+        public void Map_WithExpandoAndNoDestinationWithDifferentTypes_ShouldMap()
         {
             _source.message = 100;
             _source.count = "Hello, world!";
 
             var model = Mapper<SimpleModel>.Map(_source);
 
-            Assert.That((string)model.Message, Is.Null);
+            Assert.That((string)model.Message, Is.EqualTo("100"));
             Assert.That((int)model.Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Map_WithExpandoAndNoDestinationWithDifferent_ShouldConvertAndMap()
+        {
+            _source.message = "Hello, world!";
+            _source.count = "100";
+            _source.price = "1.99";
+
+            var model = Mapper<SimpleModel>.Map(_source);
+
+            Assert.That((string)model.Message, Is.EqualTo("Hello, world!"));
+            Assert.That((int)model.Count, Is.EqualTo(100));
+            Assert.That((decimal)model.Price, Is.EqualTo(1.99));
         }
     }
 }
