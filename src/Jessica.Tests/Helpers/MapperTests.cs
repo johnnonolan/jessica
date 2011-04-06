@@ -68,7 +68,7 @@ namespace Jessica.Tests.Helpers
         }
 
         [Test]
-        public void Map_WithExpandoNoDestination_SHouldMapAndReturnNewObject()
+        public void Map_WithExpandoNoDestination_ShouldMapAndReturnNewObject()
         {
             _source.message = "Hello, world!";
             _source.count = 100;

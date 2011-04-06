@@ -12,23 +12,18 @@ namespace Jessica
     public class JessModule
     {
         public IList<JessicaRoute> Routes { get; private set; }
-        public BeforePipeline Before { get; private set; }
-        public AfterPipeline After { get; private set; }
+        public BeforeFilters Before { get; private set; }
+        public AfterFilters After { get; private set; }
         public ResponseFactory Response { get; private set; }
 
         ViewFactory _viewFactory;
         string _basePath;
 
-        protected JessModule()
-            : this (string.Empty)
-        {            
-        }
-
-        protected JessModule(string basePath)
+        protected JessModule(string basePath = "")
         {
             Routes = new List<JessicaRoute>();
-            Before = new BeforePipeline();
-            After = new AfterPipeline();
+            Before = new BeforeFilters();
+            After = new AfterFilters();
             Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
 
             _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
@@ -58,19 +53,14 @@ namespace Jessica
             }
         }
 
-        protected void Delete(string route, string name, Func<dynamic, Response> action)
-        {
-            AddRoute("DELETE", route, name, action);
-        }
-
         protected void Delete(string route, Func<dynamic, Response> action)
         {
             AddRoute("DELETE", route, null, action);
         }
 
-        protected void Get(string route, string name, Func<dynamic, Response> action)
+        protected void Delete(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute("GET", route, name, action);
+            AddRoute("DELETE", route, name, action);
         }
 
         protected void Get(string route, Func<dynamic, Response> action)
@@ -78,9 +68,9 @@ namespace Jessica
             AddRoute("GET", route, null, action);
         }
 
-        protected void Post(string route, string name, Func<dynamic, Response> action)
+        protected void Get(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute("POST", route, name, action);
+            AddRoute("GET", route, name, action);
         }
 
         protected void Post(string route, Func<dynamic, Response> action)
@@ -88,14 +78,19 @@ namespace Jessica
             AddRoute("POST", route, null, action);
         }
 
-        protected void Put(string route, string name, Func<dynamic, Response> action)
+        protected void Post(string route, string name, Func<dynamic, Response> action)
         {
-            AddRoute("PUT", route, name, action);
+            AddRoute("POST", route, name, action);
         }
 
         protected void Put(string route, Func<dynamic, Response> action)
         {
             AddRoute("PUT", route, null, action);
+        }
+
+        protected void Put(string route, string name, Func<dynamic, Response> action)
+        {
+            AddRoute("PUT", route, name, action);
         }
 
         protected Action<Stream> View(string viewName, dynamic model = null)

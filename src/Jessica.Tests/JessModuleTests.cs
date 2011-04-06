@@ -16,7 +16,7 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void Constructor_WithFourRoutes_ShouldContainFourRoutes()
+        public void Constructor_WithFakeModule_ShouldContainFourRoutes()
         {
             Assert.That(_module.Routes.Count, Is.EqualTo(4));
         }
@@ -24,21 +24,27 @@ namespace Jessica.Tests
         [Test]
         public void Constructor_WithRouteWithGetAndPostActions_ShouldContainTwoActions()
         {
-            Assert.That(_module.Routes.Any(r => r.Url == ""), Is.True);
             Assert.That(_module.Routes.Single(r => r.Url == "").Actions.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void Constructor_WithOverwrittenRoutes_ShouldContain1Action()
         {
-            Assert.That(_module.Routes.Any(r => r.Url == "overwritten"), Is.True);
             Assert.That(_module.Routes.Single(r => r.Url == "overwritten").Actions.Count, Is.EqualTo(1));
         }
 
         [Test]
-        public void Constructor_WithSimpleModuleWith1NamedRoute_ShouldAdd1NamedRoute()
+        public void Constructor_WithSimpleModuleWithOneNamedRoute_ShouldAddOneNamedRoute()
         {
             Assert.That(Jess.NamedRoutes.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Constructor_WithBasePathModule_ShouldContainRouteWithBasePathPrepended()
+        {
+            _module = new BasePathModule();
+
+            Assert.That(_module.Routes.Count(r => r.Url == "base/route"), Is.EqualTo(1));
         }
     }
 }

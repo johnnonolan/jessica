@@ -40,8 +40,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterPipelineTests.cs" />
-    <Compile Include="BeforePipelineTests.cs" />
+    <Compile Include="AfterFiltersTests.cs" />
+    <Compile Include="BeforeFiltersTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />

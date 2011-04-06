@@ -57,7 +57,7 @@ namespace Jessica
                 {
                     instance.Routes.ForEach(route =>
                     {
-                        RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
+                        RouteTable.Routes.Add(route.Name, new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
 
                         if (route.Name != null)
                         {
@@ -79,6 +79,7 @@ namespace Jessica
 
             if (environment == Env.Development)
             {
+                // or allow a developer to specify a not_found route handler
                 // RouteTable.Routes.Add(new Route("{*url}", new NotFoundRouteHandler());
             }
         }

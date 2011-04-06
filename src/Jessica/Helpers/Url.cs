@@ -30,7 +30,9 @@ namespace Jessica.Helpers
                 var name = prop.Name;
                 var value = prop.GetValue(defaults, null).ToString();
                 var propertyReplaced = false;
+
                 route = RecursiveParameterReplace(route, name, value, ref propertyReplaced);
+
                 if (!propertyReplaced)
                 {
                     unreplaced.Add(name, value);

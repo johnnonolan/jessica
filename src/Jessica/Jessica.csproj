@@ -38,8 +38,8 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterPipeline.cs" />
-    <Compile Include="BeforePipeline.cs" />
+    <Compile Include="AfterFilters.cs" />
+    <Compile Include="BeforeFilters.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DefaultJessicaFactory.cs" />
