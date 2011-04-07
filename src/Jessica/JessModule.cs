@@ -12,6 +12,7 @@ namespace Jessica
     public class JessModule
     {
         public IList<JessicaRoute> Routes { get; private set; }
+
         public BeforeFilters Before { get; private set; }
         public AfterFilters After { get; private set; }
         public ResponseFactory Response { get; private set; }
@@ -53,52 +54,52 @@ namespace Jessica
             }
         }
 
-        protected void Delete(string route, Func<dynamic, Response> action)
+        public void Delete(string route, Func<dynamic, Response> action)
         {
             AddRoute("DELETE", route, null, action);
         }
 
-        protected void Delete(string route, string name, Func<dynamic, Response> action)
+        public void Delete(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute("DELETE", route, name, action);
         }
 
-        protected void Get(string route, Func<dynamic, Response> action)
+        public void Get(string route, Func<dynamic, Response> action)
         {
             AddRoute("GET", route, null, action);
         }
 
-        protected void Get(string route, string name, Func<dynamic, Response> action)
+        public void Get(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute("GET", route, name, action);
         }
 
-        protected void Post(string route, Func<dynamic, Response> action)
+        public void Post(string route, Func<dynamic, Response> action)
         {
             AddRoute("POST", route, null, action);
         }
 
-        protected void Post(string route, string name, Func<dynamic, Response> action)
+        public void Post(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute("POST", route, name, action);
         }
 
-        protected void Put(string route, Func<dynamic, Response> action)
+        public void Put(string route, Func<dynamic, Response> action)
         {
             AddRoute("PUT", route, null, action);
         }
 
-        protected void Put(string route, string name, Func<dynamic, Response> action)
+        public void Put(string route, string name, Func<dynamic, Response> action)
         {
             AddRoute("PUT", route, name, action);
         }
 
-        protected Action<Stream> View(string viewName, dynamic model = null)
+        public Action<Stream> View(string viewName, dynamic model = null)
         {
             return _viewFactory.RenderView(viewName, model);
         }
 
-        protected Action<Stream> View(dynamic model)
+        public Action<Stream> View(dynamic model)
         {
             return _viewFactory.RenderView(null, model);
         }

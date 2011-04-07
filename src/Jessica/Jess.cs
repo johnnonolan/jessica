@@ -76,12 +76,6 @@ namespace Jessica
                     ViewEngines.Add(instance);
                 }
             });
-
-            if (environment == Env.Development)
-            {
-                // or allow a developer to specify a not_found route handler
-                // RouteTable.Routes.Add(new Route("{*url}", new NotFoundRouteHandler());
-            }
         }
     }
 }
