@@ -31,7 +31,7 @@ namespace Jessica
             _basePath = basePath;
         }
 
-        private void AddRoute(string method, string route, string name, Func<dynamic, Response> action)
+        private void AddRoute(string method, string route, Func<dynamic, Response> action)
         {
             route = string.Concat(_basePath, Regex.Replace(route, "/:([^/]*)", "/{$1}")).TrimStart('/');
 
@@ -50,28 +50,28 @@ namespace Jessica
             }
             else
             {
-                Routes.Add(new JessicaRoute(route, name, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
+                Routes.Add(new JessicaRoute(route, new Dictionary<string, Func<dynamic, Response>> { { method, action } }));
             }
         }
 
         public void Delete(string route, Func<dynamic, Response> action)
         {
-            AddRoute("DELETE", route, null, action);
+            AddRoute("DELETE", route, action);
         }
 
         public void Get(string route, Func<dynamic, Response> action)
         {
-            AddRoute("GET", route, null, action);
+            AddRoute("GET", route, action);
         }
 
         public void Post(string route, Func<dynamic, Response> action)
         {
-            AddRoute("POST", route, null, action);
+            AddRoute("POST", route, action);
         }
 
         public void Put(string route, Func<dynamic, Response> action)
         {
-            AddRoute("PUT", route, null, action);
+            AddRoute("PUT", route, action);
         }
 
         public Action<Stream> View(string viewName, dynamic model = null)

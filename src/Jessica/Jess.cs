@@ -52,10 +52,7 @@ namespace Jessica
 
                 if (instance != null)
                 {
-                    instance.Routes.ForEach(route =>
-                    {
-                        RouteTable.Routes.Add(route.Name, new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
-                    });
+                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module))));
                 }
             });
 
