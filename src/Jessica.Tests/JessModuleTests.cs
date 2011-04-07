@@ -34,12 +34,6 @@ namespace Jessica.Tests
         }
 
         [Test]
-        public void Constructor_WithSimpleModuleWithOneNamedRoute_ShouldAddOneNamedRoute()
-        {
-            Assert.That(Jess.NamedRoutes.Count, Is.EqualTo(1));
-        }
-
-        [Test]
         public void Constructor_WithBasePathModule_ShouldContainRouteWithBasePathPrepended()
         {
             _module = new BasePathModule();

@@ -19,13 +19,11 @@ namespace Jessica
     public static class Jess
     {
         public static IJessicaFactory Factory { get; set; }
-        public static IDictionary<string, string> NamedRoutes { get; private set; }
         public static IList<IViewEngine> ViewEngines { get; private set; }
 
         static Jess()
         {
             Factory = new DefaultJessicaFactory();
-            NamedRoutes = new Dictionary<string, string>();
             ViewEngines = new List<IViewEngine>();
         }
 
@@ -33,7 +31,6 @@ namespace Jessica
         {
             RouteTable.Routes.Clear();
 
-            NamedRoutes.Clear();
             ViewEngines.Clear();
 
             var modules = new List<Type>();
@@ -58,11 +55,6 @@ namespace Jessica
                     instance.Routes.ForEach(route =>
                     {
                         RouteTable.Routes.Add(route.Name, new Route(route.Url, new JessicaRouteHandler(route.Url, module)));
-
-                        if (route.Name != null)
-                        {
-                            NamedRoutes.Add(route.Name, route.Url);
-                        }
                     });
                 }
             });

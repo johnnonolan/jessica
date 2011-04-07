@@ -58,7 +58,6 @@
     <Compile Include="Responses\TextResponse.cs" />
     <Compile Include="Routing\JessicaHttpHandler.cs" />
     <Compile Include="Routing\JessicaRouteHandler.cs" />
-    <Compile Include="Helpers\Url.cs" />
     <Compile Include="Routing\JessicaRoute.cs" />
     <Compile Include="ViewEngines\IViewEngine.cs" />
     <Compile Include="ViewEngines\ViewFactory.cs" />

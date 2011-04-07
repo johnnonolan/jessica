@@ -13,8 +13,8 @@ namespace Jessica.Tests.Fakes.Modules
             Get("/hello/:name",
                 p => Response.AsText("Hello, {0}!", (string)p.name));
 
-            Get("/greet/{name}", "greet",
-                p => Response.AsText("Hello, {0}. This is a named route!", (string)p.name));
+            Get("/greet/{name}",
+                p => Response.AsText("Hello, {0}. This was a named route!", (string)p.name));
 
             Get("/overwritten",
                 p => Response.AsText("You should never see this!"));

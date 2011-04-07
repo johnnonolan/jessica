@@ -59,19 +59,9 @@ namespace Jessica
             AddRoute("DELETE", route, null, action);
         }
 
-        public void Delete(string route, string name, Func<dynamic, Response> action)
-        {
-            AddRoute("DELETE", route, name, action);
-        }
-
         public void Get(string route, Func<dynamic, Response> action)
         {
             AddRoute("GET", route, null, action);
-        }
-
-        public void Get(string route, string name, Func<dynamic, Response> action)
-        {
-            AddRoute("GET", route, name, action);
         }
 
         public void Post(string route, Func<dynamic, Response> action)
@@ -79,29 +69,14 @@ namespace Jessica
             AddRoute("POST", route, null, action);
         }
 
-        public void Post(string route, string name, Func<dynamic, Response> action)
-        {
-            AddRoute("POST", route, name, action);
-        }
-
         public void Put(string route, Func<dynamic, Response> action)
         {
             AddRoute("PUT", route, null, action);
         }
 
-        public void Put(string route, string name, Func<dynamic, Response> action)
-        {
-            AddRoute("PUT", route, name, action);
-        }
-
         public Action<Stream> View(string viewName, dynamic model = null)
         {
             return _viewFactory.RenderView(viewName, model);
-        }
-
-        public Action<Stream> View(dynamic model)
-        {
-            return _viewFactory.RenderView(null, model);
         }
     }
 }
