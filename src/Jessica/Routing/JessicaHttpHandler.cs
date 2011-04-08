@@ -45,7 +45,7 @@ namespace Jessica.Routing
             var route = module.Routes.Single(r => r.Url == _route);
             var method = context.Request.HttpMethod.ToUpper();
 
-            if (route.Actions[method] == null)
+            if (!route.Actions.ContainsKey(method))
             {
                 return (int)HttpStatusCode.MethodNotAllowed;
             }
