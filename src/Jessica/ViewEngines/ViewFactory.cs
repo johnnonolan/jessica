@@ -77,7 +77,14 @@ namespace Jessica.ViewEngines
 
         private static Action<Stream> InvokeViewEngine(IViewEngine viewEngine, ViewLocation viewLocation, dynamic model)
         {
-            return viewEngine.RenderView(viewLocation, model);
+            try
+            {
+                return viewEngine.RenderView(viewLocation, model);
+            }
+            catch (Exception)
+            {
+                return stream => { };
+            }
         }
     }
 }

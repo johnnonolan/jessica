@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web.Routing;
 using Jessica.Extensions;
 using Jessica.Factories;
@@ -36,6 +38,8 @@ namespace Jessica
             var modules = new List<Type>();
             var engines = new List<Type>();
 
+            LoadUnreferencedAssemblies();
+
             AppDomain.CurrentDomain.GetAssemblies().ForEach(asm =>
             {
                 modules.AddRange(asm.GetTypes()
@@ -65,6 +69,17 @@ namespace Jessica
                     ViewEngines.Add(instance);
                 }
             });
+        }
+
+        private static void LoadUnreferencedAssemblies()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin");
+
+            if (Directory.Exists(path))
+            {
+                var assemblies = Directory.GetFiles(path, "Jessica.*.dll");
+                assemblies.ForEach(asm => Assembly.LoadFrom(asm));
+            }
         }
     }
 }
