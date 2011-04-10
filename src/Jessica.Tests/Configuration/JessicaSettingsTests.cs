@@ -52,9 +52,9 @@ namespace Jessica.Tests.Configuration
         {
             var settings = ConfigurationManager.GetSection("jessica") as JessicaSettings;
 
-            Assert.That(settings.Environment, Is.EqualTo("production"));
-            Assert.That(settings.PublicDir, Is.EqualTo("static"));
-            Assert.That(settings.ViewsDir, Is.EqualTo("views"));
+            Assert.That(settings.Environment, Is.EqualTo("production").IgnoreCase);
+            Assert.That(settings.PublicDir, Is.EqualTo("static").IgnoreCase);
+            Assert.That(settings.ViewsDir, Is.EqualTo("views").IgnoreCase);
         }
     }
 }
