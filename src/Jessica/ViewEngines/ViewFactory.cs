@@ -8,8 +8,8 @@ namespace Jessica.ViewEngines
 {
     public class ViewFactory
     {
-        private IEnumerable<IViewEngine> _viewEngines;
-        private ViewLocator _locator;
+        IEnumerable<IViewEngine> _viewEngines;
+        ViewLocator _locator;
 
         public ViewFactory(IEnumerable<IViewEngine> viewEngines, string rootPath)
         {

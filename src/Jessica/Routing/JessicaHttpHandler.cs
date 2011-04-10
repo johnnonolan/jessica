@@ -11,9 +11,9 @@ namespace Jessica.Routing
 {
     public class JessicaHttpHandler : IHttpHandler
     {
-        private string _route;
-        private RequestContext _requestContext;
-        private Type _moduleType;
+        string _route;
+        RequestContext _requestContext;
+        Type _moduleType;
 
         public JessicaHttpHandler(string route, RequestContext requestContext, Type moduleType)
         {

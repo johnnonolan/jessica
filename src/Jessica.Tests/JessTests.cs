@@ -12,15 +12,14 @@ namespace Jessica.Tests
         public void TearDown()
         {
             Jess.Factory = new DefaultJessicaFactory();
-            Jess.ViewEngines.Clear();
         }
 
         [Test]
-        public void Initialise_With2JessicaModules_ShouldAdd4RoutesToRouteTable()
+        public void Initialise_WithTwoJessicaModulesWithFiveRoutes_ShouldAddFiveRoutesToRouteTable()
         {
             Jess.Initialise();
 
-            Assert.That(RouteTable.Routes.Count, Is.EqualTo(4));
+            Assert.That(RouteTable.Routes.Count, Is.EqualTo(5));
         }
 
         [Test]

@@ -8,7 +8,7 @@ namespace Jessica.Helpers
     public static class Mapper<T>
         where T : class
     {
-        private static Dictionary<string, PropertyInfo> _propertyMap;
+        static Dictionary<string, PropertyInfo> _propertyMap;
 
         static Mapper()
         {
@@ -30,10 +30,18 @@ namespace Jessica.Helpers
 
                 if (kv.Value.GetType() != prop.PropertyType)
                 {
-                    continue;
+                    try
+                    {
+                        var converted = Convert.ChangeType(kv.Value, prop.PropertyType);
+                        prop.SetValue(destination, converted, null);
+                    }
+                    catch (Exception)
+                    { }
                 }
-
-                prop.SetValue(destination, kv.Value, null);
+                else
+                {
+                    prop.SetValue(destination, kv.Value, null);
+                }
             }
         }
 

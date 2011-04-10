@@ -10,7 +10,7 @@ namespace Jessica.Tests.ViewEngines
     [TestFixture]
     public class ViewFactoryTests
     {
-        private ViewFactory _factory;
+        ViewFactory _factory;
 
         [SetUp]
         public void SetUp()

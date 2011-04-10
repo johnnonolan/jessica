@@ -35,14 +35,17 @@
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterPipelineTests.cs" />
-    <Compile Include="BeforePipelineTests.cs" />
+    <Compile Include="AfterFiltersTests.cs" />
+    <Compile Include="BeforeFiltersTests.cs" />
+    <Compile Include="Configuration\JessicaSettingsTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
+    <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
@@ -52,7 +55,6 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Factories\DefaultJessicaFactoryTests.cs" />
     <Compile Include="Helpers\MapperTests.cs" />
-    <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="JessModuleTests.cs" />
     <Compile Include="JessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,13 +68,6 @@
     <Compile Include="ViewEngines\ViewLocatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jessica\Jessica.csproj">
-      <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
-      <Name>Jessica</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <Content Include="Fakes\Files\Base.css" />
     <Content Include="Fakes\Files\FakeHtml.html" />
     <Content Include="Fakes\Files\HelloWorld.txt" />
@@ -80,6 +75,15 @@
     <Content Include="Fakes\Views\Shared\List.html" />
     <Content Include="Fakes\Views\Simple.html" />
     <Content Include="Fakes\Views\View.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jessica\Jessica.csproj">
+      <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
+      <Name>Jessica</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -35,7 +35,7 @@ namespace Jessica.Tests.Responses
             var reader = new StreamReader(stream);
             var contents = reader.ReadToEnd();
 
-            Assert.That(contents, Contains.Substring("{\"Message\":\"Hello, world!\",\"Count\":2}"));
+            Assert.That(contents, Contains.Substring("{\"Message\":\"Hello, world!\",\"Count\":2,\"Price\":0}"));
         }
     }
 }

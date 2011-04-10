@@ -8,7 +8,7 @@ namespace Jessica.Tests.ViewEngines
     [TestFixture]
     public class ViewLocatorTests
     {
-        private ViewLocator _locator;
+        ViewLocator _locator;
 
         [SetUp]
         public void SetUp()
