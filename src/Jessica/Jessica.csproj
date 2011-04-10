@@ -44,10 +44,8 @@
     <Compile Include="Configuration\JessicaSettings.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Factories\DefaultJessicaFactory.cs" />
-    <Compile Include="Factories\ResponseFactory.cs" />
-    <Compile Include="Factories\IJessicaFactory.cs" />
-    <Compile Include="ResponseFactoryExtensions.cs" />
+    <Compile Include="Factory\DefaultJessicaFactory.cs" />
+    <Compile Include="Factory\IJessicaFactory.cs" />
     <Compile Include="Jess.cs" />
     <Compile Include="JessModule.cs" />
     <Compile Include="Responses\JsonResponse.cs" />

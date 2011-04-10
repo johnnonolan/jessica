@@ -1,3 +1,5 @@
+using Jessica.Responses;
+
 namespace Jessica.Tests.Fakes.Modules
 {
     public class FakeModule : JessModule
@@ -5,22 +7,22 @@ namespace Jessica.Tests.Fakes.Modules
         public FakeModule()
         {
             Get("/",
-                p => Response.AsText("Hello, world!"));
+                p => "Hello, world!");
 
             Post("/",
-                p => Response.AsRedirect("http://google.com"));
+                p => new RedirectResponse("http://google.com"));
 
             Get("/hello/:name",
-                p => Response.AsText("Hello, {0}!", (string)p.name));
+                p => string.Format("Hello, {0}!", p.name));
 
             Get("/greet/{name}",
-                p => Response.AsText("Hello, {0}. This was a named route!", (string)p.name));
+                p => string.Format("Hello, {0}. This was a named route!", p.name));
 
             Get("/overwritten",
-                p => Response.AsText("You should never see this!"));
+                p => "You should never see this!");
 
             Get("/overwritten",
-                p => Response.AsText("You should see this!"));
+                p => "You should see this!");
         }
     }
 }

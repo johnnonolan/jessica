@@ -1,6 +1,6 @@
 ﻿using System.Web.Routing;
-using Jessica.Factories;
-using Jessica.Tests.Fakes.Factories;
+using Jessica.Factory;
+using Jessica.Tests.Fakes.Factory;
 using NUnit.Framework;
 
 namespace Jessica.Tests

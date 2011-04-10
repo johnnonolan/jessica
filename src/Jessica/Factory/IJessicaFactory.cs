@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jessica.Factories
+namespace Jessica.Factory
 {
     public interface IJessicaFactory
     {

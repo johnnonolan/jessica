@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Web.Routing;
 using Jessica.Configuration;
 using Jessica.Extensions;
-using Jessica.Factories;
+using Jessica.Factory;
 using Jessica.Routing;
 using Jessica.ViewEngines;
 
@@ -39,8 +39,8 @@ namespace Jessica
 
             AppDomain.CurrentDomain.GetAssemblies().ForEach(asm =>
             {
-                modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof(JessModule)));
-                engines.AddRange(asm.GetTypes().Where(type => typeof(IViewEngine).IsAssignableFrom(type)).Where(type => !type.IsInterface));
+                modules.AddRange(asm.GetTypes().Where(t => t.BaseType == typeof(JessModule)));
+                engines.AddRange(asm.GetTypes().Where(t => typeof(IViewEngine).IsAssignableFrom(t)).Where(t => !t.IsInterface));
             });
 
             RegisterRoutes(modules);
