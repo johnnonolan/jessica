@@ -19,5 +19,5 @@ Jessica aims to become a feature equivalent of Sinatra for .NET. Jessica follows
 
 h3. More Information
 
-* Jessica - http://jessicafx.org
-* Why Did I Create Jessica? - http://tombell.org.uk/blog/2011/04/10/why-did-i-create-jessica/
+* Jessica - "http://jessicafx.org":http://jessicafx.org
+* Why Did I Create Jessica? - "http://tombell.org.uk/blog/2011/04/10/why-did-i-create-jessica/":http://tombell.org.uk/blog/2011/04/10/why-did-i-create-jessica/
