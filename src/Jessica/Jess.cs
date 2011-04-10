@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Routing;
+using Jessica.Configuration;
 using Jessica.Extensions;
 using Jessica.Factories;
 using Jessica.Routing;
@@ -11,17 +13,12 @@ using Jessica.ViewEngines;
 
 namespace Jessica
 {
-    public enum Env
-    {
-        Production,
-        Development,
-        Test
-    }
-
     public static class Jess
     {
         public static IJessicaFactory Factory { get; set; }
+
         public static IList<IViewEngine> ViewEngines { get; private set; }
+        public static JessicaSettings Settings { get; private set; }
 
         static Jess()
         {
@@ -29,10 +26,11 @@ namespace Jessica
             ViewEngines = new List<IViewEngine>();
         }
 
-        public static void Initialise(Env environment = Env.Development)
+        public static void Initialise(JessicaSettings settings = null)
         {
-            RouteTable.Routes.Clear();
+            Settings = settings ?? ConfigurationManager.GetSection("jessica") as JessicaSettings;
 
+            RouteTable.Routes.Clear();
             ViewEngines.Clear();
 
             var modules = new List<Type>();
@@ -77,7 +75,7 @@ namespace Jessica
 
             if (Directory.Exists(path))
             {
-                var assemblies = Directory.GetFiles(path, "Jessica.*.dll");
+                var assemblies = Directory.GetFiles(path, "Jessica*.dll");
                 assemblies.ForEach(asm => Assembly.LoadFrom(asm));
             }
         }
