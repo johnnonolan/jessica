@@ -7,21 +7,21 @@ namespace Jessica.Configuration
         [ConfigurationProperty("environment", DefaultValue = "development", IsRequired = false)]
         public string Environment
         {
-            get { return (string)this["environment"]; }
+            get { return this["environment"].ToString(); }
             set { this["environment"] = value; }
         }
 
         [ConfigurationProperty("publicDir", DefaultValue = "public", IsRequired = false)]
         public string PublicDir
         {
-            get { return (string)this["publicDir"]; }
+            get { return this["publicDir"].ToString(); }
             set { this["publicDir"] = value; }
         }
 
         [ConfigurationProperty("viewsDir", DefaultValue = "views", IsRequired = false)]
         public string ViewsDir
         {
-            get { return (string)this["viewsDir"]; }
+            get { return this["viewsDir"].ToString(); }
             set { this["viewsDir"] = value; }
         }
 

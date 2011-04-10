@@ -63,7 +63,9 @@
     <Compile Include="ViewEngines\ViewLocation.cs" />
     <Compile Include="ViewEngines\ViewLocator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Filters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

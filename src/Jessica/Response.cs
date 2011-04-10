@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Jessica.Responses;
 
 namespace Jessica
 {
     public class Response
     {
-        static string _rootPath = AppDomain.CurrentDomain.BaseDirectory;
-
         public IDictionary<string, string> Headers { get; set; }
         public int StatusCode { get; set; }
         public string ContentType { get; set; }
