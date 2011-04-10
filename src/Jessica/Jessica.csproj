@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AfterFilters.cs" />
     <Compile Include="BeforeFilters.cs" />
+    <Compile Include="Configuration\JessicaSettings.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DefaultJessicaFactory.cs" />

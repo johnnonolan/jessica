@@ -35,6 +35,7 @@
       <HintPath>..\..\lib\nunit\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AfterFiltersTests.cs" />
     <Compile Include="BeforeFiltersTests.cs" />
+    <Compile Include="Configuration\JessicaSettingsTests.cs" />
     <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
@@ -79,6 +81,9 @@
       <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
       <Name>Jessica</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
