@@ -48,7 +48,6 @@
     <Compile Include="Factories\ResponseFactory.cs" />
     <Compile Include="Factories\IJessicaFactory.cs" />
     <Compile Include="ResponseFactoryExtensions.cs" />
-    <Compile Include="Helpers\Mapper.cs" />
     <Compile Include="Jess.cs" />
     <Compile Include="JessModule.cs" />
     <Compile Include="Responses\JsonResponse.cs" />
