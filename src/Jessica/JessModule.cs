@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Jessica.Filters;
+using Jessica.Responses;
 using Jessica.Routing;
 using Jessica.ViewEngines;
 

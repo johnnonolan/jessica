@@ -41,8 +41,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterFiltersTests.cs" />
-    <Compile Include="BeforeFiltersTests.cs" />
+    <Compile Include="Filters\AfterFiltersTests.cs" />
+    <Compile Include="Filters\BeforeFiltersTests.cs" />
     <Compile Include="Configuration\JessicaSettingsTests.cs" />
     <Compile Include="Fakes\Factory\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\BasePathModule.cs" />
@@ -61,7 +61,7 @@
     <Compile Include="Responses\RedirectResponseTests.cs" />
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
-    <Compile Include="ResponseTests.cs" />
+    <Compile Include="Responses\ResponseTests.cs" />
     <Compile Include="ViewEngines\ViewFactoryTests.cs" />
     <Compile Include="ViewEngines\ViewLocatorTests.cs" />
   </ItemGroup>

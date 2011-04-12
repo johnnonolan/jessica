@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Web.Routing;
 
-namespace Jessica
+namespace Jessica.Filters
 {
-    public class BeforeFilters
+    public class AfterFilters
     {
         public List<Action<RequestContext>> Filters { get; set; }
 
-        public BeforeFilters()
+        public AfterFilters()
         {
             Filters = new List<Action<RequestContext>>();
         }
@@ -18,7 +18,7 @@ namespace Jessica
             Filters.ForEach(filter => filter.Invoke(context));
         }
 
-        public static BeforeFilters operator +(BeforeFilters filters, Action<RequestContext> filter)
+        public static AfterFilters operator +(AfterFilters filters, Action<RequestContext> filter)
         {
             filters.AddFilterToEnd(filter);
             return filters;

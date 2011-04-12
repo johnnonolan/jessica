@@ -42,8 +42,7 @@ namespace Jessica.ViewEngines
                     return null;
                 }
 
-                var selectedview = (string.IsNullOrEmpty(Path.GetExtension(viewName))) ?
-                    FindViewFromShortName(viewFolder, viewName, supportedExtensions) : FindViewFromFullName(viewFolder, viewName, supportedExtensions);
+                var selectedview = FindViewFromShortName(viewFolder, viewName, supportedExtensions);
 
                 if (selectedview == null)
                 {
@@ -57,19 +56,6 @@ namespace Jessica.ViewEngines
             {
                 return null;
             }
-        }
-
-        private static Tuple<string, string> FindViewFromFullName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
-        {
-            var extension = Path.GetExtension(viewName);
-            var file = Path.Combine(viewFolder, viewName);
-
-            if (!File.Exists(file) || extension == null || !supportedExtensions.Contains(extension.TrimStart('.')))
-            {
-                return null;
-            }
-
-            return new Tuple<string, string>(file, extension.TrimStart('.'));
         }
 
         private static Tuple<string, string> FindViewFromShortName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
