@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Routing;
-using Jessica.Configuration;
 using Jessica.Extensions;
-using Jessica.Factories;
+using Jessica.Factory;
 using Jessica.Routing;
 using Jessica.ViewEngines;
 
@@ -17,7 +15,6 @@ namespace Jessica
     {
         public static IJessicaFactory Factory { get; set; }
         public static IList<IViewEngine> ViewEngines { get; private set; }
-        public static JessicaSettings Settings { get; private set; }
 
         static Jess()
         {
@@ -25,10 +22,8 @@ namespace Jessica
             ViewEngines = new List<IViewEngine>();
         }
 
-        public static void Initialise(JessicaSettings settings = null)
+        public static void Initialise()
         {
-            Settings = settings ?? ConfigurationManager.GetSection("jessica") as JessicaSettings;
-
             RouteTable.Routes.Clear();
             ViewEngines.Clear();
 
@@ -39,8 +34,8 @@ namespace Jessica
 
             AppDomain.CurrentDomain.GetAssemblies().ForEach(asm =>
             {
-                modules.AddRange(asm.GetTypes().Where(type => type.BaseType == typeof(JessModule)));
-                engines.AddRange(asm.GetTypes().Where(type => typeof(IViewEngine).IsAssignableFrom(type)).Where(type => !type.IsInterface));
+                modules.AddRange(asm.GetTypes().Where(t => t.BaseType == typeof(JessModule)));
+                engines.AddRange(asm.GetTypes().Where(t => typeof(IViewEngine).IsAssignableFrom(t)).Where(t => !t.IsInterface));
             });
 
             RegisterRoutes(modules);

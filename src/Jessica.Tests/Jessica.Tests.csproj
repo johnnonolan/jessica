@@ -41,20 +41,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterFiltersTests.cs" />
-    <Compile Include="BeforeFiltersTests.cs" />
-    <Compile Include="Configuration\JessicaSettingsTests.cs" />
-    <Compile Include="Fakes\Factories\CustomJessicaFactory.cs" />
+    <Compile Include="Filters\AfterFiltersTests.cs" />
+    <Compile Include="Filters\BeforeFiltersTests.cs" />
+    <Compile Include="Fakes\Factory\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Fakes\ViewEngines\AnotherViewEngine.cs" />
     <Compile Include="Fakes\ViewEngines\FakeViewEngine.cs" />
-    <Compile Include="ResponseFactoryExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="Factories\DefaultJessicaFactoryTests.cs" />
-    <Compile Include="Helpers\MapperTests.cs" />
+    <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
     <Compile Include="JessModuleTests.cs" />
     <Compile Include="JessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,7 +60,7 @@
     <Compile Include="Responses\RedirectResponseTests.cs" />
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
-    <Compile Include="ResponseTests.cs" />
+    <Compile Include="Responses\ResponseTests.cs" />
     <Compile Include="ViewEngines\ViewFactoryTests.cs" />
     <Compile Include="ViewEngines\ViewLocatorTests.cs" />
   </ItemGroup>
@@ -81,9 +78,6 @@
       <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
       <Name>Jessica</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

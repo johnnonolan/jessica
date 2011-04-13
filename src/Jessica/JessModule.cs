@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Jessica.Factories;
+using Jessica.Filters;
+using Jessica.Responses;
 using Jessica.Routing;
 using Jessica.ViewEngines;
 
@@ -15,7 +16,6 @@ namespace Jessica
 
         public BeforeFilters Before { get; private set; }
         public AfterFilters After { get; private set; }
-        public ResponseFactory Response { get; private set; }
 
         ViewFactory _viewFactory;
         string _basePath;
@@ -25,7 +25,6 @@ namespace Jessica
             Routes = new List<JessicaRoute>();
             Before = new BeforeFilters();
             After = new AfterFilters();
-            Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
 
             _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
             _basePath = basePath;

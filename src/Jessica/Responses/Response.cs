@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace Jessica
+namespace Jessica.Responses
 {
     public class Response
     {
-        public IDictionary<string, string> Headers { get; set; }
         public int StatusCode { get; set; }
         public string ContentType { get; set; }
         public Action<Stream> Contents { get; set; }
+        public IDictionary<string, string> Headers { get; set; }
 
         public Response()
         {
-            Headers = new Dictionary<string, string>();
             StatusCode = (int)HttpStatusCode.OK;
             ContentType = "text/html";
             Contents = GetStringContents(string.Empty);
+            Headers = new Dictionary<string, string>();
         }
 
         public static implicit operator Response(Action<Stream> action)

@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using System.Web.Routing;
+using Jessica.Filters;
 using NUnit.Framework;
 
-namespace Jessica.Tests
+namespace Jessica.Tests.Filters
 {
     [TestFixture]
     public class AfterFiltersTests

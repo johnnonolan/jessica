@@ -1,7 +1,7 @@
 ﻿using System;
-using Jessica.Factories;
+using Jessica.Factory;
 
-namespace Jessica.Tests.Fakes.Factories
+namespace Jessica.Tests.Fakes.Factory
 {
     public class CustomJessicaFactory : IJessicaFactory
     {

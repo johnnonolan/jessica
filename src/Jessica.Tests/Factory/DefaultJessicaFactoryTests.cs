@@ -1,8 +1,8 @@
-﻿using Jessica.Factories;
+﻿using Jessica.Factory;
 using Jessica.Tests.Fakes.Modules;
 using NUnit.Framework;
 
-namespace Jessica.Tests.Factories
+namespace Jessica.Tests.Factory
 {
     [TestFixture]
     public class DefaultJessicaFactoryTests

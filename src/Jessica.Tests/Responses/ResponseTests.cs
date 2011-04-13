@@ -1,7 +1,8 @@
 using System.IO;
+using Jessica.Responses;
 using NUnit.Framework;
 
-namespace Jessica.Tests
+namespace Jessica.Tests.Responses
 {
     [TestFixture]
     public class ResponseTests

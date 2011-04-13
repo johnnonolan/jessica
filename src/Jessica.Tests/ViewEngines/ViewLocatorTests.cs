@@ -116,39 +116,5 @@ namespace Jessica.Tests.ViewEngines
             Assert.That(contents, Contains.Substring("<title>My Sub Folder View!</title>"));
             Assert.That(contents, Contains.Substring("<h1>My Sub Folder View!</h1>"));
         }
-
-        [Test]
-        public void FindView_WithFullViewNameAndExtensions_ShouldReturnInstanceOfViewLocation()
-        {
-            var location = _locator.FindView("View.html", new[] { "html" });
-
-            Assert.That(location, Is.InstanceOf<ViewLocation>());
-        }
-
-        [Test]
-        public void FindView_WithFullViewNameAndExtensions_ShouldReturnCorrectLocation()
-        {
-            var location = _locator.FindView("View.html", new[] { "html" });
-
-            Assert.That(location.Location, Is.EqualTo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\Views\\", "View.html")));
-        }
-
-        [Test]
-        public void FindView_WithFullViewNameAndExtensions_ShouldReturnCorrectExtension()
-        {
-            var location = _locator.FindView("View.html", new[] { "html" });
-
-            Assert.That(location.Extension, Is.EqualTo("html"));
-        }
-
-        [Test]
-        public void FindView_WithFullViewNameAndExtensions_ShouldReturnCorrectContents()
-        {
-            var location = _locator.FindView("View.html", new[] { "html" });
-            var contents = location.Contents.ReadToEnd();
-
-            Assert.That(contents, Contains.Substring("<title>My View!</title>"));
-            Assert.That(contents, Contains.Substring("<h1>My View!</h1>"));
-        }
     }
 }

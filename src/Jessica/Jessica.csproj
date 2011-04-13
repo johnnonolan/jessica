@@ -39,21 +39,17 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterFilters.cs" />
-    <Compile Include="BeforeFilters.cs" />
-    <Compile Include="Configuration\JessicaSettings.cs" />
+    <Compile Include="Filters\AfterFilters.cs" />
+    <Compile Include="Filters\BeforeFilters.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Factories\DefaultJessicaFactory.cs" />
-    <Compile Include="Factories\ResponseFactory.cs" />
-    <Compile Include="Factories\IJessicaFactory.cs" />
-    <Compile Include="ResponseFactoryExtensions.cs" />
-    <Compile Include="Helpers\Mapper.cs" />
+    <Compile Include="Factory\DefaultJessicaFactory.cs" />
+    <Compile Include="Factory\IJessicaFactory.cs" />
     <Compile Include="Jess.cs" />
     <Compile Include="JessModule.cs" />
     <Compile Include="Responses\JsonResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Response.cs" />
+    <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\FileResponse.cs" />
     <Compile Include="Responses\RedirectResponse.cs" />
     <Compile Include="Responses\StaticFileResponse.cs" />
