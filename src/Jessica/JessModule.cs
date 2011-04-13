@@ -19,8 +19,13 @@ namespace Jessica
 
         ViewFactory _viewFactory;
         string _basePath;
+		
+		public JessModule()
+			: this("")
+		{
+		}
 
-        protected JessModule(string basePath = "")
+        public JessModule(string basePath)
         {
             Routes = new List<JessicaRoute>();
             Before = new BeforeFilters();
