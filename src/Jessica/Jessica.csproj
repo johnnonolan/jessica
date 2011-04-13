@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="Filters\AfterFilters.cs" />
     <Compile Include="Filters\BeforeFilters.cs" />
-    <Compile Include="Configuration\JessicaSettings.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factory\DefaultJessicaFactory.cs" />
