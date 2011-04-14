@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Routing;
+using Jessica.Configuration;
 using Jessica.Extensions;
 using Jessica.Factory;
 using Jessica.Routing;
@@ -15,6 +17,7 @@ namespace Jessica
     {
         public static IJessicaFactory Factory { get; set; }
         public static IList<IViewEngine> ViewEngines { get; private set; }
+        public static JessicaConfiguration Configuration { get; set; }
 
         static Jess()
         {
@@ -22,7 +25,7 @@ namespace Jessica
             ViewEngines = new List<IViewEngine>();
         }
 
-        public static void Initialise()
+        public static void Initialise(JessicaConfiguration configuration = null)
         {
             RouteTable.Routes.Clear();
             ViewEngines.Clear();

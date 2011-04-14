@@ -49,6 +49,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\JessicaConfigurationTests.cs" />
     <Compile Include="Filters\AfterFiltersTests.cs" />
     <Compile Include="Filters\BeforeFiltersTests.cs" />
     <Compile Include="Fakes\Factory\CustomJessicaFactory.cs" />
