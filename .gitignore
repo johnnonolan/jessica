@@ -19,3 +19,8 @@ _svn/
 Thumbs.db
 *.bak
 *.log
+
+# Mono Develop
+*.userprefs
+*.pidb
+
