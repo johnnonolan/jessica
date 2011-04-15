@@ -83,7 +83,7 @@ namespace Jessica.Routing
 
         private static void MapResponseToHttpResponse(Response response, HttpResponse httpResponse)
         {
-            response.Headers.ForEach(header => httpResponse.Headers.Add(header.Key, header.Value));
+            response.Headers.ForEach(header => httpResponse.AppendHeader(header.Key, header.Value));
             httpResponse.StatusCode = response.StatusCode;
             httpResponse.ContentType = response.ContentType;
             response.Contents.Invoke(httpResponse.OutputStream);
