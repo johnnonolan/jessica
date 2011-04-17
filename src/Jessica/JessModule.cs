@@ -23,11 +23,12 @@ namespace Jessica
         public JessModule(string basePath = "")
         {
             Routes = new List<JessicaRoute>();
+
             Before = new BeforeFilters();
             After = new AfterFilters();
 
             _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
-            _basePath = basePath;
+            _basePath = basePath ?? "";
         }
 
         private void AddRoute(string method, string route, Func<dynamic, Response> action)
