@@ -14,8 +14,8 @@ namespace Jessica
     {
         public IList<JessicaRoute> Routes { get; private set; }
 
-        public BeforeFilters Before { get; private set; }
-        public AfterFilters After { get; private set; }
+        public BeforeFilters Before { get; set; }
+        public AfterFilters After { get; set; }
 
         ViewFactory _viewFactory;
         string _basePath;
