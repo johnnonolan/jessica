@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Jessica.ViewEngines
+namespace Jessica.ViewEngine
 {
     public class ViewLocation
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Jessica.ViewEngines
+namespace Jessica.ViewEngine
 {
     public class ViewFactory
     {
@@ -40,6 +40,9 @@ namespace Jessica.ViewEngines
 
         private Action<Stream> GetRenderedView(string viewName, dynamic model)
         {
+            // Path.GetFileNameWithoutExtension will strip out the path, so
+            // the viewName will no longer contain subfolders of the views
+            // directory.
             var viewLocation = _locator.FindView(Path.GetFileNameWithoutExtension(viewName), GetExtensionsForViewLookUp(viewName));
             var resolvedViewEngine = GetViewEngine(viewLocation);
 

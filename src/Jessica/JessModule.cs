@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Jessica.Filters;
 using Jessica.Responses;
 using Jessica.Routing;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 
 namespace Jessica
 {

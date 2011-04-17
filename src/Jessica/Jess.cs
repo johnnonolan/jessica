@@ -7,7 +7,7 @@ using System.Web.Routing;
 using Jessica.Extensions;
 using Jessica.Factory;
 using Jessica.Routing;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 
 namespace Jessica
 {
@@ -48,8 +48,7 @@ namespace Jessica
 
             if (Directory.Exists(path))
             {
-                var assemblies = Directory.GetFiles(path, "Jessica*.dll");
-                assemblies.ForEach(asm => Assembly.LoadFrom(asm));
+                Directory.GetFiles(path, "Jessica*.dll").ForEach(asm => Assembly.LoadFrom(asm));
             }
         }
 
