@@ -1,5 +1,4 @@
 using System.Net;
-using Jessica.Extensions;
 
 namespace Jessica.Responses
 {

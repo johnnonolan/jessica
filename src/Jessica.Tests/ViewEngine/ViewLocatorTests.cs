@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 using NUnit.Framework;
 
-namespace Jessica.Tests.ViewEngines
+namespace Jessica.Tests.ViewEngine
 {
     [TestFixture]
     public class ViewLocatorTests

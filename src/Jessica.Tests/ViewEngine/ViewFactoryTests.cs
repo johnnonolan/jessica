@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using Jessica.Tests.Fakes.Models;
-using Jessica.Tests.Fakes.ViewEngines;
-using Jessica.ViewEngines;
+using Jessica.Tests.Fakes.ViewEngine;
+using Jessica.ViewEngine;
 using NUnit.Framework;
 
-namespace Jessica.Tests.ViewEngines
+namespace Jessica.Tests.ViewEngine
 {
     [TestFixture]
     public class ViewFactoryTests

@@ -66,10 +66,10 @@
     <Compile Include="Routing\JessicaHttpHandler.cs" />
     <Compile Include="Routing\JessicaRouteHandler.cs" />
     <Compile Include="Routing\JessicaRoute.cs" />
-    <Compile Include="ViewEngines\IViewEngine.cs" />
-    <Compile Include="ViewEngines\ViewFactory.cs" />
-    <Compile Include="ViewEngines\ViewLocation.cs" />
-    <Compile Include="ViewEngines\ViewLocator.cs" />
+    <Compile Include="ViewEngine\IViewEngine.cs" />
+    <Compile Include="ViewEngine\ViewFactory.cs" />
+    <Compile Include="ViewEngine\ViewLocation.cs" />
+    <Compile Include="ViewEngine\ViewLocator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

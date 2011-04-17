@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Jessica.ViewEngines
+namespace Jessica.ViewEngine
 {
     public interface IViewEngine
     {

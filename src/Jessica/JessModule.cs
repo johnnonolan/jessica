@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Jessica.Filters;
 using Jessica.Responses;
 using Jessica.Routing;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 
 namespace Jessica
 {
@@ -14,8 +14,8 @@ namespace Jessica
     {
         public IList<JessicaRoute> Routes { get; private set; }
 
-        public BeforeFilters Before { get; private set; }
-        public AfterFilters After { get; private set; }
+        public BeforeFilters Before { get; set; }
+        public AfterFilters After { get; set; }
 
         ViewFactory _viewFactory;
         string _basePath;

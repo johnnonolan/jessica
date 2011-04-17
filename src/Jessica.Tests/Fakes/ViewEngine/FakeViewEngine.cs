@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 
-namespace Jessica.Tests.Fakes.ViewEngines
+namespace Jessica.Tests.Fakes.ViewEngine
 {
     public class FakeViewEngine : IViewEngine
     {

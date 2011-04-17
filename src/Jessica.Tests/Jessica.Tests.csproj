@@ -57,8 +57,8 @@
     <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
-    <Compile Include="Fakes\ViewEngines\AnotherViewEngine.cs" />
-    <Compile Include="Fakes\ViewEngines\FakeViewEngine.cs" />
+    <Compile Include="Fakes\ViewEngine\AnotherViewEngine.cs" />
+    <Compile Include="Fakes\ViewEngine\FakeViewEngine.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Factory\DefaultJessicaFactoryTests.cs" />
     <Compile Include="JessModuleTests.cs" />
@@ -69,8 +69,8 @@
     <Compile Include="Responses\StaticFileResponseTests.cs" />
     <Compile Include="Responses\TextResponseTests.cs" />
     <Compile Include="Responses\ResponseTests.cs" />
-    <Compile Include="ViewEngines\ViewFactoryTests.cs" />
-    <Compile Include="ViewEngines\ViewLocatorTests.cs" />
+    <Compile Include="ViewEngine\ViewFactoryTests.cs" />
+    <Compile Include="ViewEngine\ViewLocatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fakes\Files\Base.css" />
