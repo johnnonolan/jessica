@@ -40,10 +40,7 @@ namespace Jessica.ViewEngine
 
         private Action<Stream> GetRenderedView(string viewName, dynamic model)
         {
-            // Path.GetFileNameWithoutExtension will strip out the path, so
-            // the viewName will no longer contain subfolders of the views
-            // directory.
-            var viewLocation = _locator.FindView(Path.GetFileNameWithoutExtension(viewName), GetExtensionsForViewLookUp(viewName));
+            var viewLocation = _locator.FindView(Path.ChangeExtension(viewName, null), GetExtensionsForViewLookUp(viewName));
             var resolvedViewEngine = GetViewEngine(viewLocation);
 
             return InvokeViewEngine(resolvedViewEngine, viewLocation, model);

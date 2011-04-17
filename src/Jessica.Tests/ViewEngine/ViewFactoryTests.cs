@@ -48,6 +48,21 @@ namespace Jessica.Tests.ViewEngine
         }
 
         [Test]
+        public void RenderView_WithViewNameInSubFolder_ShouldReturnContentsOfView()
+        {
+            var view = _factory.RenderView("Shared/List", null);
+
+            var stream = new MemoryStream();
+            view.Invoke(stream);
+            stream.Position = 0;
+            var reader = new StreamReader(stream);
+            var contents = reader.ReadToEnd();
+
+            Assert.That(contents, Contains.Substring("<title>My Sub Folder View!</title>"));
+            Assert.That(contents, Contains.Substring("<h1>My Sub Folder View!</h1>"));
+        }
+
+        [Test]
         public void RenderView_WithNonExistingViewNameAndNullModel_ShouldReturnEmptyStream()
         {
             var view = _factory.RenderView("DoesNotExist", null);
