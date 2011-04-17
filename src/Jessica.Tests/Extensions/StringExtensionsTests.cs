@@ -24,29 +24,5 @@ namespace Jessica.Tests.Extensions
         {
             Assert.That("Foobar!".With(), Is.EqualTo("Foobar!"));
         }
-
-        [Test]
-        public void UrlEncode_WithNormalString_ShouldReturnOriginalString()
-        {
-            Assert.That("Hello".UrlEncode(), Is.EqualTo("Hello"));
-        }
-
-        [Test]
-        public void UrlEncode_WithEncodableString_ShouldReturnEncodedString()
-        {
-            Assert.That("Hello, world!".UrlEncode(), Is.EqualTo("Hello%2c+world!"));
-        }
-
-        [Test]
-        public void Join_WithPlaceholderAndEmptyCollection_ShouldReturnEmptyString()
-        {
-            Assert.That("&".Join(new List<int>()), Is.EqualTo(string.Empty));
-        }
-
-        [Test]
-        public void Join_WithPlaceholderAndCollection_ShouldReturnCorrectString()
-        {
-            Assert.That("&".Join(new List<int> { 1, 2, 3 }), Is.EqualTo("1&2&3"));
-        }
     }
 }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Jessica.Factories;
+using Jessica.Filters;
+using Jessica.Responses;
 using Jessica.Routing;
-using Jessica.ViewEngines;
+using Jessica.ViewEngine;
 
 namespace Jessica
 {
@@ -13,22 +14,21 @@ namespace Jessica
     {
         public IList<JessicaRoute> Routes { get; private set; }
 
-        public BeforeFilters Before { get; private set; }
-        public AfterFilters After { get; private set; }
-        public ResponseFactory Response { get; private set; }
+        public BeforeFilters Before { get; set; }
+        public AfterFilters After { get; set; }
 
         ViewFactory _viewFactory;
         string _basePath;
 
-        protected JessModule(string basePath = "")
+        public JessModule(string basePath = "")
         {
             Routes = new List<JessicaRoute>();
+
             Before = new BeforeFilters();
             After = new AfterFilters();
-            Response = new ResponseFactory(AppDomain.CurrentDomain.BaseDirectory);
 
             _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
-            _basePath = basePath;
+            _basePath = basePath ?? "";
         }
 
         private void AddRoute(string method, string route, Func<dynamic, Response> action)
