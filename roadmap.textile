@@ -3,14 +3,14 @@ h1. Jessica v1.0.0 Roadmap
 h2. Routes
 
 * Conditions
-** Unsupported
+** *Currently Unsupported*
 * Return Values
 ** @Response@
 ** @int@
 ** @string@
 ** @Action<Stream>@
 * Custom Route Matchers
-** Unsupported
+** *Currently Unsupported*
 
 h2. Static Files
 
@@ -19,16 +19,24 @@ Supported by ASP.NET
 h2. Views/Templates
 
 * Liquid
+** @Jessica.ViewEngine.DotLiquid@
 * Spark
+** @Jessica.ViewEngine.Spark@ - Currently Outdated
 * Razor
+** @Jessica.ViewEngine.Razor@ - Currently In Progress
 * Markdown
+** @Jessica.ViewEngine.Markdown@
 * Textile
+** @Jessica.ViewEngine.Textile@
 
 h2. Filters
 
 * Before
+** Supported
 * After
-* Pattern based filters are unsupported
+** Supported
+* Pattern based filters
+** *Currently Unsupported*
 
 h2. Helpers
 
@@ -37,40 +45,41 @@ h2. Helpers
 * Halting
 ** Supported by ASP.NET
 * Passing
-** Unsupported
+** *Currently Unsupported*
 * Triggering Another Route
-** Unsupported
+** *Currently Unsupported*
 * Setting Body, Status Code and Headers
-** Return @Response@ with set properties
+** Return new @Response@
 * Mime Types
-** Return @Response@ with set properties
+** Return new @Response@
 * Generating URLs
-** Unsupported
+** *Currently Unsupported*
 * Browser Redirect
-** Return @RedirectResponse@
+** Return new @RedirectResponse@
 * Cache Control
 ** Supported by ASP.NET
 * Sending Files
-** Return @StaticFileResponse@
+** Return new @StaticFileResponse@
 * Accessing the Request Object
 ** HttpContext property on the dynamic parameter
 * Attachments
-** Return @FileResponse@
+** Return new @FileResponse@
 * Looking Up Template Files
-** Unsupported
+** *Currently Unsupported*
 
 h2. Configuration
 
 * Available Settings
 ** Environment
 ** Views directory
+** Public directory
 
 h2. Error Handling
 
 * Not Found
-** Unsupported
+** *Currently Unsupported*
 * Error
-** Unsupported
+** *Currently Unsupported*
 
 h2. Rack Middleware
 
