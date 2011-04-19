@@ -1,0 +1,105 @@
+h1. Jessica v1.0.0 Roadmap
+
+h2. Routes
+
+* Conditions
+** Unsupported
+* Return Values
+** @Response@
+** @int@
+** @string@
+** @Action<Stream>@
+* Custom Route Matchers
+** Unsupported
+
+h2. Static Files
+
+Supported by ASP.NET
+
+h2. Views/Templates
+
+* Liquid
+* Spark
+* Razor
+* Markdown
+* Textile
+
+h2. Filters
+
+* Before
+* After
+* Pattern based filters are unsupported
+
+h2. Helpers
+
+* Using Sessions
+** Supported by ASP.NET
+* Halting
+** Supported by ASP.NET
+* Passing
+** Unsupported
+* Triggering Another Route
+** Unsupported
+* Setting Body, Status Code and Headers
+** Return @Response@ with set properties
+* Mime Types
+** Return @Response@ with set properties
+* Generating URLs
+** Unsupported
+* Browser Redirect
+** Return @RedirectResponse@
+* Cache Control
+** Supported by ASP.NET
+* Sending Files
+** Return @StaticFileResponse@
+* Accessing the Request Object
+** HttpContext property on the dynamic parameter
+* Attachments
+** Return @FileResponse@
+* Looking Up Template Files
+** Unsupported
+
+h2. Configuration
+
+* Available Settings
+** Environment
+** Views directory
+
+h2. Error Handling
+
+* Not Found
+** Unsupported
+* Error
+** Unsupported
+
+h2. Rack Middleware
+
+N/A
+
+h2. Testing
+
+N/A
+
+h2. Sinatra::Base - Middleware, Libraries, and Modular Apps
+
+N/A
+
+h2. Scopes and Binding
+
+N/A
+
+h2. Command Line
+
+N/A
+
+h2. Requirements
+
+N/A
+
+h2. The Bleeding Edge
+
+N/A
+
+h2. Further Reading
+
+N/A
