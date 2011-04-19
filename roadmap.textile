@@ -14,7 +14,7 @@ h2. Routes
 
 h2. Static Files
 
-Supported by ASP.NET
+* *Supported by ASP.NET*
 
 h2. Views/Templates
 
