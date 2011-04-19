@@ -11,6 +11,13 @@ namespace Jessica.Configuration
             set { this["environment"] = value; }
         }
 
+        [ConfigurationProperty("publicDir", DefaultValue = "public", IsRequired = false)]
+        public string PublicDirectory
+        {
+            get { return this["publicDir"].ToString(); }
+            set { this["publicDir"] = value; }
+        }
+
         [ConfigurationProperty("viewsDir", DefaultValue = "views", IsRequired = false)]
         public string ViewsDirectory
         {
@@ -21,6 +28,12 @@ namespace Jessica.Configuration
         public JessicaConfiguration SetEnvironment(string environment)
         {
             Environment = environment;
+            return this;
+        }
+
+        public JessicaConfiguration SetPublicDirectory(string publicDirectory)
+        {
+            PublicDirectory = publicDirectory;
             return this;
         }
 

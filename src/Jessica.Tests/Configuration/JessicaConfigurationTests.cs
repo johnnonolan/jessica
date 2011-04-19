@@ -21,6 +21,12 @@ namespace Jessica.Tests.Configuration
         }
 
         [Test]
+        public void PublicDirectory_WithNoSetValue_ShouldReturnDefaultValue()
+        {
+            Assert.That(_configuration.PublicDirectory, Is.EqualTo("public"));
+        }
+
+        [Test]
         public void ViewsDirectory_WithNoSetValue_ShouldReturnDefaultValue()
         {
             Assert.That(_configuration.ViewsDirectory, Is.EqualTo("views"));
@@ -32,6 +38,14 @@ namespace Jessica.Tests.Configuration
             _configuration.SetEnvironment("production");
 
             Assert.That(_configuration.Environment, Is.EqualTo("production"));
+        }
+
+        [Test]
+        public void SetPublicDirectory_WithPublicDirectory_ShouldSetCorrectValue()
+        {
+            _configuration.SetPublicDirectory("static");
+
+            Assert.That(_configuration.PublicDirectory, Is.EqualTo("static"));
         }
 
         [Test]
