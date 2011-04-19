@@ -6,9 +6,9 @@ h2. Routes
 ** *Currently Unsupported*
 * Return Values
 ** @Response@
-** @int@
-** @string@
-** @Action<Stream>@
+** @int@ - HTTP status code
+** @string@ - Body
+** @Action<Stream>@ - Writes to OutputStream
 * Custom Route Matchers
 ** *Currently Unsupported*
 
@@ -21,7 +21,7 @@ h2. Views/Templates
 * Liquid
 ** @Jessica.ViewEngine.DotLiquid@
 * Spark
-** @Jessica.ViewEngine.Spark@ - Currently Outdated
+** @Jessica.ViewEngine.Spark@ - Currently In Progress
 * Razor
 ** @Jessica.ViewEngine.Razor@ - Currently In Progress
 * Markdown
@@ -32,18 +32,18 @@ h2. Views/Templates
 h2. Filters
 
 * Before
-** Supported
+** *Supported*
 * After
-** Supported
+** *Supported*
 * Pattern based filters
 ** *Currently Unsupported*
 
 h2. Helpers
 
 * Using Sessions
-** Supported by ASP.NET
+** *Supported by ASP.NET*
 * Halting
-** Supported by ASP.NET
+** *Supported by ASP.NET*
 * Passing
 ** *Currently Unsupported*
 * Triggering Another Route
@@ -57,7 +57,7 @@ h2. Helpers
 * Browser Redirect
 ** Return new @RedirectResponse@
 * Cache Control
-** Supported by ASP.NET
+** *Supported by ASP.NET*
 * Sending Files
 ** Return new @StaticFileResponse@
 * Accessing the Request Object
@@ -70,9 +70,9 @@ h2. Helpers
 h2. Configuration
 
 * Available Settings
-** Environment
-** Views directory
-** Public directory
+** Environment - Development/Production/Testing
+** Views directory - Directory containing views
+** Public directory - Directory containing static files for helper responses
 
 h2. Error Handling
 
