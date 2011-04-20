@@ -27,6 +27,30 @@ namespace Jessica.Specs.Configuration
             _configuration = new JessicaConfiguration();
 
         Because of = () =>
+        {
+            _configuration.Environment = "production";
+            _configuration.PublicDirectory = "static";
+            _configuration.ViewsDirectory = "templates";
+        };
+
+        It should_return_set_environment = () =>
+            _configuration.Environment.ShouldEqual("production");
+
+        It should_return_set_public_directory = () =>
+            _configuration.PublicDirectory.ShouldEqual("static");
+
+        It should_return_set_views_directory = () =>
+            _configuration.ViewsDirectory.ShouldEqual("templates");
+
+        static JessicaConfiguration _configuration;
+    }
+
+    public class when_setting_configuration_values_with_fluent_api
+    {
+        Establish context = () =>
+            _configuration = new JessicaConfiguration();
+
+        Because of = () =>
             _configuration
                 .SetEnvironment("production")
                 .SetPublicDirectory("static")
