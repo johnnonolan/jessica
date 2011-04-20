@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Jessica.Extensions;
+﻿using Jessica.Extensions;
 using NUnit.Framework;
 
 namespace Jessica.Tests.Extensions

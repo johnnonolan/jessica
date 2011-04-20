@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jessica", "Jessica\Jessica.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jessica.Tests", "Jessica.Tests\Jessica.Tests.csproj", "{778C8FBF-7122-4B55-AB50-A296879F78F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jessica.Specs", "Jessica.Specs\Jessica.Specs.csproj", "{7557D681-F424-4E1E-A7AE-B998068125FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{778C8FBF-7122-4B55-AB50-A296879F78F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{778C8FBF-7122-4B55-AB50-A296879F78F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{778C8FBF-7122-4B55-AB50-A296879F78F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7557D681-F424-4E1E-A7AE-B998068125FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7557D681-F424-4E1E-A7AE-B998068125FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7557D681-F424-4E1E-A7AE-B998068125FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7557D681-F424-4E1E-A7AE-B998068125FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
