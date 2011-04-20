@@ -5,54 +5,70 @@ using Machine.Specifications;
 
 namespace Jessica.Specs.ViewEngine
 {
-    public class view_locator_setup
+    public class when_locating_a_view_with_a_null_view_name
     {
         Establish context = () =>
         {
             var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
-            ViewLocator = new ViewLocator(rootPath);
+            _viewLocator = new ViewLocator(rootPath);
         };
 
-        protected static ViewLocator ViewLocator;
-    }
-
-    public class when_locating_a_view_with_a_null_view_name : view_locator_setup
-    {
         Because of = () =>
-            _location = ViewLocator.FindView(null, null);
+            _location = _viewLocator.FindView(null, null);
 
         It should_return_a_null_view_location = () =>
             _location.ShouldBeNull();
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 
-    public class when_locating_a_view_with_a_view_name_and_empty_extensions_collection : view_locator_setup
+    public class when_locating_a_view_with_a_view_name_and_empty_extensions_collection
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            _viewLocator = new ViewLocator(rootPath);
+        };
+
         Because of = () =>
-            _location = ViewLocator.FindView("View", new string[] { });
+            _location = _viewLocator.FindView("View", new string[] { });
 
         It should_return_a_null_view_location = () =>
             _location.ShouldBeNull();
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 
-    public class when_locating_a_view_with_non_existing_view_name_and_extensions : view_locator_setup
+    public class when_locating_a_view_with_non_existing_view_name_and_extensions
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            _viewLocator = new ViewLocator(rootPath);
+        };
+
         Because of = () =>
-            _location = ViewLocator.FindView("DoesNotExist", new[] { "html" });
+            _location = _viewLocator.FindView("DoesNotExist", new[] { "html" });
 
         It should_return_a_null_view_location = () =>
             _location.ShouldBeNull();
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 
-    public class when_locating_a_view_with_view_name : view_locator_setup
+    public class when_locating_a_view_with_view_name
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            _viewLocator = new ViewLocator(rootPath);
+        };
+
         Because of = () =>
-            _location = ViewLocator.FindView("View", new[] { "html" });
+            _location = _viewLocator.FindView("View", new[] { "html" });
 
         It should_return_an_instance_of_view_location = () =>
             _location.ShouldNotBeNull();
@@ -71,23 +87,37 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 
-    public class when_locating_a_view_with_non_existing_view_name_in_sub_directory : view_locator_setup
+    public class when_locating_a_view_with_non_existing_view_name_in_sub_directory
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            _viewLocator = new ViewLocator(rootPath);
+        };
+
         Because of = () =>
-            _location = ViewLocator.FindView("Shared/DoesNotExist", new[] { "html" });
+            _location = _viewLocator.FindView("Shared/DoesNotExist", new[] { "html" });
 
         It should_return_a_null_view_location = () =>
             _location.ShouldBeNull();
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 
-    public class when_locating_a_view_with_view_name_in_sub_directory : view_locator_setup
+    public class when_locating_a_view_with_view_name_in_sub_directory
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            _viewLocator = new ViewLocator(rootPath);
+        };
+
         Because of = () =>
-            _location = ViewLocator.FindView("Shared/List", new[] { "html" });
+            _location = _viewLocator.FindView("Shared/List", new[] { "html" });
 
         It should_return_an_instance_of_view_location = () =>
             _location.ShouldNotBeNull();
@@ -106,5 +136,6 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static ViewLocation _location;
+        static ViewLocator _viewLocator;
     }
 }

@@ -7,44 +7,55 @@ using Machine.Specifications;
 
 namespace Jessica.Specs.ViewEngine
 {
-    public class view_factory_setup
+    public class when_rendering_a_view_with_null_view_name_and_model
     {
         Establish context = () =>
         {
             var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
             var engines = new[] { new FakeViewEngine() };
-            ViewFactory = new ViewFactory(engines, rootPath);
+            _viewFactory = new ViewFactory(engines, rootPath);
         };
 
-        protected static ViewFactory ViewFactory;
-    }
-
-    public class when_rendering_a_view_with_null_view_name_and_model : view_factory_setup
-    {
         Because of = () =>
-            _exception = Catch.Exception(() => ViewFactory.RenderView(null, null));
+            _exception = Catch.Exception(() => _viewFactory.RenderView(null, null));
 
         It should_throw_argument_exception = () =>
             _exception.ShouldBeOfType<ArgumentException>();
 
         static Exception _exception;
+        static ViewFactory _viewFactory;
     }
 
-    public class when_rendering_a_view_with_empty_view_name_and_null_model : view_factory_setup
+    public class when_rendering_a_view_with_empty_view_name_and_null_model
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            var engines = new[] { new FakeViewEngine() };
+            _viewFactory = new ViewFactory(engines, rootPath);
+        };
+
         Because of = () =>
-            _exception = Catch.Exception(() => ViewFactory.RenderView(string.Empty, null));
+            _exception = Catch.Exception(() => _viewFactory.RenderView(string.Empty, null));
 
         It should_throw_argument_exception = () =>
             _exception.ShouldBeOfType<ArgumentException>();
 
         static Exception _exception;
+        static ViewFactory _viewFactory;
     }
 
-    public class when_rendering_a_view_with_view_name_and_null_model : view_factory_setup
+    public class when_rendering_a_view_with_view_name_and_null_model
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            var engines = new[] { new FakeViewEngine() };
+            _viewFactory = new ViewFactory(engines, rootPath);
+        };
+
         Because of = () =>
-            _view = ViewFactory.RenderView("View", null);
+            _view = _viewFactory.RenderView("View", null);
 
         It should_contain_correct_contents = () =>
         {
@@ -61,12 +72,20 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static Action<Stream> _view;
+        static ViewFactory _viewFactory;
     }
 
-    public class when_rendering_a_view_with_view_name_in_sub_directory : view_factory_setup
+    public class when_rendering_a_view_with_view_name_in_sub_directory
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            var engines = new[] { new FakeViewEngine() };
+            _viewFactory = new ViewFactory(engines, rootPath);
+        };
+
         Because of = () =>
-            _view = ViewFactory.RenderView("Shared/List", null);
+            _view = _viewFactory.RenderView("Shared/List", null);
 
         It should_contain_correct_contents = () =>
         {
@@ -83,12 +102,20 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static Action<Stream> _view;
+        static ViewFactory _viewFactory;
     }
 
-    public class when_rendering_a_view_with_a_view_name_which_does_not_exist : view_factory_setup
+    public class when_rendering_a_view_with_a_view_name_which_does_not_exist
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            var engines = new[] { new FakeViewEngine() };
+            _viewFactory = new ViewFactory(engines, rootPath);
+        };
+
         Because of = () =>
-            _view = ViewFactory.RenderView("DoesNotExist", null);
+            _view = _viewFactory.RenderView("DoesNotExist", null);
 
         It should_contain_correct_contents = () =>
         {
@@ -104,12 +131,20 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static Action<Stream> _view;
+        static ViewFactory _viewFactory;
     }
 
-    public class when_rendering_a_view_with_a_null_view_name_and_model : view_factory_setup
+    public class when_rendering_a_view_with_a_null_view_name_and_model
     {
+        Establish context = () =>
+        {
+            var rootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes");
+            var engines = new[] { new FakeViewEngine() };
+            _viewFactory = new ViewFactory(engines, rootPath);
+        };
+
         Because of = () =>
-            _view = ViewFactory.RenderView(null, new SimpleModel());
+            _view = _viewFactory.RenderView(null, new SimpleModel());
 
         It should_contain_correct_contents = () =>
         {
@@ -126,5 +161,6 @@ namespace Jessica.Specs.ViewEngine
         };
 
         static Action<Stream> _view;
+        static ViewFactory _viewFactory;
     }
 }

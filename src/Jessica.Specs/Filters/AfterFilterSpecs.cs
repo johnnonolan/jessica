@@ -6,113 +6,124 @@ using Machine.Specifications;
 
 namespace Jessica.Specs.Filters
 {
-    public class after_filter_list
+    public class when_adding_two_after_filters_to_the_end
     {
         Establish context = () =>
-            Filters = new AfterFilters();
+            _filters = new AfterFilters();
 
-        protected static AfterFilters Filters;
-    }
-
-    public class when_adding_two_after_filters_to_the_end : after_filter_list
-    {
         Because of = () =>
         {
-            Filters.AddFilterToEnd(_filter1);
-            Filters.AddFilterToEnd(_filter2);
+            _filters.AddFilterToEnd(_filter1);
+            _filters.AddFilterToEnd(_filter2);
         };
 
         It should_contain_two_filters = () =>
-            Filters.Filters.Count.ShouldEqual(2);
+            _filters.Filters.Count.ShouldEqual(2);
 
         It should_contain_filter1_as_first_filter = () =>
-            Filters.Filters.First().ShouldEqual(_filter1);
+            _filters.Filters.First().ShouldEqual(_filter1);
 
         It should_contain_filter2_as_last_filter = () =>
-            Filters.Filters.Last().ShouldEqual(_filter2);
+            _filters.Filters.Last().ShouldEqual(_filter2);
 
         static Action<RequestContext> _filter1 = context => { };
         static Action<RequestContext> _filter2 = context => { };
+        static AfterFilters _filters;
     }
 
-    public class when_adding_two_after_filters_to_the_start : after_filter_list
+    public class when_adding_two_after_filters_to_the_start
     {
+        Establish context = () =>
+            _filters = new AfterFilters();
+
         Because of = () =>
         {
-            Filters.AddFilterToStart(_filter1);
-            Filters.AddFilterToStart(_filter2);
+            _filters.AddFilterToStart(_filter1);
+            _filters.AddFilterToStart(_filter2);
         };
 
         It should_contain_two_filters = () =>
-            Filters.Filters.Count.ShouldEqual(2);
+            _filters.Filters.Count.ShouldEqual(2);
 
         It should_contain_filter1_as_last_filter = () =>
-            Filters.Filters.Last().ShouldEqual(_filter1);
+            _filters.Filters.Last().ShouldEqual(_filter1);
 
         It should_contain_filter2_as_first_filter = () =>
-            Filters.Filters.First().ShouldEqual(_filter2);
+            _filters.Filters.First().ShouldEqual(_filter2);
 
         static Action<RequestContext> _filter1 = context => { };
         static Action<RequestContext> _filter2 = context => { };
+        static AfterFilters _filters;
     }
 
-    public class when_inserting_an_after_filter_at_index : after_filter_list
+    public class when_inserting_an_after_filter_at_index
     {
+        Establish context = () =>
+            _filters = new AfterFilters();
+
         Because of = () =>
         {
-            Filters.AddFilterToEnd(_filter1);
-            Filters.AddFilterToEnd(_filter3);
-            Filters.InsertFilterAtIndex(1, _filter2);
+            _filters.AddFilterToEnd(_filter1);
+            _filters.AddFilterToEnd(_filter3);
+            _filters.InsertFilterAtIndex(1, _filter2);
         };
 
         It should_contain_three_filters = () =>
-            Filters.Filters.Count.ShouldEqual(3);
+            _filters.Filters.Count.ShouldEqual(3);
 
         It should_contain_filter1_at_index_zero = () =>
-            Filters.Filters.ElementAt(0).ShouldEqual(_filter1);
+            _filters.Filters.ElementAt(0).ShouldEqual(_filter1);
 
         It should_contain_filter2_at_index_one = () =>
-            Filters.Filters.ElementAt(1).ShouldEqual(_filter2);
+            _filters.Filters.ElementAt(1).ShouldEqual(_filter2);
 
         It should_contain_filter3_at_index_two = () =>
-            Filters.Filters.ElementAt(2).ShouldEqual(_filter3);
+            _filters.Filters.ElementAt(2).ShouldEqual(_filter3);
 
         static Action<RequestContext> _filter1 = context => { };
         static Action<RequestContext> _filter2 = context => { };
         static Action<RequestContext> _filter3 = context => { };
+        static AfterFilters _filters;
     }
 
-    public class when_concatenating_an_after_filter : after_filter_list
+    public class when_concatenating_an_after_filter
     {
+        Establish context = () =>
+            _filters = new AfterFilters();
+
         Because of = () =>
         {
-            Filters.AddFilterToEnd(_filter2);
-            Filters += _filter1;
+            _filters.AddFilterToEnd(_filter2);
+            _filters += _filter1;
         };
 
         It should_contain_two_filters = () =>
-            Filters.Filters.Count.ShouldEqual(2);
+            _filters.Filters.Count.ShouldEqual(2);
 
         It should_contain_filter1_as_last_filter = () =>
-            Filters.Filters.Last().ShouldEqual(_filter1);
+            _filters.Filters.Last().ShouldEqual(_filter1);
 
         It should_contain_filter2_as_first_filter = () =>
-            Filters.Filters.First().ShouldEqual(_filter2);
+            _filters.Filters.First().ShouldEqual(_filter2);
 
         static Action<RequestContext> _filter1 = context => { };
         static Action<RequestContext> _filter2 = context => { };
+        static AfterFilters _filters;
     }
 
-    public class when_invoking_after_filters_containing_two_filters : after_filter_list
+    public class when_invoking_after_filters_containing_two_filters
     {
+        Establish context = () =>
+            _filters = new AfterFilters();
+
         Because of = () =>
         {
             _filter1Called = false;
             _filter2Called = false;
 
-            Filters += _filter1;
-            Filters += _filter2;
-            Filters.Invoke(null);
+            _filters += _filter1;
+            _filters += _filter2;
+            _filters.Invoke(null);
         };
 
         It should_invoke_the_first_filter = () =>
@@ -125,5 +136,6 @@ namespace Jessica.Specs.Filters
         static bool _filter2Called;
         static Action<RequestContext> _filter1 = context => { _filter1Called = true; };
         static Action<RequestContext> _filter2 = context => { _filter2Called = true; };
+        static AfterFilters _filters;
     }
 }
