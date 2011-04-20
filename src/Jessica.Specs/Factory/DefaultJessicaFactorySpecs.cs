@@ -1,5 +1,5 @@
 using Jessica.Factory;
-using Jessica.Tests.Fakes.Modules;
+using Jessica.Specs.Fakes.Modules;
 using Machine.Specifications;
 
 namespace Jessica.Specs.Factory

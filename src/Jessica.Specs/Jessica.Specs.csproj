@@ -36,31 +36,43 @@
       <HintPath>..\..\lib\mspec\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\JessicaConfigurationSpecs.cs" />
     <Compile Include="Extensions\EnumerableExtensionsSpecs.cs" />
     <Compile Include="Extensions\StringExtensionsSpecs.cs" />
     <Compile Include="Factory\DefaultJessicaFactorySpecs.cs" />
+    <Compile Include="Fakes\Models\SimpleModel.cs" />
+    <Compile Include="Fakes\Modules\FakeModule.cs" />
     <Compile Include="Filters\AfterFilterSpecs.cs" />
     <Compile Include="Filters\BeforeFilterSpecs.cs" />
+    <Compile Include="JessModuleSpecs.cs" />
+    <Compile Include="JessSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\FileResponseSpecs.cs" />
+    <Compile Include="Responses\JsonResponseSpecs.cs" />
+    <Compile Include="Responses\RedirectResponseSpecs.cs" />
+    <Compile Include="Responses\ResponseSpecs.cs" />
+    <Compile Include="Responses\StaticFileResponseSpecs.cs" />
+    <Compile Include="Responses\TextResponseSpecs.cs" />
+    <Compile Include="ViewEngine\ViewFactorySpecs.cs" />
+    <Compile Include="ViewEngine\ViewLocatorSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jessica.Tests\Jessica.Tests.csproj">
-      <Project>{778C8FBF-7122-4B55-AB50-A296879F78F0}</Project>
-      <Name>Jessica.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Jessica\Jessica.csproj">
       <Project>{738B1B85-7962-4670-940A-1D907F0B2577}</Project>
       <Name>Jessica</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Responses\" />
-    <Folder Include="ViewEngine\" />
+    <Content Include="Fakes\Files\Stylesheet.css" />
+    <Content Include="Fakes\Files\Download.txt" />
+    <Content Include="Fakes\Files\Index.html" />
+    <Content Include="Fakes\Files\SimpleJs.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
