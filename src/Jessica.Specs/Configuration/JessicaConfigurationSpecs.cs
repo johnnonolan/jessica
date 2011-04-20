@@ -1,3 +1,4 @@
+using System.Configuration;
 using Jessica.Configuration;
 using Machine.Specifications;
 
@@ -39,6 +40,22 @@ namespace Jessica.Specs.Configuration
 
         It should_return_set_views_directory = () =>
             _configuration.ViewsDirectory.ShouldEqual("templates");
+
+        static JessicaConfiguration _configuration;
+    }
+
+    public class when_setting_configuration_values_from_jessica_config_section
+    {
+        Establish context = () =>
+        {
+            _configuration = ConfigurationManager.GetSection("jessica") as JessicaConfiguration;
+        };
+
+        It should_return_set_environment;
+
+        It should_return_set_public_directory;
+
+        It should_return_set_views_directory;
 
         static JessicaConfiguration _configuration;
     }
