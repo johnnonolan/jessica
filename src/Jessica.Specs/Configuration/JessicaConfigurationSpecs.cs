@@ -48,15 +48,21 @@ namespace Jessica.Specs.Configuration
     {
         Establish context = () =>
         {
-            _configuration = ConfigurationManager.GetSection("jessica") as JessicaConfiguration;
+            var fileMap = new ExeConfigurationFileMap{ ExeConfigFilename = "../../Fakes/Configuration/App.config" };
+            var config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            _configuration = config.GetSection("jessica") as JessicaConfiguration;
         };
 
-        It should_return_set_environment;
+        It should_return_set_environment = () =>
+            _configuration.Environment.ShouldEqual("testing");
 
-        It should_return_set_public_directory;
+        It should_return_set_public_directory = () =>
+            _configuration.PublicDirectory.ShouldEqual("static");
 
-        It should_return_set_views_directory;
+        It should_return_set_views_directory = () =>
+            _configuration.ViewsDirectory.ShouldEqual("templates");
 
         static JessicaConfiguration _configuration;
     }
 }
+ 

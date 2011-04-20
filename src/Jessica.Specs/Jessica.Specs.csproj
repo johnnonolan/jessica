@@ -46,8 +46,11 @@
     <Compile Include="Extensions\EnumerableExtensionsSpecs.cs" />
     <Compile Include="Extensions\StringExtensionsSpecs.cs" />
     <Compile Include="Factory\DefaultJessicaFactorySpecs.cs" />
+    <Compile Include="Fakes\Factory\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />
+    <Compile Include="Fakes\Modules\BasePathModule.cs" />
     <Compile Include="Fakes\Modules\FakeModule.cs" />
+    <Compile Include="Fakes\ViewEngine\AnotherViewEngine.cs" />
     <Compile Include="Fakes\ViewEngine\FakeViewEngine.cs" />
     <Compile Include="Filters\AfterFilterSpecs.cs" />
     <Compile Include="Filters\BeforeFilterSpecs.cs" />
@@ -77,6 +80,9 @@
     <Content Include="Fakes\Views\Shared\List.html" />
     <Content Include="Fakes\Views\Simple.html" />
     <Content Include="Fakes\Views\View.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fakes\Configuration\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
