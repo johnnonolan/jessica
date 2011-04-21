@@ -31,6 +31,9 @@ namespace Jessica.Specs.Responses
                 }
             };
 
+            It should_contain_an_empty_header_collection = () =>
+                _response.Headers.ShouldBeEmpty();
+
             static JsonResponse<SimpleModel> _response;
         }
     }

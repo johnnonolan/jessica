@@ -28,6 +28,9 @@ namespace Jessica.Specs.Responses
             }
         };
 
+        It should_contain_an_empty_header_collection = () =>
+            _response.Headers.ShouldBeEmpty();
+
         static StaticFileResponse _response;
     }
 
@@ -41,6 +44,22 @@ namespace Jessica.Specs.Responses
 
         It should_contain_the_correct_content_type = () =>
             _response.ContentType.ShouldEqual("text/html");
+
+        It should_contain_empty_contents = () =>
+        {
+            using (var stream = new MemoryStream())
+            {
+                _response.Contents.Invoke(stream);
+                stream.Position = 0;
+                var reader = new StreamReader(stream);
+                var contents = reader.ReadToEnd();
+
+                contents.ShouldBeEmpty();
+            }
+        };
+
+        It should_contain_an_empty_header_collection = () =>
+            _response.Headers.ShouldBeEmpty();
 
         static StaticFileResponse _response;
     }

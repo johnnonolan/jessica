@@ -45,7 +45,7 @@ namespace Jessica.Specs.Extensions
         It should_iterate_ten_times = () =>
             _iterations.ShouldEqual(10);
 
-        static List<int> _collection;
+        static IEnumerable<int> _collection;
         static int _iterations;
     }
 }

@@ -28,6 +28,9 @@ namespace Jessica.Specs.Responses
             }
         };
 
+        It should_contain_an_empty_header_collection = () =>
+            _response.Headers.ShouldBeEmpty();
+
         static TextResponse _response;
     }
 
@@ -54,6 +57,9 @@ namespace Jessica.Specs.Responses
                 contents.ShouldContain("Hello, Tom the number is 100!");
             }
         };
+
+        It should_contain_an_empty_header_collection = () =>
+            _response.Headers.ShouldBeEmpty();
 
         static TextResponse _response;
     }
