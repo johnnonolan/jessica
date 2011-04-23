@@ -9,7 +9,7 @@ namespace Jessica.Specs.Responses
     {
         public class when_constructing_a_json_response_with_a_model
         {
-            Establish context = () =>
+            Because of = () =>
                 _response = new JsonResponse<SimpleModel>(new SimpleModel { Message = "Hello, world!", Count = 2 });
 
             It should_contain_the_correct_status_code = () =>

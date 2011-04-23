@@ -6,7 +6,7 @@ namespace Jessica.Specs.Responses
 {
     public class when_constructing_a_file_response_with_existing_file_path
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new FileResponse("../../Fakes/Files/Download.txt");
 
         It should_contain_correct_status_code = () =>
@@ -36,7 +36,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_file_response_with_a_non_existing_file_path
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new FileResponse("FakeDownload.txt");
 
         It should_contain_file_not_found_status_code = () =>

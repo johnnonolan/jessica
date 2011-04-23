@@ -6,7 +6,7 @@ namespace Jessica.Specs.Responses
 {
     public class when_constructing_a_text_response_with_value
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new TextResponse("Hello, world!");
 
         It should_contain_the_correct_status_code = () =>
@@ -36,7 +36,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_text_response_with_format_and_arguments
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new TextResponse("Hello, {0} the number is {1}!", "Tom", 100);
 
         It should_contain_the_correct_status_code = () =>

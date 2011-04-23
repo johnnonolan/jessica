@@ -5,7 +5,7 @@ namespace Jessica.Specs.Responses
 {
     public class when_constructing_a_redirect_response_with_a_location
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new RedirectResponse("http://google.com");
 
         It should_contain_the_correct_status_code = () =>

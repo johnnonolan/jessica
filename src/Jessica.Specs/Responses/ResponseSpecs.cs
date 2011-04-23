@@ -9,7 +9,7 @@ namespace Jessica.Specs.Responses
 {
     public class when_constructing_a_response
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new Response();
 
         It should_contain_the_default_status_code = () =>
@@ -39,7 +39,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_implicit_integer
     {
-        Establish context = () =>
+        Because of = () =>
             _response = 304;
 
         It should_contain_the_correct_status_code = () =>
@@ -69,7 +69,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_implicit_string
     {
-        Establish context = () =>
+        Because of = () =>
             _response = "Hello, world!";
 
         It should_contain_the_default_status_code = () =>
@@ -99,7 +99,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_implicit_action
     {
-        Establish context = () =>
+        Because of = () =>
             _response = _action;
 
         It should_contain_the_default_status_code = () =>
@@ -136,7 +136,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_file_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsFile("../../../Fakes/Files/Download.txt");
@@ -169,7 +169,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_json_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsJson(new SimpleModel { Message = "Hello, world!", Count = 2 });
@@ -202,7 +202,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_redirect_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsRedirect("http://google.com");
@@ -222,7 +222,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_html_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsHtml("../../../Fakes/Files/Index.html");
@@ -256,7 +256,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_css_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsCss("../../../Fakes/Files/Stylesheet.css");
@@ -290,7 +290,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_js_method
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsJs("../../../Fakes/Files/SimpleJs.js");
@@ -323,7 +323,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_response_with_as_text_method_and_value
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsText("Hello, world!");
@@ -356,7 +356,7 @@ namespace Jessica.Specs.Responses
     
     public class when_constructing_a_response_with_as_text_method_with_format_and_arguments
     {
-        Establish context = () =>
+        Because of = () =>
         {
             Jess.Configuration = new JessicaConfiguration();
             _response = Response.AsText("Hello, {0} the number is {1}!", "Tom", 100);

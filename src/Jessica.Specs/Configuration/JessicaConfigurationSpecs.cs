@@ -6,7 +6,7 @@ namespace Jessica.Specs.Configuration
 {
     public class when_getting_configuration_values_with_no_set_values
     {
-        Establish context = () =>
+        Because of = () =>
             _configuration = new JessicaConfiguration();
 
         It should_return_default_environment = () =>
@@ -70,7 +70,7 @@ namespace Jessica.Specs.Configuration
 
     public class when_setting_configuration_values_from_jessica_config_section
     {
-        Establish context = () =>
+        Because of = () =>
         {
             var fileMap = new ExeConfigurationFileMap{ ExeConfigFilename = "../../Fakes/Configuration/App.config" };
             var config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);

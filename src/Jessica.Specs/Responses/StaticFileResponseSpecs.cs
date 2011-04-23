@@ -6,7 +6,7 @@ namespace Jessica.Specs.Responses
 {
     public class when_constructing_a_static_file_response_with_file_path_and_content_type
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new StaticFileResponse("../../Fakes/Files/SimpleJs.js", "text/javascript");
 
         It should_contain_the_correct_status_code = () =>
@@ -36,7 +36,7 @@ namespace Jessica.Specs.Responses
 
     public class when_constructing_a_static_file_response_with_non_existing_file_path_and_content_type
     {
-        Establish context = () =>
+        Because of = () =>
             _response = new StaticFileResponse("FakeJavascript.js", "text/javascript");
 
         It should_contain_file_not_found_status_code = () =>
