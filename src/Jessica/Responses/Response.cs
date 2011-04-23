@@ -43,5 +43,44 @@ namespace Jessica.Responses
                 writer.Write(contents);
             };
         }
+
+        public static Response AsFile(string filePath, string contentType = "application/octet-stream")
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Jess.Configuration.PublicDirectory, filePath);
+            return new FileResponse(path, contentType);
+        }
+
+        public static Response AsJson<T>(T model)
+        {
+            return new JsonResponse<T>(model);
+        }
+
+        public static Response AsRedirect(string location)
+        {
+            return new RedirectResponse(location);
+        }
+
+        public static Response AsHtml(string filePath)
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Jess.Configuration.PublicDirectory, filePath);
+            return new StaticFileResponse(path);
+        }
+
+        public static Response AsCss(string filePath)
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Jess.Configuration.PublicDirectory, filePath);
+            return new StaticFileResponse(path, "text/css");
+        }
+
+        public static Response AsJs(string filePath)
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Jess.Configuration.PublicDirectory, filePath);
+            return new StaticFileResponse(path, "text/javascript");
+        }
+
+        public static Response AsText(string format, params object[] args)
+        {
+            return new TextResponse(format, args);
+        }
     }
 }
