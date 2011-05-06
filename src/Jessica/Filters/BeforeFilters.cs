@@ -1,40 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Routing;
+using Jessica.Responses;
 
 namespace Jessica.Filters
 {
     public class BeforeFilters
     {
-        public List<Action<RequestContext>> Filters { get; set; }
+        public List<Func<RequestContext, Response>> Filters { get; set; }
 
         public BeforeFilters()
         {
-            Filters = new List<Action<RequestContext>>();
+            Filters = new List<Func<RequestContext, Response>>();
         }
 
-        public void Invoke(RequestContext context)
+        public Response Invoke(RequestContext context)
         {
-            Filters.ForEach(filter => filter.Invoke(context));
+            Response response = null;
+
+            using (var enumerator = Filters.GetEnumerator())
+            {
+                while (response == null && enumerator.MoveNext())
+                {
+                    if (enumerator.Current != null)
+                    {
+                        response = enumerator.Current.Invoke(context);
+                    }
+                }
+            }
+
+            return response;
         }
 
-        public static BeforeFilters operator +(BeforeFilters filters, Action<RequestContext> filter)
+        public static BeforeFilters operator +(BeforeFilters filters, Func<RequestContext, Response> filter)
         {
             filters.AddFilterToEnd(filter);
             return filters;
         }
 
-        public void AddFilterToStart(Action<RequestContext> filter)
+        public void AddFilterToStart(Func<RequestContext, Response> filter)
         {
             InsertFilterAtIndex(0, filter);
         }
 
-        public void AddFilterToEnd(Action<RequestContext> filter)
+        public void AddFilterToEnd(Func<RequestContext, Response> filter)
         {
             Filters.Add(filter);
         }
 
-        public void InsertFilterAtIndex(int index, Action<RequestContext> filter)
+        public void InsertFilterAtIndex(int index, Func<RequestContext, Response> filter)
         {
             Filters.Insert(index, filter);
         }
