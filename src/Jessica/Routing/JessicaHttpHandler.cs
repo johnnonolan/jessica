@@ -5,16 +5,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Routing;
+using System.Web.SessionState;
 using Jessica.Extensions;
 using Jessica.Responses;
 
 namespace Jessica.Routing
 {
-    public class JessicaHttpHandler : IHttpHandler
+    public class JessicaHttpHandler : IHttpHandler, IRequiresSessionState
     {
+        Type _moduleType;
         string _route;
         RequestContext _requestContext;
-        Type _moduleType;
 
         public JessicaHttpHandler(string route, RequestContext requestContext, Type moduleType)
         {
