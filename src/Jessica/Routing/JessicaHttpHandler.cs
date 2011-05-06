@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.SessionState;
 using Jessica.Extensions;
-using Jessica.Filters;
 using Jessica.Responses;
 
 namespace Jessica.Routing
@@ -53,12 +52,7 @@ namespace Jessica.Routing
                 return (int)HttpStatusCode.MethodNotAllowed;
             }
 
-            var response = InvokeBeforeFilters(module);
-
-            if (response == null)
-            {
-                response = route.Actions[method].Invoke(BuildParameterObject(context));
-            }
+            var response = InvokeBeforeFilters(module) ?? route.Actions[method].Invoke(BuildParameterObject(context));
 
             if (module.After != null)
             {

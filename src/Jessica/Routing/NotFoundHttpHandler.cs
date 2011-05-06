@@ -25,7 +25,7 @@ namespace Jessica.Routing
       </style>
     </head>
     <body>
-      <h1>Oops, Jessica hasn't learn this line.</h1>
+      <h1>Oops, Jessica doesn't know this line.</h1>
       <div id='c'>
         <p>Try this in your module:</p>
         <pre>#{method}(""/#{route}"", p => ""Hello world!"");</pre>
