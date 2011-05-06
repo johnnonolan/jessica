@@ -27,6 +27,11 @@ namespace Jessica
 
         public static void Initialise(JessicaConfiguration configuration = null)
         {
+            if (Configuration == null)
+            {
+                Configuration = configuration ?? (JessicaConfiguration)ConfigurationManager.GetSection("jessica") ?? new JessicaConfiguration();
+            }
+
             RouteTable.Routes.Clear();
             ViewEngines.Clear();
 
@@ -42,6 +47,12 @@ namespace Jessica
             });
 
             RegisterRoutes(modules);
+
+            if (Configuration.IsDevelopment)
+            {
+                RegisterNotFoundRoute();
+            }
+
             RegisterViewEngines(engines);
         }
 
@@ -66,6 +77,11 @@ namespace Jessica
                     instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module))));
                 }
             });
+        }
+
+        private static void RegisterNotFoundRoute()
+        {
+            RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
         }
 
         private static void RegisterViewEngines(IEnumerable<Type> engines)

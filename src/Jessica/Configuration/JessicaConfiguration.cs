@@ -25,6 +25,21 @@ namespace Jessica.Configuration
             set { this["viewsDir"] = value; }
         }
 
+        public bool IsProduction
+        {
+            get { return Environment.ToLower() == "production"; }
+        }
+
+        public bool IsDevelopment
+        {
+            get { return Environment.ToLower() == "development"; }
+        }
+
+        public bool IsTesting
+        {
+            get { return Environment.ToLower() == "testing"; }
+        }
+
         public JessicaConfiguration SetEnvironment(string environment)
         {
             Environment = environment;
