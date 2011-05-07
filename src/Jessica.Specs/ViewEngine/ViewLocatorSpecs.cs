@@ -74,7 +74,7 @@ namespace Jessica.Specs.ViewEngine
             _location.ShouldNotBeNull();
 
         It should_contain_the_correct_location_of_view = () =>
-            _location.Location.ShouldEqual(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\Views", "View.html"));
+            _location.Location.ShouldEqual(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\views", "View.html"));
 
         It should_contain_the_correct_extension_of_view = () =>
             _location.Extension.ShouldEqual("html");
@@ -123,7 +123,7 @@ namespace Jessica.Specs.ViewEngine
             _location.ShouldNotBeNull();
 
         It should_contain_the_correct_location_of_view = () =>
-            _location.Location.ShouldEqual(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\Views", "Shared/List.html"));
+            _location.Location.ShouldEqual(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Fakes\\views", "Shared/List.html"));
 
         It should_contain_the_correct_extension_of_view = () =>
             _location.Extension.ShouldEqual("html");

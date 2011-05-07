@@ -35,7 +35,7 @@ namespace Jessica.ViewEngine
         {
             try
             {
-                var viewFolder = Path.Combine(_rootPath, "Views");
+                var viewFolder = Path.Combine(_rootPath, Jess.Configuration.ViewsDirectory);
 
                 if (string.IsNullOrEmpty(viewFolder))
                 {

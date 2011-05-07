@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Routing;
+using System.Web.SessionState;
 using Jessica.Extensions;
 using Jessica.Responses;
 
 namespace Jessica.Routing
 {
-    public class JessicaHttpHandler : IHttpHandler
+    public class JessicaHttpHandler : IHttpHandler, IRequiresSessionState
     {
+        Type _moduleType;
         string _route;
         RequestContext _requestContext;
-        Type _moduleType;
 
         public JessicaHttpHandler(string route, RequestContext requestContext, Type moduleType)
         {
@@ -30,33 +30,39 @@ namespace Jessica.Routing
 
         public void ProcessRequest(HttpContext context)
         {
-            var response = InvokeRequestLifeCycle(context);
-            MapResponseToHttpResponse(response, context.Response);
+            InvokeRequestLifeCycle(context);
         }
 
-        private Response InvokeRequestLifeCycle(HttpContext context)
+        private void InvokeRequestLifeCycle(HttpContext context)
         {
             var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
 
-            if (module == null)
+            if (module != null)
             {
-                return (int)HttpStatusCode.InternalServerError;
-            }
+                var response = InvokeBeforeFilters(module) ?? ResolveAndInvokeRoute(module, context);
+                MapResponseToHttpResponse(response, context.Response);
 
+                if (module.After != null)
+                {
+                    module.After.Invoke(_requestContext);
+                }
+            }
+            else
+            {
+                MapResponseToHttpResponse(500, context.Response);
+            }
+        }
+
+        private Response InvokeBeforeFilters(JessModule module)
+        {
+            return module.Before != null ? module.Before.Invoke(_requestContext) : null;
+        }
+
+        private Response ResolveAndInvokeRoute(JessModule module, HttpContext context)
+        {
             var route = module.Routes.Single(r => r.Url == _route);
             var method = context.Request.HttpMethod.ToUpper();
-
-            if (!route.Actions.ContainsKey(method))
-            {
-                return (int)HttpStatusCode.MethodNotAllowed;
-            }
-
-            module.Before.Invoke(_requestContext);
-            var parameters = BuildParameterObject(context);
-            var response = route.Actions[method].Invoke(parameters);
-            module.After.Invoke(_requestContext);
-
-            return response;
+            return route.Actions.ContainsKey(method) ? route.Actions[method].Invoke(BuildParameterObject(context)) : 405;
         }
 
         private dynamic BuildParameterObject(HttpContext context)
