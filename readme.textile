@@ -17,7 +17,14 @@ Jessica aims to become a feature equivalent of Sinatra for .NET. Jessica follows
 * Simple Conventions
 * Simple Code
 
+h2. Installing
+
+If you would like to use the Jessica micro web framework you can install it via the NuGet package manager.
+
+@Install-Package Jessica@
+
 h3. More Information
 
 * Jessica - "http://jessicafx.org":http://jessicafx.org
 * Why Did I Create Jessica? - "http://tombell.org.uk/blog/2011/04/10/why-did-i-create-jessica/":http://tombell.org.uk/blog/2011/04/10/why-did-i-create-jessica/
+* Jessica (Micro Web Frameworks Part 2) - "http://www.vimeo.com/23462557":http://www.vimeo.com/23462557
