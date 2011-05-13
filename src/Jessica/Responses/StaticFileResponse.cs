@@ -15,7 +15,7 @@ namespace Jessica.Responses
             {
                 Contents = GetFileContents(filePath);
                 ContentType = contentType;
-                StatusCode = 404;
+                StatusCode = 200;
             }
         }
 
