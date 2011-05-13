@@ -6,12 +6,12 @@ namespace Jessica.Routing
 {
     public class JessicaRoute
     {
-        public string Url { get; private set; }
+        public string Route { get; private set; }
         public IDictionary<string, Func<dynamic, Response>> Actions { get; private set; }
 
-        public JessicaRoute(string url, IDictionary<string, Func<dynamic, Response>> actions)
+        public JessicaRoute(string route, IDictionary<string, Func<dynamic, Response>> actions)
         {
-            Url = url;
+            Route = route;
             Actions = actions;
         }
     }

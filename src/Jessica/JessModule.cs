@@ -35,7 +35,7 @@ namespace Jessica
         {
             route = string.Concat(_basePath, Regex.Replace(route, "/:([^/]*)", "/{$1}")).TrimStart('/');
 
-            var existing = Routes.SingleOrDefault(r => r.Url == route);
+            var existing = Routes.SingleOrDefault(r => r.Route == route);
 
             if (existing != null)
             {
