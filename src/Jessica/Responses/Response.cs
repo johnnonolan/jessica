@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 
 namespace Jessica.Responses
 {
@@ -14,7 +13,7 @@ namespace Jessica.Responses
 
         public Response()
         {
-            StatusCode = (int)HttpStatusCode.OK;
+            StatusCode = 200;
             ContentType = "text/html";
             Contents = GetStringContents(string.Empty);
             Headers = new Dictionary<string, string>();

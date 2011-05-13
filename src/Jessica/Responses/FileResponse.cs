@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net;
 
 namespace Jessica.Responses
 {
@@ -10,13 +9,13 @@ namespace Jessica.Responses
         {
             if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath) || !Path.HasExtension(filePath))
             {
-                StatusCode = (int)HttpStatusCode.NotFound;
+                StatusCode = 404;
             }
             else
             {
                 Contents = GetFileContents(filePath);
                 ContentType = contentType;
-                StatusCode = (int)HttpStatusCode.OK;
+                StatusCode = 200;
             }
         }
 
