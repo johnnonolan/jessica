@@ -50,7 +50,7 @@ namespace Jessica
 
             if (Configuration.IsDevelopment)
             {
-                RegisterNotFoundRoute();
+                RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
             }
 
             RegisterViewEngines(engines);
@@ -74,14 +74,9 @@ namespace Jessica
 
                 if (instance != null)
                 {
-                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Url, new JessicaRouteHandler(route.Url, module))));
+                    instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Route, new JessicaRouteHandler(route.Route, module))));
                 }
             });
-        }
-
-        private static void RegisterNotFoundRoute()
-        {
-            RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
         }
 
         private static void RegisterViewEngines(IEnumerable<Type> engines)

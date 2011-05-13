@@ -13,10 +13,10 @@ namespace Jessica.Specs
             _module.Routes.Count.ShouldEqual(4);
 
         It should_contain_the_correct_number_of_actions_for_routes = () =>
-            _module.Routes.Single(r => r.Url == "").Actions.Count.ShouldEqual(2);
+            _module.Routes.Single(r => r.Route == "").Actions.Count.ShouldEqual(2);
 
         It should_contain_the_correct_number_of_actions_for_overwritten_routes = () =>
-            _module.Routes.Single(r => r.Url == "overwritten").Actions.Count.ShouldEqual(1);
+            _module.Routes.Single(r => r.Route == "overwritten").Actions.Count.ShouldEqual(1);
 
         static JessModule _module;
     }
@@ -30,10 +30,10 @@ namespace Jessica.Specs
             _module.Routes.Count.ShouldEqual(2);
 
         It should_contain_the_correct_number_of_actions_for_routes = () =>
-            _module.Routes.Single(r => r.Url == "base/route").Actions.Count.ShouldEqual(2);
+            _module.Routes.Single(r => r.Route == "base/route").Actions.Count.ShouldEqual(2);
 
         It should_contain_the_correct_route_with_base_path = () =>
-            _module.Routes.Count(r => r.Url == "base/route").ShouldEqual(1);
+            _module.Routes.Count(r => r.Route == "base/route").ShouldEqual(1);
 
         static JessModule _module;
     }

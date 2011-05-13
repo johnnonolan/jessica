@@ -60,7 +60,7 @@ namespace Jessica.Routing
 
         private Response ResolveAndInvokeRoute(JessModule module, HttpContext context)
         {
-            var route = module.Routes.Single(r => r.Url == _route);
+            var route = module.Routes.Single(r => r.Route == _route);
             var method = context.Request.HttpMethod.ToUpper();
             return route.Actions.ContainsKey(method) ? route.Actions[method].Invoke(BuildParameterObject(context)) : 405;
         }
