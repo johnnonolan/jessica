@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace Jessica.Responses
 {
     public class RedirectResponse : Response
@@ -9,7 +7,7 @@ namespace Jessica.Responses
             Headers.Add("Location", location);
             Contents = GetStringContents(string.Empty);
             ContentType = "text/html";
-            StatusCode = (int)HttpStatusCode.SeeOther;
+            StatusCode = 303;
         }
     }
 }

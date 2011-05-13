@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net;
 using System.Web.Script.Serialization;
 
 namespace Jessica.Responses
@@ -11,7 +10,7 @@ namespace Jessica.Responses
         {
             Contents = GetJsonContents(model);
             ContentType = "application/json";
-            StatusCode = (int)HttpStatusCode.OK;
+            StatusCode = 200;
         }
 
         private static Action<Stream> GetJsonContents(T model)
