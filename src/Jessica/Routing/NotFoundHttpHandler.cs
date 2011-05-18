@@ -15,6 +15,8 @@ namespace Jessica.Routing
 
         public void ProcessRequest(HttpContext context)
         {
+            var route = _requestContext.RouteData.Values["route"] ?? "";
+
             var html = @"
 <!DOCTYPE html>
   <html>
@@ -35,7 +37,7 @@ namespace Jessica.Routing
 ";
 
             html = html.Replace("#{method}", context.Request.HttpMethod.ToTitleCase());
-            html = html.Replace("#{route}", _requestContext.RouteData.Values["route"].ToString());
+            html = html.Replace("#{route}", route.ToString());
 
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/html";
