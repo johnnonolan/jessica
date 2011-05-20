@@ -13,10 +13,8 @@ namespace Jessica.Routing
             _requestContext = requestContext;
         }
 
-        public void ProcessRequest(HttpContext context)
+        private static void HandleInternalNotFound(HttpContext context, string route)
         {
-            var route = _requestContext.RouteData.Values["route"] ?? "";
-
             var html = @"
 <!DOCTYPE html>
   <html>
@@ -34,15 +32,35 @@ namespace Jessica.Routing
       </div>
     </body>
   </html>
-";
-
-            html = html.Replace("#{method}", context.Request.HttpMethod.ToTitleCase());
-            html = html.Replace("#{route}", route.ToString());
+"
+                .Replace("#{method}", context.Request.HttpMethod.ToTitleCase())
+                .Replace("#{route}", route);
 
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/html";
             context.Response.Write(html);
-            context.Response.End();
+        }
+
+        private void HandleUserNotFound(HttpContext context, string route)
+        {
+            var response = Jess.NotFoundHandler(route, _requestContext);
+            context.Response.StatusCode = 404;
+            context.Response.ContentType = response.ContentType;
+            response.Contents(context.Response.OutputStream);
+        }
+
+        public void ProcessRequest(HttpContext context)
+        {
+            var route = _requestContext.RouteData.Values["route"] ?? "";
+
+            if (Jess.NotFoundHandler != null)
+            {
+                HandleUserNotFound(context, route.ToString());
+            }
+            else
+            {
+                HandleInternalNotFound(context, route.ToString());
+            }
         }
 
         public bool IsReusable

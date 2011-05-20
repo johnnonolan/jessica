@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Jessica.Configuration;
 using Jessica.Extensions;
 using Jessica.Factory;
+using Jessica.Responses;
 using Jessica.Routing;
 using Jessica.ViewEngine;
 
@@ -19,10 +20,17 @@ namespace Jessica
         public static IList<IViewEngine> ViewEngines { get; private set; }
         public static JessicaConfiguration Configuration { get; set; }
 
+        public static Func<string, RequestContext, Response> NotFoundHandler { get; set; }
+
         static Jess()
         {
             Factory = new DefaultJessicaFactory();
             ViewEngines = new List<IViewEngine>();
+        }
+
+        public static void NotFound(Func<string, RequestContext, Response> notFoundHandler)
+        {
+            NotFoundHandler = notFoundHandler;
         }
 
         public static void Initialise(JessicaConfiguration configuration = null)
@@ -48,7 +56,7 @@ namespace Jessica
 
             RegisterRoutes(modules);
 
-            if (Configuration.IsDevelopment)
+            if (Configuration.IsDevelopment || NotFoundHandler != null)
             {
                 RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
             }
