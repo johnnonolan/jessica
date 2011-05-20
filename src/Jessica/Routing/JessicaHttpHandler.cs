@@ -35,10 +35,15 @@ namespace Jessica.Routing
 
         private void InvokeRequestLifeCycle(HttpContext context)
         {
-            var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
-
-            if (module != null)
+            try
             {
+                var module = Jess.Factory.CreateInstance(_moduleType) as JessModule;
+
+                if (module == null)
+                {
+                    throw new NullReferenceException("module");
+                }
+
                 var response = InvokeBeforeFilters(module) ?? ResolveAndInvokeRoute(module, context);
                 MapResponseToHttpResponse(response, context.Response);
 
@@ -47,9 +52,19 @@ namespace Jessica.Routing
                     module.After.Invoke(_requestContext);
                 }
             }
-            else
+            catch (Exception exception)
             {
-                MapResponseToHttpResponse(500, context.Response);
+                if (Jess.ErrorHandler == null)
+                {
+                    throw;
+                }
+
+                var response = Jess.ErrorHandler(exception, _requestContext, _moduleType);
+
+                if (response != null)
+                {
+                    MapResponseToHttpResponse(response, context.Response);
+                }
             }
         }
 

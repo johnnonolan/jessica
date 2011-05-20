@@ -21,6 +21,7 @@ namespace Jessica
         public static JessicaConfiguration Configuration { get; set; }
 
         public static Func<string, RequestContext, Response> NotFoundHandler { get; set; }
+        public static Func<Exception, RequestContext, Type, Response> ErrorHandler { get; set; }
 
         static Jess()
         {
@@ -31,6 +32,11 @@ namespace Jessica
         public static void NotFound(Func<string, RequestContext, Response> notFoundHandler)
         {
             NotFoundHandler = notFoundHandler;
+        }
+
+        public static void Error(Func<Exception, RequestContext, Type, Response> errorHandler)
+        {
+            ErrorHandler = errorHandler;
         }
 
         public static void Initialise(JessicaConfiguration configuration = null)
