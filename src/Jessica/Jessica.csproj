@@ -53,7 +53,6 @@
     <Compile Include="Filters\AfterFilters.cs" />
     <Compile Include="Filters\BeforeFilters.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factory\DefaultJessicaFactory.cs" />
     <Compile Include="Factory\IJessicaFactory.cs" />
     <Compile Include="Jess.cs" />

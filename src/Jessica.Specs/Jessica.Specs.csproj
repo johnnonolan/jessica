@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="Configuration\JessicaConfigurationSpecs.cs" />
     <Compile Include="Extensions\EnumerableExtensionsSpecs.cs" />
-    <Compile Include="Extensions\StringExtensionsSpecs.cs" />
     <Compile Include="Factory\DefaultJessicaFactorySpecs.cs" />
     <Compile Include="Fakes\Factory\CustomJessicaFactory.cs" />
     <Compile Include="Fakes\Models\SimpleModel.cs" />

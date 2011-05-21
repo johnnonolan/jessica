@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Web;
 using System.Web.Routing;
 using Jessica.Extensions;
@@ -42,6 +43,7 @@ namespace Jessica.Routing
 
         private static void InvokeNotFoundInternalHandler(HttpContext context, string route)
         {
+            var method = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(context.Request.HttpMethod);
             var html = @"
 <!DOCTYPE html>
   <html>
@@ -58,7 +60,7 @@ namespace Jessica.Routing
         <pre>#{method}(""/#{route}"", p => ""Hello world!"");</pre>
       </div>
     </body>
-  </html>".Replace("#{method}", context.Request.HttpMethod.ToTitleCase()).Replace("#{route}", route);
+  </html>".Replace("#{method}", method).Replace("#{route}", route);
 
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/html";
