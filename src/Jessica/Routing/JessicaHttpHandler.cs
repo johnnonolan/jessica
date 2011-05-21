@@ -86,12 +86,36 @@ namespace Jessica.Routing
 
             foreach (string key in context.Request.Form)
             {
-                parameters.Add(key, context.Request.Form[key]);
+                if (key.Contains("[]"))
+                {
+                    var values = context.Request.Form.GetValues(key);
+
+                    if (values != null)
+                    {
+                        parameters.Add(key.Replace("[]", ""), values);
+                    }
+                }
+                else
+                {
+                    parameters.Add(key, context.Request.Form[key]);
+                }
             }
 
             foreach (string key in context.Request.QueryString)
             {
-                parameters.Add(key, context.Request.QueryString[key]);
+                if (key.Contains("[]"))
+                {
+                    var values = context.Request.QueryString.GetValues(key);
+
+                    if (values != null)
+                    {
+                        parameters.Add(key.Replace("[]", ""), values);
+                    }
+                }
+                else
+                {
+                    parameters.Add(key, context.Request.QueryString[key]);
+                }
             }
 
             foreach (var item in _requestContext.RouteData.Values)
