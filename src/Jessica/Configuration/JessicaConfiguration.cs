@@ -39,23 +39,5 @@ namespace Jessica.Configuration
         {
             get { return Environment.ToLower() == "testing"; }
         }
-
-        public JessicaConfiguration SetEnvironment(string environment)
-        {
-            Environment = environment;
-            return this;
-        }
-
-        public JessicaConfiguration SetPublicDirectory(string publicDirectory)
-        {
-            PublicDirectory = publicDirectory;
-            return this;
-        }
-
-        public JessicaConfiguration SetViewsDirectory(string viewsDirectory)
-        {
-            ViewsDirectory = viewsDirectory;
-            return this;
-        }
     }
 }

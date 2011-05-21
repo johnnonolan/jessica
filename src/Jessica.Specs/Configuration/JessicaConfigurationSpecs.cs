@@ -63,38 +63,6 @@ namespace Jessica.Specs.Configuration
         static JessicaConfiguration _configuration;
     }
 
-    public class when_setting_configuration_values_with_fluent_api
-    {
-        Establish context = () =>
-            _configuration = new JessicaConfiguration();
-
-        Because of = () =>
-            _configuration
-                .SetEnvironment("production")
-                .SetPublicDirectory("static")
-                .SetViewsDirectory("templates");
-
-        It should_return_set_environment = () =>
-            _configuration.Environment.ShouldEqual("production");
-
-        It should_return_true_for_set_environment = () =>
-            _configuration.IsProduction.ShouldBeTrue();
-
-        It should_return_false_for_other_environments = () =>
-        {
-            _configuration.IsDevelopment.ShouldBeFalse();
-            _configuration.IsTesting.ShouldBeFalse();
-        };
-
-        It should_return_set_public_directory = () =>
-            _configuration.PublicDirectory.ShouldEqual("static");
-
-        It should_return_set_views_directory = () =>
-            _configuration.ViewsDirectory.ShouldEqual("templates");
-
-        static JessicaConfiguration _configuration;
-    }
-
     public class when_setting_configuration_values_from_jessica_config_section
     {
         Because of = () =>
@@ -107,7 +75,7 @@ namespace Jessica.Specs.Configuration
         It should_return_set_environment = () =>
             _configuration.Environment.ShouldEqual("testing");
 
-        It should_return_true_for_set_environment = () =>
+        It should_return_true_for_testing_environment = () =>
              _configuration.IsTesting.ShouldBeTrue();
 
         It should_return_false_for_other_environments = () =>

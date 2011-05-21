@@ -18,6 +18,7 @@ namespace Jessica
     {
         public static IJessicaFactory Factory { get; set; }
         public static IList<IViewEngine> ViewEngines { get; private set; }
+
         public static JessicaConfiguration Configuration { get; set; }
 
         public static Func<string, RequestContext, Response> NotFoundHandler { get; set; }

@@ -13,7 +13,34 @@ namespace Jessica.Routing
             _requestContext = requestContext;
         }
 
-        private static void HandleInternalNotFound(HttpContext context, string route)
+        public bool IsReusable
+        {
+            get { return true; }
+        }
+
+        public void ProcessRequest(HttpContext context)
+        {
+            var route = _requestContext.RouteData.Values["route"] ?? "";
+
+            if (Jess.NotFoundHandler != null)
+            {
+                InvokeNotFoundUserHandler(context, route.ToString());
+            }
+            else
+            {
+                InvokeNotFoundInternalHandler(context, route.ToString());
+            }
+        }
+
+        private void InvokeNotFoundUserHandler(HttpContext context, string route)
+        {
+            var response = Jess.NotFoundHandler(route, _requestContext);
+            context.Response.StatusCode = 404;
+            context.Response.ContentType = response.ContentType;
+            response.Contents(context.Response.OutputStream);
+        }
+
+        private static void InvokeNotFoundInternalHandler(HttpContext context, string route)
         {
             var html = @"
 <!DOCTYPE html>
@@ -31,41 +58,11 @@ namespace Jessica.Routing
         <pre>#{method}(""/#{route}"", p => ""Hello world!"");</pre>
       </div>
     </body>
-  </html>
-"
-                .Replace("#{method}", context.Request.HttpMethod.ToTitleCase())
-                .Replace("#{route}", route);
+  </html>".Replace("#{method}", context.Request.HttpMethod.ToTitleCase()).Replace("#{route}", route);
 
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/html";
             context.Response.Write(html);
-        }
-
-        private void HandleUserNotFound(HttpContext context, string route)
-        {
-            var response = Jess.NotFoundHandler(route, _requestContext);
-            context.Response.StatusCode = 404;
-            context.Response.ContentType = response.ContentType;
-            response.Contents(context.Response.OutputStream);
-        }
-
-        public void ProcessRequest(HttpContext context)
-        {
-            var route = _requestContext.RouteData.Values["route"] ?? "";
-
-            if (Jess.NotFoundHandler != null)
-            {
-                HandleUserNotFound(context, route.ToString());
-            }
-            else
-            {
-                HandleInternalNotFound(context, route.ToString());
-            }
-        }
-
-        public bool IsReusable
-        {
-            get { return true; }
         }
     }
 }
