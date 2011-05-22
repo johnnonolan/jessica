@@ -7,7 +7,7 @@ namespace Jessica.ViewEngine
 {
     public class ViewLocator
     {
-        string _rootPath;
+        private string _rootPath;
 
         public ViewLocator(string rootPath)
         {
@@ -29,6 +29,16 @@ namespace Jessica.ViewEngine
             }
 
             return LocateView(viewName, supportedExtensions);
+        }
+
+        private static Tuple<string, string> FindViewFromShortName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
+        {
+            var selectedView = from extension in supportedExtensions
+                               let file = Path.Combine(viewFolder, viewName + "." + extension)
+                               where File.Exists(file)
+                               select Tuple.Create(file, extension);
+
+            return selectedView.FirstOrDefault();
         }
 
         private ViewLocation LocateView(string viewName, IEnumerable<string> supportedExtensions)
@@ -56,16 +66,6 @@ namespace Jessica.ViewEngine
             {
                 return null;
             }
-        }
-
-        private static Tuple<string, string> FindViewFromShortName(string viewFolder, string viewName, IEnumerable<string> supportedExtensions)
-        {
-            var selectedView = from extension in supportedExtensions
-                               let file = Path.Combine(viewFolder, viewName + "." + extension)
-                               where File.Exists(file)
-                               select Tuple.Create(file, extension);
-
-            return selectedView.FirstOrDefault();
         }
     }
 }

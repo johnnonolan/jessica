@@ -1,19 +1,18 @@
 using System.Threading;
 using System.Web;
 using System.Web.Routing;
-using Jessica.Extensions;
 
 namespace Jessica.Routing
 {
     public class NotFoundHttpHandler : IHttpHandler
     {
-        RequestContext _requestContext;
+        private RequestContext _requestContext;
 
         public NotFoundHttpHandler(RequestContext requestContext)
         {
             _requestContext = requestContext;
         }
-
+        
         public bool IsReusable
         {
             get { return true; }
@@ -21,7 +20,7 @@ namespace Jessica.Routing
 
         public void ProcessRequest(HttpContext context)
         {
-            var route = _requestContext.RouteData.Values["route"] ?? "";
+            var route = _requestContext.RouteData.Values["route"] ?? string.Empty;
 
             if (Jess.NotFoundHandler != null)
             {
@@ -31,14 +30,6 @@ namespace Jessica.Routing
             {
                 InvokeNotFoundInternalHandler(context, route.ToString());
             }
-        }
-
-        private void InvokeNotFoundUserHandler(HttpContext context, string route)
-        {
-            var response = Jess.NotFoundHandler(route, _requestContext);
-            context.Response.StatusCode = 404;
-            context.Response.ContentType = response.ContentType;
-            response.Contents(context.Response.OutputStream);
         }
 
         private static void InvokeNotFoundInternalHandler(HttpContext context, string route)
@@ -65,6 +56,14 @@ namespace Jessica.Routing
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/html";
             context.Response.Write(html);
+        }
+
+        private void InvokeNotFoundUserHandler(HttpContext context, string route)
+        {
+            var response = Jess.NotFoundHandler(route, _requestContext);
+            context.Response.StatusCode = 404;
+            context.Response.ContentType = response.ContentType;
+            response.Contents(context.Response.OutputStream);
         }
     }
 }

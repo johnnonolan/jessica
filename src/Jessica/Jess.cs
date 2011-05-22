@@ -16,24 +16,21 @@ namespace Jessica
 {
     public static class Jess
     {
-        public static IJessicaFactory Factory { get; set; }
-        public static IList<IViewEngine> ViewEngines { get; private set; }
-
-        public static JessicaConfiguration Configuration { get; set; }
-
-        public static Func<string, RequestContext, Response> NotFoundHandler { get; set; }
-        public static Func<Exception, RequestContext, Type, Response> ErrorHandler { get; set; }
-
         static Jess()
         {
             Factory = new DefaultJessicaFactory();
             ViewEngines = new List<IViewEngine>();
         }
 
-        public static void NotFound(Func<string, RequestContext, Response> notFoundHandler)
-        {
-            NotFoundHandler = notFoundHandler;
-        }
+        public static JessicaConfiguration Configuration { get; set; }
+
+        public static Func<Exception, RequestContext, Type, Response> ErrorHandler { get; set; }
+
+        public static IJessicaFactory Factory { get; set; }
+
+        public static Func<string, RequestContext, Response> NotFoundHandler { get; set; }
+
+        public static IList<IViewEngine> ViewEngines { get; private set; }
 
         public static void Error(Func<Exception, RequestContext, Type, Response> errorHandler)
         {
@@ -71,14 +68,9 @@ namespace Jessica
             RegisterViewEngines(engines);
         }
 
-        private static void LoadJessicaAssemblies()
+        public static void NotFound(Func<string, RequestContext, Response> notFoundHandler)
         {
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin");
-
-            if (Directory.Exists(path))
-            {
-                Directory.GetFiles(path, "Jessica*.dll").ForEach(asm => Assembly.LoadFrom(asm));
-            }
+            NotFoundHandler = notFoundHandler;
         }
 
         private static void RegisterRoutes(IEnumerable<Type> modules)
@@ -105,6 +97,16 @@ namespace Jessica
                     ViewEngines.Add(instance);
                 }
             }); 
+        }
+
+        private static void LoadJessicaAssemblies()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin");
+
+            if (Directory.Exists(path))
+            {
+                Directory.GetFiles(path, "Jessica*.dll").ForEach(asm => Assembly.LoadFrom(asm));
+            }
         }
     }
 }

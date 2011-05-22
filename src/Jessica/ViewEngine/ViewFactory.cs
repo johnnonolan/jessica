@@ -8,8 +8,8 @@ namespace Jessica.ViewEngine
 {
     public class ViewFactory
     {
-        IEnumerable<IViewEngine> _viewEngines;
-        ViewLocator _locator;
+        private ViewLocator _locator;
+        private IEnumerable<IViewEngine> _viewEngines;
 
         public ViewFactory(IEnumerable<IViewEngine> viewEngines, string rootPath)
         {
@@ -33,9 +33,33 @@ namespace Jessica.ViewEngine
             return GetRenderedView(actualViewName, model);
         }
 
+        private static IEnumerable<string> GetViewExtension(string viewName)
+        {
+            var extension = Path.GetExtension(viewName);
+            return string.IsNullOrEmpty(extension) ? null : new[] { extension.TrimStart('.') };
+        }
+
         private static string GetViewNameFromModel(dynamic model)
         {
             return Regex.Replace(model.GetType().Name, "Model$", string.Empty);
+        }
+
+        private static Action<Stream> InvokeViewEngine(IViewEngine viewEngine, ViewLocation viewLocation, dynamic model)
+        {
+            try
+            {
+                return viewEngine.RenderView(viewLocation, model);
+            }
+            catch (Exception)
+            {
+                return stream => { };
+            }
+        }
+        
+        private IEnumerable<string> GetExtensionsForViewLookUp(string viewName)
+        {
+            var extensions = GetViewExtension(viewName) ?? GetSupportedViewEngineExtensions();
+            return extensions;
         }
 
         private Action<Stream> GetRenderedView(string viewName, dynamic model)
@@ -44,18 +68,6 @@ namespace Jessica.ViewEngine
             var resolvedViewEngine = GetViewEngine(viewLocation);
 
             return InvokeViewEngine(resolvedViewEngine, viewLocation, model);
-        }
-
-        private IEnumerable<string> GetExtensionsForViewLookUp(string viewName)
-        {
-            var extensions = GetViewExtension(viewName) ?? GetSupportedViewEngineExtensions();
-            return extensions;
-        }
-
-        private static IEnumerable<string> GetViewExtension(string viewName)
-        {
-            var extension = Path.GetExtension(viewName);
-            return string.IsNullOrEmpty(extension) ? null : new[] { extension.TrimStart('.') };
         }
 
         private IEnumerable<string> GetSupportedViewEngineExtensions()
@@ -73,18 +85,6 @@ namespace Jessica.ViewEngine
 
             var viewEngines = _viewEngines.Where(engine => engine.Extensions.Any(x => x.ToUpperInvariant() == viewLocation.Extension.ToUpperInvariant()));
             return viewEngines.FirstOrDefault();
-        }
-
-        private static Action<Stream> InvokeViewEngine(IViewEngine viewEngine, ViewLocation viewLocation, dynamic model)
-        {
-            try
-            {
-                return viewEngine.RenderView(viewLocation, model);
-            }
-            catch (Exception)
-            {
-                return stream => { };
-            }
         }
     }
 }

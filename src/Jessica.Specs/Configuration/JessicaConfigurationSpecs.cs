@@ -93,4 +93,3 @@ namespace Jessica.Specs.Configuration
         static JessicaConfiguration _configuration;
     }
 }
- 

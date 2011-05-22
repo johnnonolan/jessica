@@ -11,6 +11,21 @@ namespace Jessica.Configuration
             set { this["environment"] = value; }
         }
 
+        public bool IsDevelopment
+        {
+            get { return Environment.ToLower() == "development"; }
+        }
+
+        public bool IsProduction
+        {
+            get { return Environment.ToLower() == "production"; }
+        }
+
+        public bool IsTesting
+        {
+            get { return Environment.ToLower() == "testing"; }
+        }
+
         [ConfigurationProperty("publicDir", DefaultValue = "public", IsRequired = false)]
         public string PublicDirectory
         {
@@ -23,21 +38,6 @@ namespace Jessica.Configuration
         {
             get { return this["viewsDir"].ToString(); }
             set { this["viewsDir"] = value; }
-        }
-
-        public bool IsProduction
-        {
-            get { return Environment.ToLower() == "production"; }
-        }
-
-        public bool IsDevelopment
-        {
-            get { return Environment.ToLower() == "development"; }
-        }
-
-        public bool IsTesting
-        {
-            get { return Environment.ToLower() == "testing"; }
         }
     }
 }
