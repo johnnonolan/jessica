@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System.Configuration">
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
@@ -63,6 +64,7 @@
     <Compile Include="Responses\RedirectResponse.cs" />
     <Compile Include="Responses\StaticFileResponse.cs" />
     <Compile Include="Responses\TextResponse.cs" />
+    <Compile Include="Responses\XmlResponse.cs" />
     <Compile Include="Routing\JessicaHttpHandler.cs" />
     <Compile Include="Routing\JessicaRouteHandler.cs" />
     <Compile Include="Routing\JessicaRoute.cs" />
