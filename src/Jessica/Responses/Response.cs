@@ -61,6 +61,11 @@ namespace Jessica.Responses
             return new TextResponse(format, args);
         }
 
+        public static Response AsXml<T>(T model)
+        {
+            return new XmlResponse<T>(model);
+        }
+
         public static implicit operator Response(Action<Stream> action)
         {
             return new Response { Contents = action };

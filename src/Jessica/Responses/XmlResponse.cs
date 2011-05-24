@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 namespace Jessica.Responses
 {
     public class XmlResponse<T> : Response
-        where T : class
     {
         public XmlResponse(T model)
         {

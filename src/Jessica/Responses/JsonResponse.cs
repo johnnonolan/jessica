@@ -5,7 +5,6 @@ using System.Web.Script.Serialization;
 namespace Jessica.Responses
 {
     public class JsonResponse<T> : Response
-        where T : class
     {
         public JsonResponse(T model)
         {
