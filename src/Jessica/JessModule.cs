@@ -6,14 +6,12 @@ using System.Text.RegularExpressions;
 using Jessica.Filters;
 using Jessica.Responses;
 using Jessica.Routing;
-using Jessica.ViewEngine;
 
 namespace Jessica
 {
     public class JessModule
     {
         private string _basePath;
-        private ViewFactory _viewFactory;
 
         public JessModule(string basePath = null)
         {
@@ -22,7 +20,6 @@ namespace Jessica
             Before = new BeforeFilters();
             After = new AfterFilters();
 
-            _viewFactory = new ViewFactory(Jess.ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
             _basePath = basePath ?? string.Empty;
         }
 
@@ -54,7 +51,7 @@ namespace Jessica
 
         public Action<Stream> View(string viewName, dynamic model = null)
         {
-            return _viewFactory.RenderView(viewName, model);
+            return Jess.Render(viewName, model);
         }
 
         private void AddRoute(string method, string route, Func<dynamic, Response> action)

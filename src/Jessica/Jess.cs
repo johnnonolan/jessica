@@ -16,6 +16,8 @@ namespace Jessica
 {
     public static class Jess
     {
+        private static ViewFactory _viewFactory;
+
         static Jess()
         {
             Factory = new DefaultJessicaFactory();
@@ -73,6 +75,11 @@ namespace Jessica
             NotFoundHandler = notFoundHandler;
         }
 
+        public static Action<Stream> Render(string viewName, dynamic model = null)
+        {
+            return _viewFactory.RenderView(viewName, model);
+        }
+
         private static void RegisterRoutes(IEnumerable<Type> modules)
         {
             modules.ForEach(module =>
@@ -96,7 +103,9 @@ namespace Jessica
                 {
                     ViewEngines.Add(instance);
                 }
-            }); 
+            });
+
+            _viewFactory = new ViewFactory(ViewEngines, AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private static void LoadJessicaAssemblies()
