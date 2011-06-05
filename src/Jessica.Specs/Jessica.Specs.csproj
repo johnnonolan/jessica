@@ -33,8 +33,9 @@
     <NoWarn>169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\..\lib\mspec\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=0.4.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Machine.Specifications.0.4.13.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -85,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fakes\Configuration\App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
