@@ -51,6 +51,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configuration\JessicaConfiguration.cs" />
+    <Compile Include="Exceptions\RenderingViewException.cs" />
     <Compile Include="Filters\AfterFilters.cs" />
     <Compile Include="Filters\BeforeFilters.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

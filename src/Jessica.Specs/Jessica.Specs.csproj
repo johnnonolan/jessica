@@ -33,9 +33,9 @@
     <NoWarn>169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.4.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications, Version=0.4.23.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Machine.Specifications.0.4.13.0\lib\Machine.Specifications.dll</HintPath>
+      <HintPath>..\..\lib\Machine.Specifications.0.4.23.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -60,6 +60,7 @@
     <Compile Include="Filters\BeforeFilterSpecs.cs" />
     <Compile Include="JessModuleSpecs.cs" />
     <Compile Include="JessSpecs.cs" />
+    <Compile Include="Responses\XmlResponseSpecs.cs" />
     <Compile Include="Responses\FileResponseSpecs.cs" />
     <Compile Include="Responses\JsonResponseSpecs.cs" />
     <Compile Include="Responses\RedirectResponseSpecs.cs" />
@@ -88,6 +89,7 @@
     <None Include="Fakes\Configuration\App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

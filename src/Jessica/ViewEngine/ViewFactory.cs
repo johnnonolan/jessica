@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Jessica.Exceptions;
 
 namespace Jessica.ViewEngine
 {
@@ -50,12 +51,12 @@ namespace Jessica.ViewEngine
             {
                 return viewEngine.RenderView(viewLocation, model);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return stream => { };
+                throw new RenderingViewException(exception.Message, viewLocation);
             }
         }
-        
+
         private IEnumerable<string> GetExtensionsForViewLookUp(string viewName)
         {
             var extensions = GetViewExtension(viewName) ?? GetSupportedViewEngineExtensions();

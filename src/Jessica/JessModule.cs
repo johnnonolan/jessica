@@ -9,16 +9,16 @@ using Jessica.Routing;
 
 namespace Jessica
 {
-    public class JessModule
+    public abstract class JessModule
     {
         private string _basePath;
 
-        public JessModule(string basePath = null)
+        protected JessModule(string basePath = null)
         {
-            Routes = new List<JessicaRoute>();
-
-            Before = new BeforeFilters();
             After = new AfterFilters();
+            Before = new BeforeFilters();
+
+            Routes = new List<JessicaRoute>();
 
             _basePath = basePath ?? string.Empty;
         }
@@ -49,9 +49,9 @@ namespace Jessica
             AddRoute("PUT", route, action);
         }
 
-        public Action<Stream> View(string viewName, dynamic model = null)
+        public Action<Stream> Render(string template, dynamic model = null)
         {
-            return Jess.Render(viewName, model);
+            return Jess.Render(template, model);
         }
 
         private void AddRoute(string method, string route, Func<dynamic, Response> action)

@@ -46,9 +46,6 @@ namespace Jessica
                 Configuration = configuration ?? (JessicaConfiguration)ConfigurationManager.GetSection("jessica") ?? new JessicaConfiguration();
             }
 
-            RouteTable.Routes.Clear();
-            ViewEngines.Clear();
-
             var modules = new List<Type>();
             var engines = new List<Type>();
 
@@ -62,11 +59,6 @@ namespace Jessica
 
             RegisterRoutes(modules);
 
-            if (Configuration.IsDevelopment || NotFoundHandler != null)
-            {
-                RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
-            }
-
             RegisterViewEngines(engines);
         }
 
@@ -75,13 +67,15 @@ namespace Jessica
             NotFoundHandler = notFoundHandler;
         }
 
-        public static Action<Stream> Render(string viewName, dynamic model = null)
+        public static Action<Stream> Render(string template, dynamic model = null)
         {
-            return _viewFactory.RenderView(viewName, model);
+            return _viewFactory.RenderView(template, model);
         }
 
         private static void RegisterRoutes(IEnumerable<Type> modules)
         {
+            RouteTable.Routes.Clear();
+
             modules.ForEach(module =>
             {
                 var instance = Factory.CreateInstance(module) as JessModule;
@@ -91,10 +85,17 @@ namespace Jessica
                     instance.Routes.ForEach(route => RouteTable.Routes.Add(new Route(route.Route, new JessicaRouteHandler(route.Route, module))));
                 }
             });
+
+            if (Configuration.IsDevelopment || NotFoundHandler != null)
+            {
+                RouteTable.Routes.Add(new Route("{*route}", new NotFoundRouteHandler()));
+            }
         }
 
         private static void RegisterViewEngines(IEnumerable<Type> engines)
         {
+            ViewEngines.Clear();
+
             engines.ForEach(engine =>
             {
                 var instance = Factory.CreateInstance(engine) as IViewEngine;

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Jessica.Exceptions;
 using Jessica.Specs.Fakes.Models;
 using Jessica.Specs.Fakes.ViewEngine;
 using Jessica.ViewEngine;
@@ -115,23 +116,14 @@ namespace Jessica.Specs.ViewEngine
         };
 
         Because of = () =>
-            _view = _viewFactory.RenderView("DoesNotExist", null);
+            _exception = Catch.Exception(() => _view = _viewFactory.RenderView("DoesNotExist", null));
 
-        It should_contain_correct_contents = () =>
-        {
-            using (var stream = new MemoryStream())
-            {
-                _view.Invoke(stream);
-                stream.Position = 0;
-                var reader = new StreamReader(stream);
-                var contents = reader.ReadToEnd();
-
-                contents.ShouldBeEmpty();
-            }
-        };
+        It should_throw_a_rendering_view_exception = () =>
+            _exception.ShouldBeOfType<RenderingViewException>();
 
         static Action<Stream> _view;
         static ViewFactory _viewFactory;
+        static Exception _exception;
     }
 
     public class when_rendering_a_view_with_a_null_view_name_and_model
